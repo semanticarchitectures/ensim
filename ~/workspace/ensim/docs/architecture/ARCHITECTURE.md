@@ -1,0 +1,176 @@
+# Enterprise Simulation Framework — Architecture & Design Document
+
+**Working name:** ENSIM (Enterprise Simulation Framework)
+**Initial target enterprise:** United States Air Force
+**Mission 1:** Hickam–Luzon Humanitarian Airdrop
+**Status:** Draft v0.5 — RTI, message format, Mission 1 fidelity, tech stack, `org-doctrine-model` (now with real AOC division data), and the JSON-Schema-vs-BFO/CCO decision are all settled. A `model-explorer` UI (Section 13) is scaffolded and ready to build against existing data. Ready for `federation-kernel` and `sim-services` implementation.
+**Date:** 2026-09-05
+
+*This is the canonical copy of the architecture document, kept inside the repo it describes. An earlier standalone copy was shared directly with Kevin before the monorepo scaffold existed — this version supersedes it.*
+
+---
+
+## 1. Purpose and vision
+
+ENSIM is a framework for simulating a military enterprise — not just its platforms and engagements, but the organizations, doctrine, roles, and command relationships that govern how the enterprise actually operates. Most mission simulations start from the platform (an aircraft, a sensor, a weapon) and treat organization as background context. ENSIM inverts that: the organization and its doctrine are first-class, machine-readable model elements, and specific missions are scenarios run *through* that organizational model. This makes the framework useful for two distinct kinds of question. The first is mission-level: can this cargo aircraft get from Hickam to a drop zone on Luzon and execute a Container Delivery System (CDS) airdrop under realistic tasking, weather, and airspace constraints? The second is enterprise-level: if we change something structural — automate a C2 function, stand up a new organization, alter a tasking process — how does that ripple through mission execution across many scenarios? The second question is the actual point of the framework; the first is the proving ground.
+
+The initial target enterprise is the U.S. Air Force, modeled from unclassified, publicly available doctrine only. The first mission is a C-17 cargo flight from Joint Base Pearl Harbor–Hickam to Luzon, Philippines, to airdrop humanitarian supplies following a typhoon — a scenario grounded in the real precedent of Operation Damayan (2013, Typhoon Haiyan relief).
+
+## 2. Operational concept: focusing the enterprise
+
+The framework's core operational idea is that a given study doesn't require simulating the entire enterprise at full fidelity. Instead, a study defines a **focus**: which parts of the organization, doctrine, and mission set are modeled in detail, and which are held constant or abstracted. Two elements make this possible: an organization/doctrine model that exists independently of any one mission, and a composition mechanism that lets different mission and study federates attach to relevant slices of that model.
+
+Worked example — the prompt that motivated this framework: modeling the impact of large numbers of autonomous platforms on C2 and evaluating new TTPs for handling the increase in air and ground vehicle traffic. The process starts at the organization/doctrine layer, not the platform layer. Two structural options emerge directly from that layer because they are, definitionally, organizational choices:
+
+**Option A — automate within the existing C2 organization.** Keep the current C2 structure (e.g., an AOC's mobility operations element) but increase automation of unmanned-traffic management functions within it, changing role workload and staffing but not organizational boundaries.
+
+**Option B — stand up a new organization.** Create a distinct unmanned-traffic-management node that interfaces with the existing manned C2 structure via defined liaison/reporting relationships, changing the org chart and the C2SIM tasking/reporting graph itself.
+
+Because organizations, roles, and reporting relationships are modeled as structured data rather than hard-coded into mission logic, both options are expressed as alternate organization models pointed at the same mission scenarios (increased UAS/vehicle density on and around Luzon, for instance), and the resulting C2 load, latency, and error rates are compared. This is the reason the org/doctrine layer has to be a real, swappable model and not simulation flavor text.
+
+## 3. Architectural principles
+
+**Organization and doctrine are data, not code.** Units, roles, responsibilities, reporting chains, and tasking processes are represented as structured, versioned data (see Section 6) so that alternate organizational designs can be swapped in for a study without touching mission or platform code.
+
+**Interfaces are representative, not classified-replica.** Real USAF C2 systems (TBMCS-derived tools, GCCS-J, JADOCS, and similar) are CUI or classified, and their actual interface specifications are not publicly available. ENSIM interfaces are built to be *structurally faithful* — same roles, same message types, same tasking sequence (request → validate → ATO line → execution → report) — using only open, unclassified references such as the Open-Arsenal/ModularAF standards (UCI, OMS) and public doctrine publications. No component in this repo should claim to be, or be styled to resemble, an actual fielded system's UI.
+
+**Simulation-only concerns ride on SISO standards**, kept strictly separate from the org/doctrine data model and the mission/business logic (Section 4).
+
+**All code is AI-generated**, under explicit conventions that keep generation grounded in the doctrine/standards references checked into the repo rather than model assumptions (Section 9, and see `/AGENTS.md` at the repo root — that file now exists and is the operative version of this section's guidance).
+
+**Everything here is unclassified.** No component should ever require, encode, or approximate classified or CUI information. If a future study needs that, it happens in a separate, appropriately accredited environment — not in this repo.
+
+## 4. Standards selection (SISO)
+
+ENSIM uses a layered standards stack so that "organization" and "simulation mechanics" don't get tangled together.
+
+| Layer | Standard | Role in ENSIM | Notes |
+|---|---|---|---|
+| Organization / doctrine / tasking | **C2SIM** (SISO-STD-019-2020, unifying C-BML + MSDL), serialized as **JSON** | Canonical representation of order of battle, unit hierarchy, roles, and machine-readable tasking/orders/reports | The C2SIM reference implementation (OpenC2SIM) and NATO NETN tooling are XML-native; ENSIM uses a C2SIM-*inspired* JSON schema instead (decided — see Section 4a). This is the foundation layer described in Section 6, now implemented in `packages/org-doctrine-model/schema`. |
+| Federation / composition | **HLA — IEEE 1516**, via **Portico** | Federates separate simulations (a mission run, a C2-automation study, a UAS-density study) into one coordinated execution with shared time management | **Decided:** Portico (HLA 1.3/1516/1516e, CDDL license, Java + C++). No open-source RTI supports IEEE 1516-2025 ("HLA 4") yet; revisit Pitch pRTI 6 (commercial) only if a future study specifically needs HLA 4 features. Setup documented in `portico-setup.md`. |
+| Composable federation building blocks | **BOM** (SISO-STD-003-2006) | Lets a study assemble only the model components ("aspects") it needs — e.g., add a UAS-traffic module to an existing airlift federation without rebuilding it | Directly supports the "focus the enterprise" operational concept in Section 2. |
+| Entity/platform real-time state | **DIS — IEEE 1278.1-2012** | Lightweight broadcast of platform state (aircraft position, load status) inside a single mission run | Use **open-dis** libraries. Gateway into the HLA federation via RPR-FOM (SISO-STD-001-2025) when a mission federate needs to expose entity state to the rest of the federation. **Deferred from Mission 1 v1** — see Section 4a and Section 7. |
+
+Rationale for this split: C2SIM is the only layer in this stack designed to represent *organizations and orders*, which is why it anchors the org/doctrine model. HLA/BOM handle *composition* — the ability to bring different aspects of the enterprise into focus per study, per the operational concept. DIS/RPR-FOM handle *entity realism* inside a given mission run without forcing the whole federation into a heavyweight per-tick broadcast model.
+
+### 4a. Decisions locked in (2026-08-14)
+
+Three previously open items are decided, and a fourth (tech stack) has been added.
+
+**RTI: Portico.** No open-source RTI supports HLA 4 (1516-2025) yet, so this was a low-risk call — Portico is the most complete, actively maintained, cross-platform open-source option, and its CDDL license combines freely with the rest of the monorepo (you only have to share back changes to Portico's own files, not ENSIM code). Portico is **not** published to Maven Central — see `portico-setup.md` for the vendoring procedure, including an open item: the exact current release tag could not be confirmed from the environment that authored this doc, and must be checked against the live repo before pinning a version.
+
+**Messages: JSON, not XML.** All C2SIM/MSDL-derived data (org structure, roles, tasking, orders/reports) and all inter-service messages use JSON schemas modeled on the C2SIM data model, not literal C2SIM XML. This is friendlier for AI-generated TypeScript/Python code and avoids XML tooling overhead. The tradeoff to keep in mind: the official OpenC2SIM reference implementation and NATO NETN federates exchange XML, so ENSIM cannot plug directly into that ecosystem as-is. If interoperability with an actual C2SIM/NETN federate is ever needed, add a thin XML import/export adapter at the federation boundary rather than converting the internal model — don't let that future possibility creep into the core schema now. The JSON Schemas themselves now exist in `packages/org-doctrine-model/schema`.
+
+**Mission 1 v1 scope: data/process simulation, not flight dynamics.** The first build proves the tasking chain and org-doctrine model — request validation, ATO tasking, C2 node hand-offs, timing — using discrete events, not real geospatial/physics simulation of the aircraft. Practically, this means Mission 1 v1 exercises the **C2SIM (JSON) layer** and the **HLA/Portico federation layer** fully, but the **DIS/entity-gateway layer** (real-time aircraft position, drop-zone physics) is out of scope until a v2 fidelity increment. See Section 7 and Section 8.
+
+**Tech stack: TypeScript everywhere except `federation-kernel` (Java, for Portico).** Full rationale in `tech-stack.md`. Monorepo tooling is pnpm workspaces for the TypeScript packages, plus a standalone Maven module for `federation-kernel`, coordinated by a root `Justfile` rather than forced into one package manager.
+
+## 5. Open-Arsenal / ModularAF — role and caveats
+
+The USAF's AFLCMC Architecture & Standards Engineering office maintains **Open-Arsenal** (github.com/open-arsenal, formerly branded ModularAF), an unclassified, government-owned set of open architecture standards across five domains: Platforms, C2, Autonomy, Weapons, and Terrestrial. Two artifacts are relevant to ENSIM:
+
+**UCI (Universal C2 Interface)** and **OMS (Open Mission Systems)** define a decoupled, schema-driven, tiered-compliance message architecture for multi-domain C2. ENSIM should borrow this *design philosophy* — pub/sub, schema-first messages, tiered compliance levels — for its representative C2 interface layer (Section 3, "interfaces are representative").
+
+Two caveats matter for a monorepo built by AI coding tools. First, only one repo in the org (`oms-ghost-detector`, a hackathon demo) contains actual runnable code; the rest are Word/PDF/XSD specification sets. Treat Open-Arsenal as a reference for message-schema design, not as a dependency to vendor in. Second, the repos are marked "Government Owned," not a standard OSI license — before quoting, adapting, or embedding any schema fragment from these repos, verify the actual license terms rather than assuming permissive reuse. The Terrestrial domain's T-GRA product, which would cover mission-planning/logistics architecture, is not yet published (targeted January 2027) — there is currently no Open-Arsenal coverage for airlift/logistics, so that part of ENSIM's C2 interface layer is being built from public doctrine, not from an Open-Arsenal reference.
+
+## 6. Organization and doctrine data model
+
+The org/doctrine layer is expressed as C2SIM/MSDL-*inspired* structured data in JSON (not the literal C2SIM XML schema — see Section 4a). Core entity types, now implemented as JSON Schema in `packages/org-doctrine-model/schema`:
+
+- **Organization** — a named unit or command (e.g., PACAF, Air Mobility Command, 618th Air Operations Center) with a type, echelon, parent/child relationships, and a home station.
+- **Role** — a position within an organization (e.g., DIRMOBFOR, Mission Commander, Loadmaster, Combat Operations Division duty officer), with responsibilities, authorities, and the reporting relationship to other roles.
+- **C2Node** — an organization or sub-element that performs tasking, coordination, or reporting functions (Wing Operations Center, AOC, TACC), distinct from the units that execute missions.
+- **DoctrineProcess** — a named, sequenced process (e.g., the ATO cycle, the Mission Tasking Matrix request-validation flow) with the roles/nodes involved at each step and the artifacts produced (ATO line, SPINS, mission tasking).
+- **Mission** — a specific tasking instance that references the organizations, roles, and doctrine process that generated it, plus mission-specific parameters (route, cargo, drop zone).
+
+The initial USAF seed dataset (previously a table in this document) now lives as validated JSON in `packages/org-doctrine-model/data`: `organizations.json` (INDOPACOM, PACAF, PACAF theater AOC, AMC, 618 AOC/TACC, 15th Wing, 535th Airlift Squadron), `roles.json` (CFACC, DIRMOBFOR, Combat Plans Division Chief, Combat Operations Division Chief, Mission Commander, Aircraft Commander, Copilot, Loadmaster), `c2nodes.json` (Wing Operations Center, the five internal AOC divisions — Strategy, Combat Plans, Combat Operations, ISR, Air Mobility — plus a generic AOC tasking node and the 618 AOC/TACC tasking function), and `doctrine-processes.json` (the HA/DR request-and-tasking flow, and the ATO cycle). Every record carries a `doctrineSource` citation; one record (`pacaf-theater-aoc`) still flags an unverified specific fact (the exact numbered-AOC designation for PACAF) rather than guessing it.
+
+**2026-09-05 correction:** the five internal AOC divisions were added, and two existing records were fixed, after directly fetching and reading AFMAN 13-1AOC Vol 3 (see `docs/doctrine-sources/aocdfo-cross-references.md` for the full account). The `combat-operations-division-duty-officer` role previously said COD builds the ATO — it doesn't; Combat Plans Division does, and COD executes it. DIRMOBFOR's C2Node was also corrected from a generic placeholder to the Air Mobility Division, which the source identifies as coordinating intertheater airlift directly with the 618 AOC/TACC. This is a real example of the citation discipline in `AGENTS.md` Section 2 catching and fixing a wrong assumption rather than leaving it uncorrected.
+
+## 7. Mission 1: Hickam–Luzon humanitarian airdrop
+
+**Precedent:** Operation Damayan (Nov 2013, response to Typhoon Haiyan) — PACAF and AMC airlift assets (C-17s and C-130s) flew relief through Clark Air Base, ~300 Airmen, 239 airlift missions, 2,000+ tons of food/water/medical supplies delivered. Mission 1 is a fictionalized single-sortie scenario in that same doctrinal and geographic pattern, not a re-creation of an actual classified mission.
+
+**Scenario outline:** A typhoon strikes Luzon. The Philippine government/U.S. Embassy Manila request assistance; USAID's Bureau for Humanitarian Assistance validates a unique DoD-capability need; INDOPACOM stands up a JTF; PACAF and the 618th AOC task the 535th Airlift Squadron (C-17) via the ATO, with DIRMOBFOR coordinating the mobility flow. The tasked aircraft flies Hickam → (refuel/stage as needed) → a designated drop zone near the affected area on Luzon → executes a Container Delivery System airdrop → returns or continues to a follow-on tasking.
+
+**v1 scope (decided): data/process simulation.** Mission 1's first build models the *tasking and coordination process*, not aircraft flight or drop-zone physics. Concretely: the entities are the C-17 sortie, crew roles (Aircraft Commander, Copilot, Loadmaster), the CDS bundles as cargo/load objects (attributes only — weight, type, count; no physical drop modeling), the drop zone as a named location/parameter set (DAFMAN 13-217 fields, not terrain), the ATO line that tasks the sortie, and the C2 nodes in the loop (Wing Operations Center → 618 AOC/TACC → theater AOC). The simulation is discrete-event: request received → validated → tasked via ATO → sortie generated → mission executed (as a state transition with realistic timing, not a flown trajectory) → mission report closes the loop. This exercises the **C2SIM/JSON layer** (Section 6 data model, the tasking DoctrineProcess) and the **HLA/Portico federation layer** (the mission run as one federate, org/doctrine as shared state) fully. It deliberately does *not* exercise DIS/RPR-FOM (Section 4a) — there's no real-time aircraft position or drop physics to broadcast yet. The Mission 1 scenario record itself now exists at `packages/org-doctrine-model/data/missions/001-hickam-luzon-airdrop.json`, with an 8-step timeline matching this description and `fictionalized: true`.
+
+**v2 (future, not part of this build):** add the `entity-gateway` package (DIS/open-dis + RPR-FOM) to give the C-17 real-time position/state during the mission run, and extend the drop zone from a parameter set to actual geospatial/physics modeling. This is a natural, additive next increment — v1's federation and data model don't need to be rebuilt to support it.
+
+## 8. Monorepo structure
+
+```
+ensim/
+├── AGENTS.md                   # conventions for AI coding tools — read this first (now written)
+├── docs/
+│   ├── architecture/           # this document, tech-stack.md, portico-setup.md, ADRs
+│   └── doctrine-sources/       # cited excerpts/links to public doctrine (AFDP 3-0.1, JP 3-17, DAFMAN 13-217, DoDD 5100.46)
+├── standards/
+│   ├── c2sim-schema/           # (future) C2SIM/MSDL-inspired JSON schema extensions beyond org-doctrine-model
+│   ├── hla-fom/                # federation object models (BOM-composable modules)
+│   └── dis-enumerations/       # DIS enumerations (v2 — not needed for Mission 1 v1)
+├── packages/
+│   ├── org-doctrine-model/     # ✅ scaffolded — Section 6 schema + USAF seed dataset (JSON), validate script
+│   ├── federation-kernel/      # ✅ scaffolded (pom.xml, README) — Java/Portico, no federate code yet
+│   ├── entity-gateway/         # DIS <-> RPR-FOM gateway (open-dis based) — v2, deferred, not built for Mission 1 v1
+│   ├── c2-interfaces/          # representative, unclassified C2 UI components (UCI/OMS-inspired schemas) — not started
+│   └── sim-services/           # scenario loader, event bus, shared utilities — not started
+├── missions/
+│   └── 001-hickam-luzon-airdrop/   # (future) scenario-run artifacts distinct from the org-doctrine-model seed record
+├── studies/                    # enterprise-change studies (Section 2), each referencing alternate org models
+│   └── (future) uas-traffic-c2/
+├── apps/
+│   ├── model-explorer/         # ✅ scaffolded (Section 13) — navigate org-doctrine-model + view mission run results
+│   ├── ops-dashboard/          # process/status view for a *running* federation (Section 10) — not started
+│   └── mission-planner/        # scenario/ORBAT authoring tool — not started
+├── infra/                      # local RTI + service orchestration (docker-compose, etc.) — not started
+├── scripts/
+│   └── setup-portico.sh        # ✅ written — vendors Portico into a local Maven repo (has TODOs to confirm against live repo)
+└── vendor/                     # populated by setup-portico.sh; not committed as source
+```
+
+## 9. AI-generated code workflow
+
+Every line of ENSIM code is intended to be generated by AI tools (Claude Code, Cursor, Kiro). `AGENTS.md` at the repo root is now the operative version of these conventions — read it before generating anything. In summary: generation must be grounded in cited doctrine/standards sources, not inferred; the classification boundary (no CUI/classified content, ever) is treated as a hard constraint, not a style preference; and license provenance is tracked per package, since Open-Arsenal content is government-owned rather than OSI-licensed.
+
+## 10. Open questions and risks
+
+The three architectural choices previously left open — RTI selection, C2SIM conformance depth, and Mission 1 fidelity — are decided (Section 4a, Section 7), and the tech stack and initial scaffold now exist. Remaining risks: the JSON-vs-XML decision means ENSIM cannot plug directly into an actual OpenC2SIM/NATO NETN federate without an adapter (build that adapter only when a real need appears). Open-Arsenal's "Government Owned" licensing on UCI/OMS is still unverified against a standard OSI license. Because Mission 1 v1 has no entity-gateway/DIS layer, `ops-dashboard` should be a process/status view (ATO state, C2 node hand-offs, mission timeline), not a moving-map display, until v2. And **Portico's exact current release/version was not confirmed from the environment that wrote this scaffold** — `portico-setup.md` and `scripts/setup-portico.sh` both have explicit TODOs marking this; do not run the setup script until that's checked against the live repo. A new tracked decision as of 2026-09-05: whether `org-doctrine-model` should stay JSON Schema or align with the BFO/CCO ontology approach used by two sibling projects (GMNS, AOC-DFO) — see Section 12, unresolved.
+
+## 11. Suggested next steps
+
+`org-doctrine-model` (Section 6 dataset, JSON Schema + seed data) is built and validated — see Section 6 and the package's own README. Two things can start immediately and in parallel because they only need what already exists: `apps/model-explorer`'s data-navigation half (Section 13), and confirming Portico's pinned version against the live repo before running `scripts/setup-portico.sh`. After Portico is vendored, implement `federation-kernel` as a minimal federate that can join a federation and publish/subscribe to `org-doctrine-model` data. `sim-services` (the discrete-event scenario runner for Mission 1's 8-step timeline) can be built directly against the existing schema without waiting on Portico — and once it produces real run output, `model-explorer`'s results-viewing half (Section 13, v2) upgrades from planned-timeline display to actual execution traces. `c2-interfaces` and the `ops-dashboard` process view follow once data is flowing end to end. `entity-gateway`, DIS enumerations, any geospatial/physics modeling, and the BFO/CCO export (Section 12) remain explicitly out of scope until each has a concrete trigger — a v2 fidelity increment, or a real GMNS/AOC-DFO interop need, respectively.
+
+## 12. Relationship to sibling projects (GMNS, AOC-DFO) — tracked open decision
+
+Two other projects, outside this monorepo, model overlapping territory. **GMNS** (Global Mobile Network Sim, github.com/semanticarchitectures/GlobalMobileNetworkSim) is a network/communications/ICAM security simulation — currently MATLAB, with a Kiro spec underway to port it to Python — that was independently evaluated for SISO C2SIM integration and for DISA/NIST-style multi-level-security enclaves. It's a natural network-layer HLA federate alongside ENSIM's org-doctrine federate (Section 2's "focus the enterprise" composability applies directly: an ENSIM study could federate with GMNS to see how a tasking change affects actual message latency and security enforcement). If GMNS's Python port lands, the integration boundary is Python↔Java over JSON — the same style `federation-kernel` already committed to, no MATLAB bridge needed.
+
+**AOC-DFO** is a separate ontology project modeling AOC data flows in BFO/CCO: every message as a typed Information Bearing Entity, SHACL shapes, competency-question validation, tiered provenance. Its "doctrine layer" (CCO Organization/Role/Act/Directive) is modeling the same real-world entities as ENSIM's `Organization`/`Role`/`C2Node`/`DoctrineProcess` — just with a heavier ontology-first methodology than ENSIM's JSON Schema. Details and specific citation leads (AFMAN 13-1AOC Vol 3, KRADOS app functions, doctrine date corrections) are in `docs/doctrine-sources/aocdfo-cross-references.md`.
+
+**The open decision this raises:** should ENSIM's org/doctrine data model stay JSON Schema, or align with the BFO/CCO ontology approach GMNS and AOC-DFO both use?
+
+Arguments for aligning: a shared vocabulary across all three projects would make the GMNS-as-federate scenario above cleaner (ENSIM roles could map directly onto GMNS's ICAM role bindings instead of needing a translation layer), and AOC-DFO's message catalog would give ENSIM's C2SIM-inspired JSON schema a real, enumerated set of message types (USMTF, J-series, VMF) instead of the generic `producesArtifacts` string list it has today.
+
+Arguments against: BFO/CCO brings real tooling weight — OWL/RDF, a reasoner, SHACL validation, competency-question SPARQL suites — that ENSIM's tech stack was deliberately chosen to avoid (see `tech-stack.md`: TypeScript + JSON Schema + ajv was picked specifically because it's what AI coding tools generate against most reliably, for a v1 that's explicitly scoped as a lightweight data/process proof of concept, not a knowledge-representation research effort). Introducing a second, heavier modeling paradigm now risks the same kind of scope creep the C2SIM JSON-vs-XML decision (Section 4a) was designed to avoid.
+
+**Decided 2026-09-05:** JSON Schema stays ENSIM's operational data model — what `federation-kernel` and `sim-services` actually run against. BFO/CCO becomes an optional *export* generated later, not built now. This mirrors the C2SIM/XML boundary-adapter pattern already adopted (Section 4a): keep the internal model lightweight and AI-generation-friendly, and add a translation layer at the boundary only when a real interop need with GMNS or AOC-DFO appears, rather than paying the OWL/SHACL/reasoner tooling cost up front.
+
+Concretely, when that export is built, it should be a one-way generator — `org-doctrine-model` JSON → `aoc-dfo`-style Turtle — not a second hand-maintained copy of the data. `docs/external/aocdfo/design.md` §4 (mapping rules MR-1 through MR-7) is the template to follow: message/entity → CCO Information Bearing/Content Entity, `cco:is_about` restrictions to domain classes, new classes only under a competency-question gate. This is deferred, not scheduled — it has no task number yet in Section 11 until a real consumer (GMNS or AOC-DFO) needs it.
+
+## 13. User interface: Model & Results Explorer
+
+ENSIM needs a UI for two related but distinct jobs: letting someone browse the org/doctrine data model itself (what organizations, roles, C2 nodes, and doctrine processes exist, how they relate, and what each is grounded in), and letting them see what happened when a mission scenario actually ran. Both live in one new app, `apps/model-explorer`, rather than three apps splitting hairs over the boundary — the two views share the same underlying entities and a viewer will move between them constantly (see a mission's timeline step, jump to the role that performed it, see its citation).
+
+**Navigate the data model.** A read-only browser over `packages/org-doctrine-model/data`: list and filter Organizations/Roles/C2Nodes/DoctrineProcesses/Missions, follow relationships (an Organization's `parentId` chain, a Role's `reportsToRoleId` chain, a DoctrineProcess's ordered steps and each step's actor), and — importantly — surface every record's `doctrineSource` citations inline, including the `note` field where something is flagged unverified. This makes the citation discipline in `AGENTS.md` Section 2 visible to a human reviewer instead of only living in JSON someone has to open by hand. This half needs no new backend or data contract — `org-doctrine-model`'s seed data already exists and validates; this app can be built now.
+
+**View mission simulation results.** This half is staged, because `sim-services` (the thing that actually runs a mission) doesn't exist yet. V1: render a Mission record's existing `timeline` array (Section 6/7) as the *planned* sequence — this is real data today, just not yet an *executed* trace. V2, once `sim-services` exists: render actual run output — per-step status, real timestamps, and any artifacts generated (an ATO line, a mission report) — reusing the same view. This means the UI's data contract for a "run result" should look like the planned timeline shape *plus* execution fields (status, actual timestamp, artifact reference), so V1's view code doesn't get rebuilt for V2 — it gets fed richer data. Don't invent the run-result schema now; define it when `sim-services` is scoped, informed by what this app actually needed to render for V1.
+
+**Scope discipline, matching Mission 1's:** no live updates, no graph visualization, no editing (that's `mission-planner`'s job) in v1 — table/list/detail views only, reading static JSON. Add a real graph view or live federation-connected updates only as a deliberate v2, not by default.
+
+**Tech:** TypeScript, per `tech-stack.md`. React + Vite for a client-rendered SPA that reads the JSON directly (no backend needed for v1 — it's static data). Scaffolded at `apps/model-explorer` with `package.json` and a README; no component code yet, since there's more value in `org-doctrine-model` and `sim-services` existing first than in a UI with nothing new to show beyond what `npm run validate`'s console output already proves.
+
+---
+
+### Sources consulted
+
+AFDP 3-0.1 (Command and Control, formerly AFDP 3-30); JP 3-17 (Air Mobility Operations); DAFMAN 13-217 (Drop-Zone and Landing-Zone Operations); DoDD 5100.46 (Foreign Disaster Relief); 15th Wing and 535th Airlift Squadron unit references; 618th Air Operations Center (TACC) fact sheet; Air & Space Forces Magazine and Joint Force Quarterly coverage of Operation Damayan; SISO standards products page (sisostandards.org) — HLA (IEEE 1516/1516-2025), DIS (IEEE 1278.1-2012), C-BML, MSDL, C2SIM (SISO-STD-019-2020), BOM (SISO-STD-003-2006), RPR-FOM (SISO-STD-001-2025); OpenC2SIM, Portico, CERTI, and open-dis project repositories; github.com/open-arsenal and open-arsenal.gitlab.io (AFLCMC Architecture & Standards Engineering / ModularAF).

@@ -1,0 +1,91 @@
+[
+  {
+    "id": "indopacom",
+    "name": "United States Indo-Pacific Command",
+    "shortName": "INDOPACOM",
+    "type": "CombatantCommand",
+    "echelon": "Combatant Command",
+    "parentId": null,
+    "description": "Geographic combatant command; stands up a Joint Task Force in response to a validated HA/DR requirement in its area of responsibility.",
+    "doctrineSource": [
+      { "publication": "DoDD 5100.46", "section": "DoD Support to Foreign Disaster Relief" }
+    ]
+  },
+  {
+    "id": "pacaf",
+    "name": "Pacific Air Forces",
+    "shortName": "PACAF",
+    "type": "MAJCOM",
+    "echelon": "Command",
+    "parentId": null,
+    "homeStation": "Joint Base Pearl Harbor-Hickam, HI",
+    "doctrineSource": [
+      { "publication": "AFDP 3-0.1", "note": "Command and Control, formerly AFDP 3-30." }
+    ]
+  },
+  {
+    "id": "pacaf-theater-aoc",
+    "name": "PACAF Theater Air Operations Center",
+    "shortName": "PACAF AOC",
+    "type": "OperationsCenter",
+    "echelon": "Operational-level C2 center",
+    "parentId": "pacaf",
+    "homeStation": "Joint Base Pearl Harbor-Hickam, HI",
+    "description": "Produces the daily Air Tasking Order (ATO) for the PACAF/INDOPACOM area of responsibility.",
+    "doctrineSource": [
+      { "publication": "AFDP 3-0.1", "note": "The AOC construct itself is confirmed doctrine. The specific numbered-AOC designation for PACAF (e.g., 613 AOC) was NOT independently verified during this research pass — confirm the exact unit number before treating it as fact, and update this record's name/shortName accordingly." },
+      { "publication": "AFMAN 13-1AOC Vol 3", "section": "25 Jun 2024 edition, §2.3; no releasability restrictions", "url": "https://static.e-publishing.af.mil/production/1/af_a3/publication/afman13-1aocv3/afman13-1aocv3_.pdf", "note": "Fetched and read directly in this session on 2026-09-05. Confirms the generic internal AOC division structure (Strategy, Combat Plans, Combat Operations, ISR, and Air Mobility Divisions — see the five new c2nodes.json records) — this applies AOC/OC-wide per the manual, it is NOT PACAF-specific. The specific PACAF numbered-AOC designation (e.g., 613 AOC) is still unverified; everything else about this record's internal structure is now grounded." }
+    ]
+  },
+  {
+    "id": "amc",
+    "name": "Air Mobility Command",
+    "shortName": "AMC",
+    "type": "MAJCOM",
+    "echelon": "Command",
+    "parentId": null,
+    "homeStation": "Scott AFB, IL",
+    "doctrineSource": [
+      { "publication": "JP 3-17", "section": "Air Mobility Operations" }
+    ]
+  },
+  {
+    "id": "amc-618-aoc-tacc",
+    "name": "618th Air Operations Center (Tanker Airlift Control Center)",
+    "shortName": "618 AOC/TACC",
+    "type": "OperationsCenter",
+    "echelon": "Operational-level C2 center",
+    "parentId": "amc",
+    "homeStation": "Scott AFB, IL",
+    "description": "AMC's sole AOC; 24/7 execution node tasking specific tail numbers/crews for global mobility missions.",
+    "doctrineSource": [
+      { "publication": "JP 3-17" },
+      { "publication": "618th Air Operations Center Fact Sheet", "url": "https://www.amc.af.mil/About-Us/Fact-Sheets/Display/Article/1517680/618th-air-operations-center/" }
+    ]
+  },
+  {
+    "id": "15th-wing",
+    "name": "15th Wing",
+    "shortName": "15 WG",
+    "type": "Wing",
+    "echelon": "Wing",
+    "parentId": "pacaf",
+    "homeStation": "Joint Base Pearl Harbor-Hickam, HI",
+    "doctrineSource": [
+      { "publication": "15th Wing public unit reference" }
+    ]
+  },
+  {
+    "id": "535th-airlift-squadron",
+    "name": "535th Airlift Squadron",
+    "shortName": "535 AS",
+    "type": "Squadron",
+    "echelon": "Squadron",
+    "parentId": "15th-wing",
+    "homeStation": "Joint Base Pearl Harbor-Hickam, HI",
+    "description": "Only active-duty C-17 squadron in Hawaii; performs humanitarian airlift and airdrop for the Indo-Pacific.",
+    "doctrineSource": [
+      { "publication": "535th Airlift Squadron public unit reference" }
+    ]
+  }
+]

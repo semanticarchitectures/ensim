@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>dev.ensim</groupId>
+  <artifactId>federation-kernel</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Must match the version installed by scripts/setup-portico.sh -->
+    <portico.version>UNSET_SEE_PORTICO_SETUP_MD</portico.version>
+  </properties>
+
+  <!-- Repo-local Maven repository populated by scripts/setup-portico.sh.
+       Portico is not published to Maven Central; see
+       docs/architecture/portico-setup.md before building this module. -->
+  <repositories>
+    <repository>
+      <id>vendor-local</id>
+      <url>file://${project.basedir}/../../vendor/maven-repo</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.openlvc</groupId>
+      <artifactId>portico</artifactId>
+      <version>${portico.version}</version>
+    </dependency>
+
+    <!-- JSON mapping at the boundary with the TypeScript side, per
+         docs/architecture/tech-stack.md. The canonical schema lives in
+         packages/org-doctrine-model/schema, not here. -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.17.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

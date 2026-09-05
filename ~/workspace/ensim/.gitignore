@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+target/
+*.log
+
+# Portico vendoring (docs/architecture/portico-setup.md) — never commit the built jar,
+# and never commit anything under corpus-controlled/ per HANDLING conventions.
+vendor/
+
+.DS_Store
