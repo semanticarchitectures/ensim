@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ensim.dev/schema/common.schema.json",
+  "title": "ENSIM Common Definitions",
+  "$defs": {
+    "entityId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Lowercase kebab-case stable identifier, unique within its entity type."
+    },
+    "doctrineSource": {
+      "type": "object",
+      "description": "Citation to the public doctrine or reference material that grounds this record. Required on every ENSIM entity per AGENTS.md — do not add a record without one, and use the 'note' field to flag anything not independently verified.",
+      "properties": {
+        "publication": {
+          "type": "string",
+          "description": "e.g. 'AFDP 3-0.1', 'JP 3-17', 'DAFMAN 13-217', 'DoDD 5100.46', or a named fact sheet/article title."
+        },
+        "section": {
+          "type": "string",
+          "description": "Specific section, page, or fact-sheet heading, if applicable."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-text caveat, e.g. 'unit designation not yet verified — confirm before treating as fact.'"
+        }
+      },
+      "required": ["publication"],
+      "additionalProperties": false
+    }
+  }
+}

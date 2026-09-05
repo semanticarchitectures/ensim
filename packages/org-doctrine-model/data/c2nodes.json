@@ -1,0 +1,91 @@
+[
+  {
+    "id": "15th-wing-operations-center",
+    "name": "15th Wing Operations Center",
+    "organizationId": "15th-wing",
+    "function": "ExecutionMonitoring",
+    "producesArtifacts": ["Sortie status reports"],
+    "description": "Wing-level execution monitoring for tasked sorties.",
+    "doctrineSource": [
+      { "publication": "Generic wing C2 doctrine reference", "note": "Wing Operations Center function is standard; the 15th Wing's specific internal C2 structure was not independently verified during this research pass." }
+    ]
+  },
+  {
+    "id": "aoc-tasking-node",
+    "name": "Air Operations Center (AOC) Tasking Function",
+    "organizationId": "pacaf-theater-aoc",
+    "function": "Tasking",
+    "producesArtifacts": ["Air Tasking Order (ATO)", "SPINS", "Airspace Control Order (ACO)"],
+    "description": "The AOC's Combat Operations Division tasking function that produces the daily ATO plus supporting SPINS/ACO.",
+    "doctrineSource": [
+      { "publication": "AFDP 3-0.1" }
+    ]
+  },
+  {
+    "id": "aoc-strategy-division",
+    "name": "Strategy Division (SRD)",
+    "organizationId": "pacaf-theater-aoc",
+    "function": "Coordination",
+    "producesArtifacts": ["Joint Air Operations Plan (JAOP)", "Air Operations Directive (AOD)", "Operational assessment report"],
+    "description": "Long-range and near-term strategy planning; develops, refines, disseminates, and assesses JFACC strategy guidance. Comprises the Strategy Plans Team, Strategy Guidance Team, and Operational Assessment Team.",
+    "doctrineSource": [
+      { "publication": "AFMAN 13-1AOC Vol 3", "section": "25 Jun 2024 edition, §2.3.4", "url": "https://static.e-publishing.af.mil/production/1/af_a3/publication/afman13-1aocv3/afman13-1aocv3_.pdf" }
+    ]
+  },
+  {
+    "id": "aoc-combat-plans-division",
+    "name": "Combat Plans Division (CPD)",
+    "organizationId": "pacaf-theater-aoc",
+    "function": "Tasking",
+    "producesArtifacts": ["Air Tasking Order (ATO)/ATONEWS", "Airspace Control Order (ACO)", "Airspace Control Plan (ACP)", "Joint Integrated Prioritized Target List (JIPTL)", "SPINS"],
+    "description": "Near-term AOC planning (within 48 hours prior to ATO execution). Comprises the Targeting Effects Team (TET), MAAP Team, ATO Production Team, and C2 Plans Team. This is the division that actually builds the ATO — not Combat Operations Division, which executes it.",
+    "doctrineSource": [
+      { "publication": "AFMAN 13-1AOC Vol 3", "section": "25 Jun 2024 edition, §2.3.5, §4.3, §4.5.1", "url": "https://static.e-publishing.af.mil/production/1/af_a3/publication/afman13-1aocv3/afman13-1aocv3_.pdf" }
+    ]
+  },
+  {
+    "id": "aoc-combat-operations-division",
+    "name": "Combat Operations Division (COD)",
+    "organizationId": "pacaf-theater-aoc",
+    "function": "ExecutionMonitoring",
+    "producesArtifacts": ["Sortie/mission execution status", "Common Tactical Picture (CTP) inputs"],
+    "description": "Executes the current ATO/ATONEWS and ACO during the 24-hour execution period. Comprises the Offensive Operations Team, Defensive Operations Team, Component Joint Data Network Team, and the Senior Intelligence Duty Officer (SIDO) team. Corrects an earlier ENSIM assumption that this division builds the ATO — per AFMAN 13-1AOC Vol 3, that is CPD's role; COD executes it.",
+    "doctrineSource": [
+      { "publication": "AFMAN 13-1AOC Vol 3", "section": "25 Jun 2024 edition, §2.3.6", "url": "https://static.e-publishing.af.mil/production/1/af_a3/publication/afman13-1aocv3/afman13-1aocv3_.pdf" }
+    ]
+  },
+  {
+    "id": "aoc-isr-division",
+    "name": "Intelligence, Surveillance, and Reconnaissance Division (ISRD)",
+    "organizationId": "pacaf-theater-aoc",
+    "function": "Coordination",
+    "producesArtifacts": ["ISR collection tasking", "Target/tactical assessment products"],
+    "description": "Assesses and anticipates adversary activity, plans ISR operations, and develops dynamic target strategies. Comprises the Analysis, Correlation, and Fusion (ACF) Team, Targets/Tactical Assessment (TGT/TA) Team, and ISR Operations Team.",
+    "doctrineSource": [
+      { "publication": "AFMAN 13-1AOC Vol 3", "section": "25 Jun 2024 edition, §2.3.7", "url": "https://static.e-publishing.af.mil/production/1/af_a3/publication/afman13-1aocv3/afman13-1aocv3_.pdf" }
+    ]
+  },
+  {
+    "id": "aoc-air-mobility-division",
+    "name": "Air Mobility Division (AMD)",
+    "organizationId": "pacaf-theater-aoc",
+    "function": "Tasking",
+    "producesArtifacts": ["Air mobility mission tasking", "Joint Integrated Prioritized Requirements List (JIPRL) coordination"],
+    "description": "Plans, coordinates, tasks, and executes air mobility missions per JFACC guidance, in a process run parallel to and integrated with the main air tasking cycle. Coordinates intertheater air mobility missions directly with the 618 AOC/TACC. Comprises the Airlift Control Team, Air Refueling Control Team, Aeromedical Evacuation Control Team, and Air Mobility Control Team. This is the doctrinally correct home for DIRMOBFOR's coordination function and for Mission 1's airlift tasking, not the generic CPD/ATO path.",
+    "doctrineSource": [
+      { "publication": "AFMAN 13-1AOC Vol 3", "section": "25 Jun 2024 edition, §2.3.8", "url": "https://static.e-publishing.af.mil/production/1/af_a3/publication/afman13-1aocv3/afman13-1aocv3_.pdf" },
+      { "publication": "AFDP 3-36, Air Mobility Operations", "section": "24 Jun 2024 edition", "note": "Cited via the AOC-DFO corpus registry, not independently fetched in this session — treat as a lead for deeper AMD/DIRMOBFOR sourcing, not yet verified firsthand." }
+    ]
+  },
+  {
+    "id": "618-aoc-tacc-tasking-node",
+    "name": "618 AOC/TACC Mission Tasking",
+    "organizationId": "amc-618-aoc-tacc",
+    "function": "Tasking",
+    "producesArtifacts": ["Mission tail/crew tasking"],
+    "description": "24/7 execution node tasking specific tail numbers and crews for AMC-owned global mobility missions, even when the aircraft flying it is theater-assigned.",
+    "doctrineSource": [
+      { "publication": "618th Air Operations Center Fact Sheet", "url": "https://www.amc.af.mil/About-Us/Fact-Sheets/Display/Article/1517680/618th-air-operations-center/" }
+    ]
+  }
+]
