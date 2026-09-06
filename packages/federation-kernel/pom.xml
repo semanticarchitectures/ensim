@@ -14,7 +14,7 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- Must match the version installed by scripts/setup-portico.sh -->
-    <portico.version>UNSET_SEE_PORTICO_SETUP_MD</portico.version>
+    <portico.version>2.1.4</portico.version>
   </properties>
 
   <!-- Repo-local Maven repository populated by scripts/setup-portico.sh.

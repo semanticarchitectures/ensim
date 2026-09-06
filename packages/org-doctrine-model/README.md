@@ -20,3 +20,11 @@ npm run validate
 ```
 
 This checks every record in `data/` against its schema using ajv. Run it after any edit to `data/` or `schema/`.
+
+## Types
+
+`types/` holds TypeScript interfaces generated from `schema/` — never hand-write a type here or elsewhere that duplicates a schema (AGENTS.md Section 5). Consumers (e.g. `apps/model-explorer`) import them as `@ensim/org-doctrine-model` or `@ensim/org-doctrine-model/types`. Regenerate after any schema change:
+
+```
+npm run generate-types
+```

@@ -7,7 +7,7 @@ Simulates a military enterprise — organizations, doctrine, roles, and command 
 
 ## Status
 
-`packages/org-doctrine-model` is scaffolded and validated: JSON Schema for `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus a seed USAF dataset and the Mission 1 scenario record. `packages/federation-kernel` has a Maven scaffold for the Portico/HLA integration but no federate code yet. Nothing else is started.
+`packages/org-doctrine-model` is scaffolded and validated: JSON Schema for `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus a seed USAF dataset, the Mission 1 scenario record, and generated TypeScript types. `apps/model-explorer`'s data-navigation UI is built against that data. `packages/federation-kernel` has a Maven scaffold for the Portico/HLA integration, pinned to `portico-2.1.4`, but no federate code yet. `sim-services`, `c2-interfaces`, and the rest of `apps/` are not started.
 
 ## Getting started
 
@@ -15,7 +15,13 @@ Simulates a military enterprise — organizations, doctrine, roles, and command 
 just validate-org-doctrine
 ```
 
-validates the seed dataset. See `docs/architecture/portico-setup.md` before attempting `just setup-portico` — it has open TODOs that must be confirmed against the live Portico repo first.
+validates the seed dataset.
+
+```
+npm run dev --workspace=@ensim/model-explorer
+```
+
+runs the model explorer UI. `just setup-portico` vendors Portico (see `docs/architecture/portico-setup.md`) — the release is pinned and it now runs unattended.
 
 ## Layout
 

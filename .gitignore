@@ -9,3 +9,4 @@ target/
 vendor/
 
 .DS_Store
+.gstack/

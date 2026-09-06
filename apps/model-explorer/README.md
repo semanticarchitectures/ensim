@@ -12,8 +12,16 @@ Table/list/detail views only, reading static JSON directly. No editing (that's `
 
 ## Status
 
-Scaffold only (`package.json`, this README). No components yet — there's more value in `org-doctrine-model` and `sim-services` existing first than in a UI with nothing new to render.
+Data-navigation half (1) is built: list and detail views for all five entity types, relationship links, and inline doctrine-source citations. Results-viewing half (2) is not started — waiting on `sim-services`.
 
 ## Stack
 
-TypeScript, React, Vite. Client-rendered SPA reading JSON directly; no backend needed for v1 since the data is static files.
+TypeScript, React, Vite, react-router-dom. Client-rendered SPA reading JSON directly; no backend needed for v1 since the data is static files. Types come from `@ensim/org-doctrine-model`'s generated `types/` (never hand-duplicated — see that package's README and AGENTS.md Section 5).
+
+## Development
+
+```
+npm install   # from repo root
+npm run dev --workspace=@ensim/model-explorer
+npm run typecheck --workspace=@ensim/model-explorer
+```

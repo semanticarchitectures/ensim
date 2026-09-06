@@ -4,8 +4,7 @@ Java module wrapping Portico (HLA RTI). This is the **only** Java package in the
 
 ## Before building
 
-1. Run `scripts/setup-portico.sh` (after filling in its two TODOs — see `docs/architecture/portico-setup.md`) to vendor Portico into `vendor/maven-repo`.
-2. Set `portico.version` in `pom.xml` to the version you actually installed.
+Run `scripts/setup-portico.sh` to vendor Portico 2.1.4 into `vendor/maven-repo` — the release is pinned and the script runs unattended now (see `docs/architecture/portico-setup.md` for how the pin was confirmed against the live repo). `pom.xml`'s `portico.version` is already set to match.
 
 ## Role in the architecture
 

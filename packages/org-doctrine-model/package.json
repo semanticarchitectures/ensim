@@ -4,11 +4,14 @@
   "private": true,
   "description": "USAF organization/doctrine data model and seed dataset for ENSIM (Section 6 of docs/architecture/ARCHITECTURE.md). Every other package depends on this one.",
   "type": "module",
+  "types": "./types/index.ts",
   "scripts": {
-    "validate": "node scripts/validate.mjs && node scripts/check-refs.mjs"
+    "validate": "node scripts/validate.mjs && node scripts/check-refs.mjs",
+    "generate-types": "node scripts/generate-types.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "json-schema-to-typescript": "^16.0.0"
   }
 }

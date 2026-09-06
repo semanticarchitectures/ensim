@@ -1,0 +1,273 @@
+:root {
+  color-scheme: light dark;
+  --border: #d0d0d5;
+  --muted: #6b6b76;
+  --accent: #2a5db0;
+  --warning-bg: #fff3cd;
+  --warning-border: #f0c14b;
+  --note-bg: #f5f1e6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #1a1a1f;
+  background: #fdfdfc;
+}
+
+code {
+  background: #eee;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-nav {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+}
+.app-nav .brand {
+  display: block;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+  color: #1a1a1f;
+}
+.app-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.app-nav a {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  color: #1a1a1f;
+}
+.app-nav a.active {
+  background: var(--accent);
+  color: white;
+}
+
+.app-content {
+  flex: 1;
+  padding: 2rem 2.5rem;
+  max-width: 900px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.breadcrumb {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.short-name {
+  color: var(--muted);
+  font-weight: normal;
+}
+
+.home-counts {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.home-counts a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.home-counts .count {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1f;
+}
+
+.filter-input {
+  width: 100%;
+  max-width: 420px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.record-table th,
+.record-table td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.record-table th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.record-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.field-list dt {
+  font-weight: 600;
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.field-list dd {
+  margin: 0.25rem 0 0;
+}
+.field-list ul {
+  margin: 0.25rem 0;
+  padding-left: 1.25rem;
+}
+
+.process-steps {
+  padding-left: 1.25rem;
+}
+.process-steps li {
+  margin-bottom: 1rem;
+}
+.process-steps p {
+  margin: 0.15rem 0;
+}
+.step-meta {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.step-artifact {
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+.doctrine-sources {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.doctrine-sources li {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.doctrine-sources li.has-note {
+  border-color: var(--warning-border);
+  background: var(--warning-bg);
+}
+.doctrine-sources .section {
+  color: var(--muted);
+}
+.doctrine-sources .note {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  background: var(--note-bg);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+}
+
+.note {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  background: var(--note-bg);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+}
+
+.unresolved {
+  color: #b00020;
+  font-style: italic;
+}
+
+.warning {
+  color: #b00020;
+  font-weight: 600;
+}
+
+.warning-banner {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #e8e8ec;
+    background: #16161a;
+  }
+  code {
+    background: #2a2a30;
+  }
+  .app-nav a {
+    color: #e8e8ec;
+  }
+  .app-nav .brand {
+    color: #e8e8ec;
+  }
+  .home-counts .count {
+    color: #e8e8ec;
+  }
+  .record-table th,
+  .record-table td {
+    border-color: #38383f;
+  }
+  .doctrine-sources li {
+    border-color: #38383f;
+  }
+  .note {
+    background: #2a2a30;
+  }
+  .doctrine-sources li.has-note {
+    background: #3a331a;
+  }
+  .warning-banner {
+    background: #3a331a;
+  }
+}
