@@ -8,7 +8,7 @@
 
 **Java 17+ (Maven)** for `packages/federation-kernel` only, because Portico's only supported language bindings are Java and C++, and Java has the more modern, better-documented build path of the two (see `portico-setup.md`).
 
-**Monorepo tooling:** pnpm workspaces (`packages/*`, `apps/*`) for the TypeScript side. The Java module is *not* forced into the same package manager — a monorepo means one repo and coordinated builds, not one build tool. A root `Justfile` wires `pnpm` and `mvn` together (`just build`, `just test`, `just dev`) so a single command works across both.
+**Monorepo tooling:** npm workspaces (`packages/*`, `apps/*`) for the TypeScript side. The Java module is *not* forced into the same package manager — a monorepo means one repo and coordinated builds, not one build tool. A root `Justfile` wires `npm` and `mvn` together (`just build`, `just test`, `just dev`) so a single command works across both.
 
 **Data/message format:** JSON everywhere (decided previously), validated against JSON Schema (2020-12) using `ajv` on the TypeScript side. `federation-kernel` uses Jackson on the Java side to map the same JSON shapes to typed objects only at the point where Portico's API requires them — the canonical schema still lives in `packages/org-doctrine-model/schema`, not duplicated as Java POJOs by hand.
 
@@ -24,4 +24,4 @@ A full Java monorepo was rejected: Java is heavier for schema-driven data modeli
 
 ## Open item
 
-pnpm + Maven is a reasonable pairing but hasn't been validated end-to-end with a real `just build` yet. Treat this as the plan going into the first build, not a proven CI pipeline.
+npm + Maven is a reasonable pairing but hasn't been validated end-to-end with a real `just build` yet. Treat this as the plan going into the first build, not a proven CI pipeline.

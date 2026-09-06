@@ -1,1 +1,0 @@
-See `AGENTS.md` at the repo root — it is the operative conventions file for this repo and applies to Claude Code exactly as it does to any other AI coding tool used here (Cursor, Kiro). This file exists only because some tooling looks for `CLAUDE.md` specifically; do not duplicate content here — edit `AGENTS.md` instead.

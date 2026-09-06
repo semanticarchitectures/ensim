@@ -1,4 +1,4 @@
-# Coordinates the TypeScript (pnpm) and Java (Maven) sides of the monorepo.
+# Coordinates the TypeScript (npm) and Java (Maven) sides of the monorepo.
 # See docs/architecture/tech-stack.md for why there are two build tools.
 
 # Validate the org-doctrine-model seed data against its JSON Schema.

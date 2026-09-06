@@ -63,7 +63,7 @@ Three previously open items are decided, and a fourth (tech stack) has been adde
 
 **Mission 1 v1 scope: data/process simulation, not flight dynamics.** The first build proves the tasking chain and org-doctrine model — request validation, ATO tasking, C2 node hand-offs, timing — using discrete events, not real geospatial/physics simulation of the aircraft. Practically, this means Mission 1 v1 exercises the **C2SIM (JSON) layer** and the **HLA/Portico federation layer** fully, but the **DIS/entity-gateway layer** (real-time aircraft position, drop-zone physics) is out of scope until a v2 fidelity increment. See Section 7 and Section 8.
 
-**Tech stack: TypeScript everywhere except `federation-kernel` (Java, for Portico).** Full rationale in `tech-stack.md`. Monorepo tooling is pnpm workspaces for the TypeScript packages, plus a standalone Maven module for `federation-kernel`, coordinated by a root `Justfile` rather than forced into one package manager.
+**Tech stack: TypeScript everywhere except `federation-kernel` (Java, for Portico).** Full rationale in `tech-stack.md`. Monorepo tooling is npm workspaces for the TypeScript packages, plus a standalone Maven module for `federation-kernel`, coordinated by a root `Justfile` rather than forced into one package manager.
 
 ## 5. Open-Arsenal / ModularAF — role and caveats
 
