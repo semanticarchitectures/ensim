@@ -20,6 +20,19 @@ export interface Role {
   authorities?: string[];
   reportsToRoleId?: string | null;
   /**
+   * Formal training/qualification pipeline for this role. Optional — not every Role record has been researched for this yet; absence means 'not yet modeled', not 'no training required'.
+   */
+  training?: {
+    name: string;
+    institution?: string;
+    duration?: string;
+    description: string;
+    /**
+     * @minItems 1
+     */
+    doctrineSource: [DoctrineSource, ...DoctrineSource[]];
+  }[];
+  /**
    * @minItems 1
    */
   doctrineSource: [DoctrineSource, ...DoctrineSource[]];

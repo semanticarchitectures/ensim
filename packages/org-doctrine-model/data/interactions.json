@@ -90,5 +90,54 @@
         "note": "Generic mission-commander concept; not tied to a specific numbered instruction in this dataset — matches the existing mission-commander Role record's citation."
       }
     ]
+  },
+  {
+    "id": "loadmaster-authenticates-to-access-control",
+    "from": { "kind": "role", "id": "loadmaster" },
+    "to": { "kind": "system", "id": "identity-access-control-system" },
+    "interactionType": "AuthenticatesTo",
+    "description": "Loadmaster authenticates to the identity/access-control system to access weight-and-balance and load-planning computation tools used to compute center of gravity for the loaded cargo configuration.",
+    "doctrineSource": [
+      {
+        "publication": "DoDI 8520.04, Access Management for DoD Information Systems",
+        "note": "General ICAM policy concept only, not a specific real system — same verification status as the identity-access-control-system System record's citation. The specific weight-and-balance/load-planning tool name is not modeled — kept generic/representative rather than naming an unverified real system."
+      }
+    ]
+  },
+  {
+    "id": "dzstl-informs-aircraft-commander-of-dz-status",
+    "from": { "kind": "role", "id": "drop-zone-support-team-leader" },
+    "to": { "kind": "role", "id": "aircraft-commander" },
+    "interactionType": "Informs",
+    "description": "Drop Zone Support Team Leader relays drop-zone status and wind data to the flight deck (Aircraft Commander) via the tactical communications system — the actual first hop of the information path that ultimately reaches the Loadmaster relayed through the flight deck.",
+    "doctrineSource": [
+      { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
+    ]
+  },
+  {
+    "id": "aircraft-commander-informs-loadmaster-of-release-command",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "role", "id": "loadmaster" },
+    "interactionType": "Informs",
+    "description": "Aircraft Commander relays drop-zone status/wind updates during the run-in and gives the verbal release command (\"Mark\") to the Loadmaster via intercom — the trigger for the Loadmaster's release-execution decision.",
+    "doctrineSource": [
+      {
+        "publication": "C-17 Pilot (c17pilot.com), \"C-17 Airdrop Operations — How Cargo and Troops Exit at 25,000 Feet\"",
+        "note": "NOT an official Air Force publication — see the loadmaster-release-execution Decision record's citation note for the full caveat on this source."
+      }
+    ]
+  },
+  {
+    "id": "loadmaster-informs-aircraft-commander-of-cargo-away",
+    "from": { "kind": "role", "id": "loadmaster" },
+    "to": { "kind": "role", "id": "aircraft-commander" },
+    "interactionType": "Informs",
+    "description": "Loadmaster confirms release completion (\"Cargo away\") to the flight deck via intercom immediately after executing the release.",
+    "doctrineSource": [
+      {
+        "publication": "C-17 Pilot (c17pilot.com), \"C-17 Airdrop Operations — How Cargo and Troops Exit at 25,000 Feet\"",
+        "note": "NOT an official Air Force publication — same verification status as aircraft-commander-informs-loadmaster-of-release-command."
+      }
+    ]
   }
 ]

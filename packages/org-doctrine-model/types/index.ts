@@ -9,4 +9,5 @@ export type { DoctrineProcess } from "./DoctrineProcess.js";
 export type { Mission } from "./Mission.js";
 export type { System } from "./System.js";
 export type { Interaction } from "./Interaction.js";
+export type { Decision } from "./Decision.js";
 export type { DoctrineSource } from "./Organization.js";

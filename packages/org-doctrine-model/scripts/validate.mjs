@@ -31,6 +31,7 @@ const checks = [
   { data: "doctrine-processes.json", schemaId: "https://ensim.dev/schema/doctrine-process.schema.json" },
   { data: "systems.json", schemaId: "https://ensim.dev/schema/system.schema.json" },
   { data: "interactions.json", schemaId: "https://ensim.dev/schema/interaction.schema.json" },
+  { data: "decisions.json", schemaId: "https://ensim.dev/schema/decision.schema.json" },
 ];
 
 let ok = true;

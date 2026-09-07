@@ -7,6 +7,7 @@ const navItems = [
   { to: "/doctrine-processes", label: "Doctrine Processes" },
   { to: "/systems", label: "Systems" },
   { to: "/interactions", label: "Interactions" },
+  { to: "/decisions", label: "Decisions" },
   { to: "/missions", label: "Missions" },
 ];
 

@@ -2,7 +2,7 @@
 // helpers the UI needs. This is a read-only view over packages/org-doctrine-model/data
 // — see docs/architecture/ARCHITECTURE.md Section 13. Types come from the
 // package's generated types (schema/*.schema.json), never hand-duplicated here.
-import type { Organization, Role, C2Node, DoctrineProcess, Mission, System, Interaction } from "@ensim/org-doctrine-model";
+import type { Organization, Role, C2Node, DoctrineProcess, Mission, System, Interaction, Decision } from "@ensim/org-doctrine-model";
 import type { RunResult } from "@ensim/sim-services";
 
 import organizationsRaw from "../../../../packages/org-doctrine-model/data/organizations.json";
@@ -11,6 +11,7 @@ import c2NodesRaw from "../../../../packages/org-doctrine-model/data/c2nodes.jso
 import doctrineProcessesRaw from "../../../../packages/org-doctrine-model/data/doctrine-processes.json";
 import systemsRaw from "../../../../packages/org-doctrine-model/data/systems.json";
 import interactionsRaw from "../../../../packages/org-doctrine-model/data/interactions.json";
+import decisionsRaw from "../../../../packages/org-doctrine-model/data/decisions.json";
 
 const missionModules = import.meta.glob<Mission>(
   "../../../../packages/org-doctrine-model/data/missions/*.json",
@@ -31,6 +32,7 @@ export const c2Nodes = c2NodesRaw as C2Node[];
 export const doctrineProcesses = doctrineProcessesRaw as DoctrineProcess[];
 export const systems = systemsRaw as System[];
 export const interactions = interactionsRaw as Interaction[];
+export const decisions = decisionsRaw as Decision[];
 export const missions = Object.values(missionModules).sort((a, b) => a.id.localeCompare(b.id));
 export const runResults = Object.values(runResultModules).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
 
@@ -40,6 +42,7 @@ export const c2NodesById = new Map(c2Nodes.map((n) => [n.id, n]));
 export const doctrineProcessesById = new Map(doctrineProcesses.map((p) => [p.id, p]));
 export const systemsById = new Map(systems.map((s) => [s.id, s]));
 export const interactionsById = new Map(interactions.map((i) => [i.id, i]));
+export const decisionsById = new Map(decisions.map((d) => [d.id, d]));
 export const missionsById = new Map(missions.map((m) => [m.id, m]));
 
 /** Walks an Organization's parentId chain from itself up to the top-level org. */
@@ -102,4 +105,8 @@ export function interactionsForParticipant(kind: Interaction["from"]["kind"], id
   return interactions.filter(
     (i) => (i.from.kind === kind && i.from.id === id) || (i.to.kind === kind && i.to.id === id),
   );
+}
+
+export function decisionsForRole(roleId: string): Decision[] {
+  return decisions.filter((d) => d.roleId === roleId);
 }

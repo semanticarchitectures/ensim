@@ -21,6 +21,7 @@ const schemas = [
   { file: "mission.schema.json", name: "Mission" },
   { file: "system.schema.json", name: "System" },
   { file: "interaction.schema.json", name: "Interaction" },
+  { file: "decision.schema.json", name: "Decision" },
 ];
 
 const banner =

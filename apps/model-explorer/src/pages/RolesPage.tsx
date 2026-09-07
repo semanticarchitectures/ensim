@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { roles, rolesById, roleReportsChain, directReports, interactionsForParticipant } from "../data";
+import { roles, rolesById, roleReportsChain, directReports, interactionsForParticipant, decisionsForRole } from "../data";
 import { RecordTable } from "../components/RecordTable";
 import { DoctrineSourceList } from "../components/DoctrineSourceList";
 import { EntityLink } from "../components/EntityLink";
@@ -33,6 +33,7 @@ export function RoleDetailPage() {
   const chain = roleReportsChain(role.id).slice(1);
   const reports = directReports(role.id);
   const roleInteractions = interactionsForParticipant("role", role.id);
+  const roleDecisions = decisionsForRole(role.id);
 
   return (
     <>
@@ -64,6 +65,24 @@ export function RoleDetailPage() {
               <ul>
                 {role.authorities.map((a, i) => (
                   <li key={i}>{a}</li>
+                ))}
+              </ul>
+            </dd>
+          </>
+        )}
+        {role.training && role.training.length > 0 && (
+          <>
+            <dt>Training</dt>
+            <dd>
+              <ul>
+                {role.training.map((t, i) => (
+                  <li key={i}>
+                    <strong>{t.name}</strong>
+                    {t.institution && ` — ${t.institution}`}
+                    {t.duration && ` (${t.duration})`}
+                    <p className="step-meta">{t.description}</p>
+                    <DoctrineSourceList sources={t.doctrineSource} />
+                  </li>
                 ))}
               </ul>
             </dd>
@@ -108,6 +127,21 @@ export function RoleDetailPage() {
                   <span className="step-status">{i.interactionType}</span> →{" "}
                   <EntityLink kind={i.to.kind} id={i.to.id} />
                   <div className="step-meta">{i.description}</div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </dd>
+        <dt>Decisions</dt>
+        <dd>
+          {roleDecisions.length === 0 ? (
+            <span className="muted">None</span>
+          ) : (
+            <ul>
+              {roleDecisions.map((d) => (
+                <li key={d.id}>
+                  <Link to={`/decisions/${d.id}`}>{d.name}</Link>
+                  <p className="step-meta">{d.description}</p>
                 </li>
               ))}
             </ul>

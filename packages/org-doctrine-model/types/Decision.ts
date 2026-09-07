@@ -3,17 +3,33 @@
 // run `npm run generate-types` after changing a schema.
 
 /**
- * A structural (doctrinal), not mission-instance-specific, edge in the mission execution interaction network: who or what interacts with who or what, and how. Sits alongside DoctrineProcess as a description of how the enterprise normally operates, at a finer grain — individual personnel and the systems they use, rather than organizational tasking flow. See ARCHITECTURE.md Section 6.
+ * A choice point a Role makes during mission execution, given specific information inputs (informedBy) and criteria — a finer grain than DoctrineProcess (organizational tasking) or Interaction (a structural edge): what a person actually has to decide, not just who they talk to. See ARCHITECTURE.md Section 6.
  */
-export interface Interaction {
+export interface Decision {
   /**
    * Lowercase kebab-case stable identifier, unique within its entity type.
    */
   id: string;
-  from: Participant;
-  to: Participant;
-  interactionType: "Operates" | "CommunicatesVia" | "AuthenticatesTo" | "CoordinatesWith" | "Commands" | "Informs";
+  /**
+   * Lowercase kebab-case stable identifier, unique within its entity type.
+   */
+  roleId: string;
+  name: string;
   description: string;
+  /**
+   * The nodes (roles, systems, etc.) whose information feeds this decision.
+   *
+   * @minItems 1
+   */
+  informedBy: [Participant, ...Participant[]];
+  /**
+   * What determines the outcome — the standard the Role applies.
+   */
+  criteria: string;
+  /**
+   * @minItems 1
+   */
+  possibleOutcomes: [string, ...string[]];
   /**
    * @minItems 1
    */

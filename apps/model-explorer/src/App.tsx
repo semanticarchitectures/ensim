@@ -7,6 +7,7 @@ import { C2NodesPage, C2NodeDetailPage } from "./pages/C2NodesPage";
 import { DoctrineProcessesPage, DoctrineProcessDetailPage } from "./pages/DoctrineProcessesPage";
 import { SystemsPage, SystemDetailPage } from "./pages/SystemsPage";
 import { InteractionsPage, InteractionDetailPage } from "./pages/InteractionsPage";
+import { DecisionsPage, DecisionDetailPage } from "./pages/DecisionsPage";
 import { MissionsPage, MissionDetailPage } from "./pages/MissionsPage";
 
 export function App() {
@@ -27,6 +28,8 @@ export function App() {
           <Route path="systems/:id" element={<SystemDetailPage />} />
           <Route path="interactions" element={<InteractionsPage />} />
           <Route path="interactions/:id" element={<InteractionDetailPage />} />
+          <Route path="decisions" element={<DecisionsPage />} />
+          <Route path="decisions/:id" element={<DecisionDetailPage />} />
           <Route path="missions" element={<MissionsPage />} />
           <Route path="missions/:id" element={<MissionDetailPage />} />
         </Route>

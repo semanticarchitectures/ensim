@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { organizations, roles, c2Nodes, doctrineProcesses, systems, interactions, missions } from "../data";
+import { organizations, roles, c2Nodes, doctrineProcesses, systems, interactions, decisions, missions } from "../data";
 
 const counts = [
   { label: "Organizations", to: "/organizations", count: organizations.length },
@@ -8,6 +8,7 @@ const counts = [
   { label: "Doctrine Processes", to: "/doctrine-processes", count: doctrineProcesses.length },
   { label: "Systems", to: "/systems", count: systems.length },
   { label: "Interactions", to: "/interactions", count: interactions.length },
+  { label: "Decisions", to: "/decisions", count: decisions.length },
   { label: "Missions", to: "/missions", count: missions.length },
 ];
 

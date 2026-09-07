@@ -1,0 +1,45 @@
+[
+  {
+    "id": "loadmaster-rigging-readiness-verification",
+    "roleId": "loadmaster",
+    "name": "Rigging and Restraint Readiness Verification",
+    "description": "Before the drop run, the Loadmaster verifies that CDS bundle rigging and restraint meets standard before the aircraft can proceed to release.",
+    "informedBy": [{ "kind": "system", "id": "cds-airdrop-mechanism" }],
+    "criteria": "CDS bundle rigging and restraint configuration meets DAFMAN 13-217 drop-zone/airdrop standards.",
+    "possibleOutcomes": ["Ready for release", "Not ready — delay or correct rigging before proceeding"],
+    "doctrineSource": [
+      { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
+    ]
+  },
+  {
+    "id": "loadmaster-release-execution",
+    "roleId": "loadmaster",
+    "name": "Release Execution",
+    "description": "The Loadmaster's hand is on the release mechanism during the drop run; physical release is executed only on the Aircraft Commander's verbal command, confirmed by a flight-deck signal that cargo is ready and the drop zone is clear.",
+    "informedBy": [
+      { "kind": "role", "id": "aircraft-commander" },
+      { "kind": "system", "id": "tactical-communications-system" }
+    ],
+    "criteria": "Release is executed only after the Aircraft Commander's verbal 'Mark' command, confirmed by a flight-deck 'cargo ready / drop zone clear' signal — never on the Loadmaster's unilateral initiative.",
+    "possibleOutcomes": ["Release executed, confirmed to flight deck (\"Cargo away\")", "Hold — awaiting Mark command"],
+    "doctrineSource": [
+      { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" },
+      {
+        "publication": "C-17 Pilot (c17pilot.com), \"C-17 Airdrop Operations — How Cargo and Troops Exit at 25,000 Feet\"",
+        "note": "NOT an official Air Force publication — an enthusiast/educational site. Cited for the specific call-and-response procedure (pilot 'Mark' → Loadmaster 'Cargo away', green-light flight-deck signal) because no official source for this exact sequence was independently accessible this session (every .mil domain network-blocked). The general framework — CDS release under aircrew/DZ coordination — is grounded in DAFMAN 13-217; this specific verbal-procedure detail is not verified against a primary Air Force source and should be treated as illustrative/representative rather than doctrinally confirmed."
+      }
+    ]
+  },
+  {
+    "id": "loadmaster-inflight-malfunction-abort-call",
+    "roleId": "loadmaster",
+    "name": "In-Flight Malfunction / Abort Call",
+    "description": "During the drop run-in, the Loadmaster monitors the cargo compartment and rigging for equipment failures and can call for the release to be aborted.",
+    "informedBy": [{ "kind": "system", "id": "cds-airdrop-mechanism" }],
+    "criteria": "Any detected equipment malfunction or rigging failure that would compromise a safe release.",
+    "possibleOutcomes": ["Continue with planned release", "Call abort and report the malfunction to the Aircraft Commander"],
+    "doctrineSource": [
+      { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
+    ]
+  }
+]

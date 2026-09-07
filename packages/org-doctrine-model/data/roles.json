@@ -109,10 +109,38 @@
     "organizationId": "535th-airlift-squadron",
     "c2NodeId": null,
     "responsibilities": [
-      "Rigs and releases Container Delivery System (CDS) bundles during airdrop"
+      "Rigs and releases Container Delivery System (CDS) bundles during airdrop",
+      "Computes and verifies aircraft weight and balance / center of gravity for the loaded cargo configuration",
+      "Monitors the cargo compartment during flight and reports equipment status/failures to the flight deck via intercom"
     ],
     "authorities": [],
     "reportsToRoleId": "aircraft-commander",
+    "training": [
+      {
+        "name": "Aircraft Loadmaster initial qualification course",
+        "institution": "344th Training Squadron, Joint Base San Antonio-Lackland, TX",
+        "duration": "~5 weeks",
+        "description": "Core qualification tasks common to all loadmaster assignments: load planning, weight and balance computation, cargo restraint procedures, aerial delivery rigging, passenger management, and emergency procedures. Awards AFSC 1A2X1 (Aircraft Loadmaster) on completion.",
+        "doctrineSource": [
+          {
+            "publication": "CFETP 1A2X1, Aircraft Loadmaster Career Field Education and Training Plan",
+            "note": "Course location/content confirmed via web search on 2026-09-07 (multiple corroborating secondary sources: wingduty.com, operationmilitarykids.org); the primary CFETP PDF itself (static.e-publishing.af.mil) could not be directly fetched from this session's environment — every .mil domain returns a network-level Akamai 403 here, not a content-specific block, same constraint noted on the air-traffic-controller and drop-zone-support-team-leader Role records."
+          }
+        ]
+      },
+      {
+        "name": "C-17 aircraft-specific qualification course",
+        "institution": "Altus AFB, OK",
+        "duration": "~12 weeks",
+        "description": "Airframe-specific follow-on training for the C-17 Globemaster III, after the initial AFSC-awarding course. Duration and content vary by airframe (Little Rock AFB, AR for C-130).",
+        "doctrineSource": [
+          {
+            "publication": "CFETP 1A2X1, Aircraft Loadmaster Career Field Education and Training Plan",
+            "note": "Same verification status as the initial qualification course entry above — confirmed via corroborating secondary sources, primary CFETP PDF not directly fetchable this session."
+          }
+        ]
+      }
+    ],
     "doctrineSource": [
       { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
     ]

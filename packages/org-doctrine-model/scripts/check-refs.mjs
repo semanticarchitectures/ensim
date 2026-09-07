@@ -16,6 +16,7 @@ const c2nodes = load(path.join(dataDir, "c2nodes.json"));
 const doctrineProcesses = load(path.join(dataDir, "doctrine-processes.json"));
 const systems = load(path.join(dataDir, "systems.json"));
 const interactions = load(path.join(dataDir, "interactions.json"));
+const decisions = load(path.join(dataDir, "decisions.json"));
 const missions = readdirSync(path.join(dataDir, "missions"))
   .filter((f) => f.endsWith(".json"))
   .map((f) => load(path.join(dataDir, "missions", f)));
@@ -71,10 +72,15 @@ for (const i of interactions) {
   checkParticipant(i.to, `interactions/${i.id}.to`);
 }
 
+for (const d of decisions) {
+  check(roleIds, d.roleId, `decisions/${d.id}.roleId`);
+  d.informedBy.forEach((p, idx) => checkParticipant(p, `decisions/${d.id}.informedBy[${idx}]`));
+}
+
 if (errors.length) {
   console.error(`FAILED — ${errors.length} dangling reference(s):`);
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 } else {
-  console.log(`All references resolve (${organizations.length} orgs, ${roles.length} roles, ${c2nodes.length} c2nodes, ${doctrineProcesses.length} processes, ${systems.length} systems, ${interactions.length} interactions, ${missions.length} mission(s)).`);
+  console.log(`All references resolve (${organizations.length} orgs, ${roles.length} roles, ${c2nodes.length} c2nodes, ${doctrineProcesses.length} processes, ${systems.length} systems, ${interactions.length} interactions, ${decisions.length} decisions, ${missions.length} mission(s)).`);
 }

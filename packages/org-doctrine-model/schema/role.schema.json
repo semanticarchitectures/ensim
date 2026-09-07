@@ -25,6 +25,26 @@
     "reportsToRoleId": {
       "anyOf": [{ "$ref": "common.schema.json#/$defs/entityId" }, { "type": "null" }]
     },
+    "training": {
+      "type": "array",
+      "description": "Formal training/qualification pipeline for this role. Optional — not every Role record has been researched for this yet; absence means 'not yet modeled', not 'no training required'.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "institution": { "type": "string" },
+          "duration": { "type": "string" },
+          "description": { "type": "string" },
+          "doctrineSource": {
+            "type": "array",
+            "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },
+            "minItems": 1
+          }
+        },
+        "required": ["name", "description", "doctrineSource"],
+        "additionalProperties": false
+      }
+    },
     "doctrineSource": {
       "type": "array",
       "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },
