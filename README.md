@@ -7,7 +7,7 @@ Simulates a military enterprise — organizations, doctrine, roles, and command 
 
 ## Status
 
-`packages/org-doctrine-model` is scaffolded and validated: JSON Schema for `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus a seed USAF dataset, the Mission 1 scenario record, and generated TypeScript types. `apps/model-explorer`'s data-navigation UI is built against that data. `packages/federation-kernel` has a working minimal HLA federate (Portico, pinned to `portico-2.1.4`) exposed over a JSON-over-stdio bridge. `packages/sim-services` runs Mission 1's discrete-event timeline end to end, publishing to `federation-kernel` and writing a validated run result to `missions/001-hickam-luzon-airdrop/` — the full stack now connects. `packages/c2-interfaces` has five schema-only C2 message types (request → validate → ATO line → execution → report), grounded in real doctrine-process artifacts, with no UI yet. `apps/` beyond `model-explorer` is not started.
+`packages/org-doctrine-model` is scaffolded and validated: JSON Schema for `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus a seed USAF dataset, the Mission 1 scenario record, and generated TypeScript types. `apps/model-explorer`'s data-navigation UI is built against that data. `packages/federation-kernel` has a working minimal HLA federate (Portico, pinned to `portico-2.1.4`) exposed over a JSON-over-stdio bridge. `packages/sim-services` runs Mission 1's discrete-event timeline end to end, publishing to `federation-kernel` and writing a validated run result to `missions/001-hickam-luzon-airdrop/` — the full stack now connects. `packages/c2-interfaces` has five schema-only C2 message types (request → validate → ATO line → execution → report), grounded in real doctrine-process artifacts. `apps/ops-dashboard` renders them as a static process/status board (ATO state, C2 node hand-offs, mission timeline) — no live federation connection yet, a deliberate v1 scope decision. `apps/mission-planner` is not started.
 
 ## Getting started
 
@@ -28,6 +28,12 @@ npm run run-mission --workspace=@ensim/sim-services
 ```
 
 runs Mission 1 end to end (requires `mvn package` in `packages/federation-kernel` first to publish to the federation; runs without it otherwise).
+
+```
+npm run dev --workspace=@ensim/ops-dashboard
+```
+
+runs the ops dashboard.
 
 ## Layout
 

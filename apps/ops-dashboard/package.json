@@ -1,0 +1,26 @@
+{
+  "name": "@ensim/ops-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Process/status view for a mission's C2 tasking sequence — ATO state, C2 node hand-offs, mission timeline. See docs/architecture/ARCHITECTURE.md Section 10.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ensim/c2-interfaces": "^0.1.0",
+    "@ensim/org-doctrine-model": "^0.1.0",
+    "@ensim/sim-services": "^0.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
+  }
+}
