@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ensim.dev/schema/run-result.schema.json",
+  "title": "RunResult",
+  "description": "The output of running a Mission scenario through sim-services' discrete-event runner (ARCHITECTURE.md Section 11/13). This is the 'run-result' data contract Section 13 deferred until sim-services was scoped: the planned-timeline shape (Mission.timeline) plus execution fields (status, simulated timestamp, artifact reference) so model-explorer's v2 results view can render it without being rebuilt.",
+  "type": "object",
+  "properties": {
+    "runId": {
+      "type": "string",
+      "description": "Unique per execution, e.g. '<missionId>-<ISO timestamp>'."
+    },
+    "missionId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "id of the org-doctrine-model Mission record this run executed."
+    },
+    "doctrineProcessId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "id of the DoctrineProcess the Mission references, for cross-referencing step artifacts."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Complete", "Failed"]
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Wall-clock time the run started (real time, not simulated)."
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Wall-clock time the run finished (real time, not simulated)."
+    },
+    "federationPublished": {
+      "type": "boolean",
+      "description": "Whether this run's per-step state was published to the org-doctrine-model HLA federation via federation-kernel. False when federation-kernel's jar wasn't available - see sim-services README."
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Matches the corresponding Mission.timeline[].step."
+          },
+          "description": {
+            "type": "string"
+          },
+          "doctrineProcessStep": {
+            "description": "stepNumber in the referenced DoctrineProcess this corresponds to, if any - matches Mission.timeline[].doctrineProcessStep.",
+            "anyOf": [{ "type": "integer" }, { "type": "null" }]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["Complete"],
+            "description": "Mission 1 v1's runner is a linear discrete-event sequence with no retry/failure branching yet - every step that ran reaches Complete. Failure at the run level is reported via the top-level 'status' field, not per-step."
+          },
+          "simulatedTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Logical/simulated time this step occurred, decoupled from wall-clock run time - see sim-services README for why."
+          },
+          "artifactProduced": {
+            "description": "The DoctrineProcess step's producesArtifact, when doctrineProcessStep resolves to one - null otherwise.",
+            "anyOf": [{ "type": "string" }, { "type": "null" }]
+          }
+        },
+        "required": ["step", "description", "status", "simulatedTimestamp", "artifactProduced"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["runId", "missionId", "doctrineProcessId", "status", "startedAt", "completedAt", "federationPublished", "steps"],
+  "additionalProperties": false
+}

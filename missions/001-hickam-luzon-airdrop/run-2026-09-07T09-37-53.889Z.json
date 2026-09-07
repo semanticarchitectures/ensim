@@ -1,0 +1,75 @@
+{
+  "runId": "mission-001-hickam-luzon-airdrop-2026-09-07T09:37:53.889Z",
+  "missionId": "mission-001-hickam-luzon-airdrop",
+  "doctrineProcessId": "hadr-request-and-tasking-flow",
+  "status": "Complete",
+  "startedAt": "2026-09-07T09:37:53.889Z",
+  "completedAt": "2026-09-07T09:37:53.899Z",
+  "federationPublished": true,
+  "steps": [
+    {
+      "step": 1,
+      "description": "Typhoon strikes Luzon; host-nation/embassy assistance request initiated.",
+      "doctrineProcessStep": 1,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T09:37:53.889Z",
+      "artifactProduced": "Assistance request"
+    },
+    {
+      "step": 2,
+      "description": "USAID BHA validates the requirement for a unique DoD capability.",
+      "doctrineProcessStep": 2,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T10:07:53.889Z",
+      "artifactProduced": "Validated requirement"
+    },
+    {
+      "step": 3,
+      "description": "Request enters the Mission Tasking Matrix process to the Secretary of Defense.",
+      "doctrineProcessStep": 3,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T10:37:53.889Z",
+      "artifactProduced": "Approved tasking authority"
+    },
+    {
+      "step": 4,
+      "description": "INDOPACOM stands up a Joint Task Force.",
+      "doctrineProcessStep": 4,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T11:07:53.889Z",
+      "artifactProduced": "Joint Task Force stand-up order"
+    },
+    {
+      "step": 5,
+      "description": "PACAF theater AOC tasks the sortie via the ATO; DIRMOBFOR coordinates mobility flow.",
+      "doctrineProcessStep": 5,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T11:37:53.889Z",
+      "artifactProduced": "ATO line"
+    },
+    {
+      "step": 6,
+      "description": "618 AOC/TACC tasks the specific tail number and crew from the 535th Airlift Squadron.",
+      "doctrineProcessStep": 6,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T12:07:53.889Z",
+      "artifactProduced": "Mission tasking"
+    },
+    {
+      "step": 7,
+      "description": "Sortie generated and mission executed — modeled as a state transition in v1, with no flight dynamics or drop-zone physics.",
+      "doctrineProcessStep": null,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T12:37:53.889Z",
+      "artifactProduced": null
+    },
+    {
+      "step": 8,
+      "description": "Mission report closes the loop back through the C2 chain.",
+      "doctrineProcessStep": null,
+      "status": "Complete",
+      "simulatedTimestamp": "2026-09-07T13:07:53.889Z",
+      "artifactProduced": null
+    }
+  ]
+}

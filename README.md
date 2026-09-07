@@ -7,7 +7,7 @@ Simulates a military enterprise — organizations, doctrine, roles, and command 
 
 ## Status
 
-`packages/org-doctrine-model` is scaffolded and validated: JSON Schema for `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus a seed USAF dataset, the Mission 1 scenario record, and generated TypeScript types. `apps/model-explorer`'s data-navigation UI is built against that data. `packages/federation-kernel` has a Maven scaffold for the Portico/HLA integration, pinned to `portico-2.1.4`, but no federate code yet. `sim-services`, `c2-interfaces`, and the rest of `apps/` are not started.
+`packages/org-doctrine-model` is scaffolded and validated: JSON Schema for `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus a seed USAF dataset, the Mission 1 scenario record, and generated TypeScript types. `apps/model-explorer`'s data-navigation UI is built against that data. `packages/federation-kernel` has a working minimal HLA federate (Portico, pinned to `portico-2.1.4`) exposed over a JSON-over-stdio bridge. `packages/sim-services` runs Mission 1's discrete-event timeline end to end, publishing to `federation-kernel` and writing a validated run result to `missions/001-hickam-luzon-airdrop/` — the full stack now connects. `c2-interfaces` and the rest of `apps/` are not started.
 
 ## Getting started
 
@@ -22,6 +22,12 @@ npm run dev --workspace=@ensim/model-explorer
 ```
 
 runs the model explorer UI. `just setup-portico` vendors Portico (see `docs/architecture/portico-setup.md`) — the release is pinned and it now runs unattended.
+
+```
+npm run run-mission --workspace=@ensim/sim-services
+```
+
+runs Mission 1 end to end (requires `mvn package` in `packages/federation-kernel` first to publish to the federation; runs without it otherwise).
 
 ## Layout
 
