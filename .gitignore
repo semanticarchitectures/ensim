@@ -4,6 +4,9 @@ build/
 target/
 *.log
 
+# Written by maven-shade-plugin next to pom.xml, not inside target/.
+dependency-reduced-pom.xml
+
 # Portico vendoring (docs/architecture/portico-setup.md) — never commit the built jar,
 # and never commit anything under corpus-controlled/ per HANDLING conventions.
 vendor/

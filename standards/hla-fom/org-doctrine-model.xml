@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>ENSIM-OrgDoctrineModel</name>
+        <type>FOM</type>
+        <version>0.1</version>
+        <modificationDate>2026-09-07</modificationDate>
+        <securityClassification>Unclassified</securityClassification>
+        <purpose>Federates org-doctrine-model records (Organization, Role, C2Node, DoctrineProcess, Mission) so ENSIM study/mission federates can share the org/doctrine layer described in docs/architecture/ARCHITECTURE.md Section 6.</purpose>
+        <applicationDomain>Military enterprise simulation</applicationDomain>
+        <description>
+            Deliberately minimal: rather than modeling each org-doctrine-model entity type's
+            fields as separate HLA attributes (which would duplicate packages/org-doctrine-model/schema
+            as a second, hand-maintained type definition — the exact drift AGENTS.md Section 5 warns
+            against), every record is carried as a single opaque JSON payload attribute. The JSON
+            Schema in packages/org-doctrine-model/schema remains the one canonical definition of what
+            an Organization/Role/C2Node/DoctrineProcess/Mission record contains; this FOM only needs to
+            change if a new *entity type* is added, not when a record's fields change.
+        </description>
+        <useLimitation>ENSIM-internal only; not a published SISO FOM module.</useLimitation>
+        <poc>
+            <pocType>Sponsor</pocType>
+            <pocName>ENSIM project</pocName>
+            <pocOrg>ENSIM</pocOrg>
+        </poc>
+        <reference>
+            <type>Dependency</type>
+            <identification>packages/org-doctrine-model/schema</identification>
+        </reference>
+        <other>See packages/federation-kernel/README.md for how this FOM is used.</other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>OrgDoctrineModel</name>
+                <sharing>Subscribe</sharing>
+                <semantics>Root for org-doctrine-model entities federated by federation-kernel.</semantics>
+                <objectClass>
+                    <name>Record</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>A single org-doctrine-model record, carried as its canonical JSON payload.</semantics>
+                    <attribute>
+                        <name>EntityId</name>
+                        <dataType>HLAunicodeString</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <dimensions/>
+                        <transportation>HLAreliable</transportation>
+                        <order>TimeStamp</order>
+                        <semantics>The record's stable entityId (matches its id field in org-doctrine-model data), e.g. "pacaf" or "mission-001-hickam-luzon-airdrop".</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>EntityType</name>
+                        <dataType>HLAunicodeString</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <dimensions/>
+                        <transportation>HLAreliable</transportation>
+                        <order>TimeStamp</order>
+                        <semantics>One of Organization, Role, C2Node, DoctrineProcess, Mission (org-doctrine-model's five entity types, ARCHITECTURE.md Section 6).</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>RecordJson</name>
+                        <dataType>HLAunicodeString</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>Record published or updated by its owning federate</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <dimensions/>
+                        <transportation>HLAreliable</transportation>
+                        <order>TimeStamp</order>
+                        <semantics>The full record as JSON, matching its org-doctrine-model schema (organization.schema.json, role.schema.json, c2node.schema.json, doctrine-process.schema.json, or mission.schema.json).</semantics>
+                    </attribute>
+                </objectClass>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <dimensions/>
+    <tags>
+        <updateReflectTag>
+            <dataType>NA</dataType>
+            <semantics>NA</semantics>
+        </updateReflectTag>
+        <sendReceiveTag>
+            <dataType>NA</dataType>
+            <semantics>NA</semantics>
+        </sendReceiveTag>
+        <deleteRemoveTag>
+            <dataType>NA</dataType>
+            <semantics>NA</semantics>
+        </deleteRemoveTag>
+        <divestitureRequestTag>
+            <dataType>NA</dataType>
+            <semantics>NA</semantics>
+        </divestitureRequestTag>
+        <divestitureCompletionTag>
+            <dataType>NA</dataType>
+            <semantics>NA</semantics>
+        </divestitureCompletionTag>
+        <acquisitionRequestTag>
+            <dataType>NA</dataType>
+            <semantics>NA</semantics>
+        </acquisitionRequestTag>
+        <requestUpdateTag>
+            <dataType>NA</dataType>
+            <semantics>NA</semantics>
+        </requestUpdateTag>
+    </tags>
+    <notes/>
+</objectModel>

@@ -3,8 +3,8 @@
 **Working name:** ENSIM (Enterprise Simulation Framework)
 **Initial target enterprise:** United States Air Force
 **Mission 1:** Hickam–Luzon Humanitarian Airdrop
-**Status:** Draft v0.6 — RTI, message format, Mission 1 fidelity, tech stack, `org-doctrine-model` (now with real AOC division data), and the JSON-Schema-vs-BFO/CCO decision are all settled. `model-explorer`'s data-navigation half (Section 13) is built and verified. Portico is pinned (`portico-2.1.4`). Ready for `federation-kernel` vendoring/implementation and `sim-services`.
-**Date:** 2026-09-06
+**Status:** Draft v0.7 — RTI, message format, Mission 1 fidelity, tech stack, `org-doctrine-model` (now with real AOC division data), and the JSON-Schema-vs-BFO/CCO decision are all settled. `model-explorer`'s data-navigation half (Section 13) is built and verified. `federation-kernel` has a working minimal federate (Section 4a), verified end-to-end across two real Portico processes. Ready for `sim-services`.
+**Date:** 2026-09-07
 
 *This is the canonical copy of the architecture document, kept inside the repo it describes. An earlier standalone copy was shared directly with Kevin before the monorepo scaffold existed — this version supersedes it.*
 
@@ -111,7 +111,7 @@ ensim/
 │   └── dis-enumerations/       # DIS enumerations (v2 — not needed for Mission 1 v1)
 ├── packages/
 │   ├── org-doctrine-model/     # ✅ scaffolded — Section 6 schema + USAF seed dataset (JSON), validate script
-│   ├── federation-kernel/      # ✅ scaffolded (pom.xml pinned to portico-2.1.4, README) — no federate code yet
+│   ├── federation-kernel/      # ✅ minimal federate working (connect/create/join/publish/subscribe/resign, verified cross-process against Portico 2.1.4)
 │   ├── entity-gateway/         # DIS <-> RPR-FOM gateway (open-dis based) — v2, deferred, not built for Mission 1 v1
 │   ├── c2-interfaces/          # representative, unclassified C2 UI components (UCI/OMS-inspired schemas) — not started
 │   └── sim-services/           # scenario loader, event bus, shared utilities — not started
@@ -139,7 +139,7 @@ The three architectural choices previously left open — RTI selection, C2SIM co
 
 ## 11. Suggested next steps
 
-`org-doctrine-model` (Section 6 dataset, JSON Schema + seed data) is built and validated — see Section 6 and the package's own README. `apps/model-explorer`'s data-navigation half (Section 13) is now built and verified — see Section 13. Portico's version is now pinned (`portico-2.1.4`, `portico-setup.md`); running `scripts/setup-portico.sh` and vendoring it is the next actionable step. After Portico is vendored, implement `federation-kernel` as a minimal federate that can join a federation and publish/subscribe to `org-doctrine-model` data. `sim-services` (the discrete-event scenario runner for Mission 1's 8-step timeline) can be built directly against the existing schema without waiting on Portico — and once it produces real run output, `model-explorer`'s results-viewing half (Section 13, v2) upgrades from planned-timeline display to actual execution traces. `c2-interfaces` and the `ops-dashboard` process view follow once data is flowing end to end. `entity-gateway`, DIS enumerations, any geospatial/physics modeling, and the BFO/CCO export (Section 12) remain explicitly out of scope until each has a concrete trigger — a v2 fidelity increment, or a real GMNS/AOC-DFO interop need, respectively.
+`org-doctrine-model` (Section 6 dataset, JSON Schema + seed data) is built and validated — see Section 6 and the package's own README. `apps/model-explorer`'s data-navigation half (Section 13) is now built and verified — see Section 13. Portico is vendored (`portico-2.1.4`) and `federation-kernel` has a minimal federate that connects, creates/joins a federation, publishes and subscribes `org-doctrine-model` records over a JSON-over-stdio bridge (`StdioBridge`) — verified end-to-end across two real Portico processes, not just unit-tested; see the package's own README for two real Portico bugs found and worked around along the way. Next: `sim-services` (the discrete-event scenario runner for Mission 1's 8-step timeline) can be built directly against the existing schema, driving `federation-kernel` via its stdio protocol — and once it produces real run output, `model-explorer`'s results-viewing half (Section 13, v2) upgrades from planned-timeline display to actual execution traces. `c2-interfaces` and the `ops-dashboard` process view follow once data is flowing end to end. `entity-gateway`, DIS enumerations, any geospatial/physics modeling, and the BFO/CCO export (Section 12) remain explicitly out of scope until each has a concrete trigger — a v2 fidelity increment, or a real GMNS/AOC-DFO interop need, respectively.
 
 ## 12. Relationship to sibling projects (GMNS, AOC-DFO) — tracked open decision
 
