@@ -25,6 +25,31 @@
     ]
   },
   {
+    "id": "dz-safety-of-flight-radio-net",
+    "name": "Drop Zone Safety-of-Flight Radio Net (UHF/VHF voice)",
+    "type": "Communications",
+    "description": "The voice radio channel between the Drop Zone Support Team and the drop aircraft. Deliberately limited-traffic by doctrine, not general coordination chatter: used for safety-of-flight matters (ATC directions, range clearance, unsafe surface conditions, mission changes) and to pass surface wind/limited weather observations. Mandatory for IMC/AWADS (instrument) drops; for standard visual drops, radio contact is used as needed rather than continuously. Represents a class of man-portable UHF/VHF AM radio (e.g. PRC-113-class equipment) generically — no specific real radio's exact frequency or crypto detail is modeled, consistent with the classification boundary (AGENTS.md Section 3).",
+    "doctrineSource": [
+      {
+        "publication": "FM 57-38, Chapter 6, Drop Zones",
+        "url": "https://www.globalsecurity.org/military/library/policy/army/fm/57-38/Ch6.htm",
+        "note": "Army field manual, publicly mirrored on globalsecurity.org. Confirmed via web search on 2026-09-07 that: radio contact with the drop aircraft is limited to safety-of-flight requirements or issues affecting airborne force employment; the DZST passes surface wind/limited weather observations to inbound aircraft when radio contact is made; radio contact is mandatory for IMC/AWADS operations. Direct fetch of the page itself returned a 403 to this session's automated request — content is corroborated via search-result synthesis rather than an independent full read, and should be re-verified against the primary source before treating any additional specific claim from it as fact."
+      }
+    ]
+  },
+  {
+    "id": "digital-situational-awareness-system",
+    "name": "Digital Situational Awareness System (ATAK-class, representative)",
+    "type": "Communications",
+    "description": "Represents a modern geospatial/situational-awareness capability in the style of ATAK (Android Team Awareness Kit) — a real, unclassified-discussable, DoD-adopted Android application (originally developed by the Air Force Research Laboratory) used for sharing positions, markers, and zone data via its Cursor on Target (CoT) protocol. Typically bearer-agnostic — cellular, satellite, or tactical mesh radio (e.g. Persistent Systems Wave Relay, Silvus-class MANET radios) rather than consumer Wi-Fi. Included as a plausible modern complement to the doctrinal voice radio net above. IMPORTANT: no source found this session documents ATAK specifically being used for CDS/airdrop drop-zone coordination in official Air Force materiel — this System is representative/illustrative only, not a doctrinally confirmed capability for this mission type.",
+    "doctrineSource": [
+      {
+        "publication": "Android Team Awareness Kit (ATAK) — general program information",
+        "note": "ATAK's existence, DoD adoption (~40,000 DoD users per public sources), AFRL origin, and Cursor on Target (CoT) data protocol are confirmed via multiple corroborating public/unclassified sources as of 2026-09-07 (Wikipedia, DHS media library, civtak.org, and DTIC technical report ADA617401, 'Improving Situation Awareness with the Android Team Awareness Kit'). Its application to CDS/airdrop drop-zone coordination specifically is NOT confirmed by any source found this session — modeled here as a plausible representative capability only, per the user's own question about whether this technology applies, not as a verified doctrinal fact."
+      }
+    ]
+  },
+  {
     "id": "identity-access-control-system",
     "name": "Identity and Access Control System (representative)",
     "type": "SecurityAccessControl",

@@ -37,12 +37,30 @@
     ]
   },
   {
-    "id": "dzstl-comms-via-tactical-system",
+    "id": "dzstl-comms-via-dz-safety-radio-net",
     "from": { "kind": "role", "id": "drop-zone-support-team-leader" },
-    "to": { "kind": "system", "id": "tactical-communications-system" },
+    "to": { "kind": "system", "id": "dz-safety-of-flight-radio-net" },
     "interactionType": "CommunicatesVia",
-    "description": "Drop Zone Support Team Leader communicates drop-zone status and readiness to the aircrew via the tactical communications system.",
-    "doctrineSource": [{ "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }]
+    "description": "Drop Zone Support Team Leader communicates with the drop aircraft via UHF/VHF voice radio — limited to safety-of-flight traffic and passing wind/weather, not continuous coordination chatter (see the System record for the doctrinal detail).",
+    "doctrineSource": [
+      {
+        "publication": "FM 57-38, Chapter 6, Drop Zones",
+        "note": "Corrected 2026-09-07 from a generic 'tactical-communications-system' reference to this more specific dz-safety-of-flight-radio-net System, after researching the actual DZST-to-aircraft radio doctrine in response to a direct question about the communication path and protocol. Same verification status as the dz-safety-of-flight-radio-net System record's citation."
+      }
+    ]
+  },
+  {
+    "id": "dzstl-comms-via-digital-situational-awareness",
+    "from": { "kind": "role", "id": "drop-zone-support-team-leader" },
+    "to": { "kind": "system", "id": "digital-situational-awareness-system" },
+    "interactionType": "CommunicatesVia",
+    "description": "Drop Zone Support Team Leader could plausibly share drop-zone position/marker data via an ATAK-class digital situational awareness capability, complementing the voice radio net. Representative/illustrative only — see the System record's doctrineSource note: no source found this session confirms this is actually used for CDS/airdrop drop-zone coordination.",
+    "doctrineSource": [
+      {
+        "publication": "Android Team Awareness Kit (ATAK) — general program information",
+        "note": "Same verification status as the digital-situational-awareness-system System record's citation — general ATAK capability confirmed, application to this specific mission type is NOT confirmed and should not be treated as doctrinal fact."
+      }
+    ]
   },
   {
     "id": "aircraft-commander-coordinates-with-atc",
@@ -62,7 +80,7 @@
     "from": { "kind": "role", "id": "loadmaster" },
     "to": { "kind": "role", "id": "drop-zone-support-team-leader" },
     "interactionType": "CoordinatesWith",
-    "description": "Loadmaster coordinates drop timing and drop-zone readiness with the Drop Zone Support Team Leader before releasing CDS bundles.",
+    "description": "Loadmaster coordinates drop timing and drop-zone readiness with the Drop Zone Support Team Leader before releasing CDS bundles. This is a doctrinal/structural relationship, not a direct radio link — physically, the DZSTL's radio contact is with the flight deck (see dzstl-informs-aircraft-commander-of-dz-status), relayed to the Loadmaster via aircraft intercom (see aircraft-commander-informs-loadmaster-of-release-command).",
     "doctrineSource": [{ "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }]
   },
   {
@@ -109,9 +127,13 @@
     "from": { "kind": "role", "id": "drop-zone-support-team-leader" },
     "to": { "kind": "role", "id": "aircraft-commander" },
     "interactionType": "Informs",
-    "description": "Drop Zone Support Team Leader relays drop-zone status and wind data to the flight deck (Aircraft Commander) via the tactical communications system — the actual first hop of the information path that ultimately reaches the Loadmaster relayed through the flight deck.",
+    "description": "Drop Zone Support Team Leader relays surface wind and limited weather observations to the flight deck (Aircraft Commander) via the dz-safety-of-flight-radio-net — the actual first hop of the information path that ultimately reaches the Loadmaster relayed through the flight deck. This radio contact is limited to safety-of-flight matters (ATC directions, range clearance, unsafe surface conditions, mission changes) and wind/weather, not continuous chatter, and is mandatory (not just customary) for IMC/AWADS instrument drops.",
     "doctrineSource": [
-      { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
+      { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" },
+      {
+        "publication": "FM 57-38, Chapter 6, Drop Zones",
+        "note": "Enriched 2026-09-07 with the specific limited-traffic/IMC-AWADS-mandatory detail — same verification status as the dz-safety-of-flight-radio-net System record's citation."
+      }
     ]
   },
   {
