@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { missions, missionsById, doctrineProcessesById } from "../data";
+import { missions, missionsById, doctrineProcessesById, runResultsForMission } from "../data";
 import { RecordTable } from "../components/RecordTable";
 import { DoctrineSourceList } from "../components/DoctrineSourceList";
 import { EntityLink } from "../components/EntityLink";
@@ -33,6 +34,9 @@ export function MissionDetailPage() {
   if (!mission) return <NotFound kind="mission" id={id} />;
 
   const process = doctrineProcessesById.get(mission.doctrineProcessId);
+  const runs = runResultsForMission(mission.id); // newest first
+  const [selectedRunId, setSelectedRunId] = useState<string | null>(runs[0]?.runId ?? null);
+  const selectedRun = selectedRunId ? runs.find((r) => r.runId === selectedRunId) : undefined;
 
   return (
     <>
@@ -108,33 +112,77 @@ export function MissionDetailPage() {
             </dd>
           </>
         )}
+        {runs.length > 0 && (
+          <>
+            <dt>Run results</dt>
+            <dd>
+              <ul className="run-list">
+                {runs.map((run) => (
+                  <li key={run.runId}>
+                    <button
+                      type="button"
+                      className={run.runId === selectedRunId ? "run-select active" : "run-select"}
+                      onClick={() => setSelectedRunId(run.runId)}
+                    >
+                      {new Date(run.startedAt).toLocaleString()} — {run.status}
+                      {run.federationPublished && <span className="muted"> (published to federation)</span>}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </>
+        )}
         <dt>Timeline</dt>
         <dd>
-          <p className="muted">
-            Planned sequence — this is not yet an executed trace (that requires <code>sim-services</code>, not built
-            yet; see ARCHITECTURE.md Section 13).
-          </p>
-          <ol className="process-steps">
-            {mission.timeline
-              .slice()
-              .sort((a, b) => a.step - b.step)
-              .map((step) => {
-                const processStep =
-                  step.doctrineProcessStep != null
-                    ? process?.steps.find((s) => s.stepNumber === step.doctrineProcessStep)
-                    : undefined;
-                return (
+          {selectedRun ? (
+            <>
+              <p className="muted">
+                Executed trace from run <code>{selectedRun.runId}</code> — real per-step status, simulated
+                timestamps, and artifacts (sim-services). <code>Planned sequence</code> below shows what was scheduled.
+              </p>
+              <ol className="process-steps">
+                {selectedRun.steps.map((step) => (
                   <li key={step.step}>
-                    <p>{step.description}</p>
-                    {processStep && (
-                      <p className="step-meta">
-                        Doctrine process step {processStep.stepNumber}: {processStep.description}
-                      </p>
-                    )}
+                    <p>
+                      {step.description} <span className="step-status">{step.status}</span>
+                    </p>
+                    <p className="step-meta">Simulated time: {new Date(step.simulatedTimestamp).toLocaleString()}</p>
+                    {step.artifactProduced && <p className="step-artifact">Produces: {step.artifactProduced}</p>}
                   </li>
-                );
-              })}
-          </ol>
+                ))}
+              </ol>
+            </>
+          ) : (
+            <p className="muted">
+              Planned sequence — no executed run yet. Run it with{" "}
+              <code>npm run run-mission --workspace=@ensim/sim-services -- {mission.id}</code>.
+            </p>
+          )}
+          <details>
+            <summary>Planned sequence ({mission.timeline.length} steps)</summary>
+            <ol className="process-steps">
+              {mission.timeline
+                .slice()
+                .sort((a, b) => a.step - b.step)
+                .map((step) => {
+                  const processStep =
+                    step.doctrineProcessStep != null
+                      ? process?.steps.find((s) => s.stepNumber === step.doctrineProcessStep)
+                      : undefined;
+                  return (
+                    <li key={step.step}>
+                      <p>{step.description}</p>
+                      {processStep && (
+                        <p className="step-meta">
+                          Doctrine process step {processStep.stepNumber}: {processStep.description}
+                        </p>
+                      )}
+                    </li>
+                  );
+                })}
+            </ol>
+          </details>
         </dd>
         <dt>Doctrine sources</dt>
         <dd>

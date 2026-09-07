@@ -3,6 +3,7 @@
 // — see docs/architecture/ARCHITECTURE.md Section 13. Types come from the
 // package's generated types (schema/*.schema.json), never hand-duplicated here.
 import type { Organization, Role, C2Node, DoctrineProcess, Mission } from "@ensim/org-doctrine-model";
+import type { RunResult } from "@ensim/sim-services";
 
 import organizationsRaw from "../../../../packages/org-doctrine-model/data/organizations.json";
 import rolesRaw from "../../../../packages/org-doctrine-model/data/roles.json";
@@ -14,11 +15,20 @@ const missionModules = import.meta.glob<Mission>(
   { eager: true, import: "default" },
 );
 
+// Actual execution traces (ARCHITECTURE.md Section 13 v2), distinct from the planned-timeline
+// seed record above — written by sim-services to missions/<id>/run-<timestamp>.json at the repo
+// root, not under packages/org-doctrine-model/data.
+const runResultModules = import.meta.glob<RunResult>("../../../../missions/*/*.json", {
+  eager: true,
+  import: "default",
+});
+
 export const organizations = organizationsRaw as Organization[];
 export const roles = rolesRaw as Role[];
 export const c2Nodes = c2NodesRaw as C2Node[];
 export const doctrineProcesses = doctrineProcessesRaw as DoctrineProcess[];
 export const missions = Object.values(missionModules).sort((a, b) => a.id.localeCompare(b.id));
+export const runResults = Object.values(runResultModules).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
 
 export const organizationsById = new Map(organizations.map((o) => [o.id, o]));
 export const rolesById = new Map(roles.map((r) => [r.id, r]));
@@ -74,4 +84,9 @@ export function rolesInC2Node(c2NodeId: string): Role[] {
 
 export function missionsUsingProcess(doctrineProcessId: string): Mission[] {
   return missions.filter((m) => m.doctrineProcessId === doctrineProcessId);
+}
+
+/** Newest first, matching the `runResults` sort order. */
+export function runResultsForMission(missionId: string): RunResult[] {
+  return runResults.filter((r) => r.missionId === missionId);
 }

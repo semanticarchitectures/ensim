@@ -4,6 +4,7 @@
   "private": true,
   "description": "Discrete-event scenario runner for ENSIM missions. See docs/architecture/ARCHITECTURE.md Section 11.",
   "type": "module",
+  "types": "./src/types/RunResult.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "generate-types": "node scripts/generate-types.mjs",
