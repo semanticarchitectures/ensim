@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ensim.dev/schema/c2-interfaces/ato-line.schema.json",
+  "title": "ATOLine",
+  "description": "The 'ATO line' phase of ENSIM's tasking sequence (ARCHITECTURE.md Section 3). Grounded in org-doctrine-model's hadr-request-and-tasking-flow doctrine process, step 5 ('ATO line', produced by the Air Mobility Division) and the ato-cycle doctrine process generally. Deliberately representative, not a real Air Tasking Order line format (USMTF/fixed-column ATO fields are not modeled — see AGENTS.md Section 3, the classification boundary).",
+  "type": "object",
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/entityId" },
+    "messageType": { "const": "ATOLine" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "missionId": { "$ref": "common.schema.json#/$defs/entityId" },
+    "doctrineProcessStep": {
+      "anyOf": [{ "type": "integer" }, { "type": "null" }]
+    },
+    "producedBy": { "$ref": "common.schema.json#/$defs/actor" },
+    "taskedOrganizationId": {
+      "$ref": "common.schema.json#/$defs/entityId",
+      "description": "org-doctrine-model Organization id of the unit tasked by this line, e.g. '535th-airlift-squadron'."
+    },
+    "taskingSummary": { "type": "string" },
+    "effectiveDate": { "type": "string", "format": "date" },
+    "doctrineSource": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },
+      "minItems": 1
+    }
+  },
+  "required": ["id", "messageType", "timestamp", "missionId", "taskedOrganizationId", "taskingSummary", "doctrineSource"],
+  "additionalProperties": false
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "es-mission-001-sortie-generated",
+    "messageType": "ExecutionStatus",
+    "timestamp": "2026-01-16T06:00:00Z",
+    "missionId": "mission-001-hickam-luzon-airdrop",
+    "producedBy": { "roleId": "mission-commander", "organizationId": "535th-airlift-squadron" },
+    "sortieStatus": "Generated",
+    "statusNote": "Sortie generated and mission executed — modeled as a state transition in v1, with no flight dynamics or drop-zone physics.",
+    "doctrineSource": [
+      {
+        "publication": "Aircrew doctrine reference",
+        "note": "Generic mission-commander concept; not tied to a specific numbered instruction in this dataset."
+      }
+    ]
+  }
+]

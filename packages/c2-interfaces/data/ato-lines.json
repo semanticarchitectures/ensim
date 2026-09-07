@@ -1,0 +1,16 @@
+[
+  {
+    "id": "ato-mission-001-535as-cds-airdrop",
+    "messageType": "ATOLine",
+    "timestamp": "2026-01-15T14:00:00Z",
+    "missionId": "mission-001-hickam-luzon-airdrop",
+    "doctrineProcessStep": 5,
+    "producedBy": { "roleId": "dirmobfor", "c2NodeId": "aoc-air-mobility-division" },
+    "taskedOrganizationId": "535th-airlift-squadron",
+    "taskingSummary": "C-17 sortie tasked for Container Delivery System airdrop to the designated drop zone, Luzon.",
+    "effectiveDate": "2026-01-16",
+    "doctrineSource": [
+      { "publication": "AFMAN 13-1AOC Vol 3", "section": "25 Jun 2024 edition, §2.3.8" }
+    ]
+  }
+]

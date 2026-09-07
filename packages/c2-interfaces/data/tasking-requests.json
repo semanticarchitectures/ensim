@@ -1,0 +1,14 @@
+[
+  {
+    "id": "tr-mission-001-typhoon-assistance-request",
+    "messageType": "TaskingRequest",
+    "timestamp": "2026-01-15T02:00:00Z",
+    "missionId": "mission-001-hickam-luzon-airdrop",
+    "doctrineProcessStep": 1,
+    "requestingParty": "Philippine government / U.S. Embassy Manila",
+    "requestSummary": "Request for U.S. military airlift assistance following typhoon landfall on Luzon.",
+    "doctrineSource": [
+      { "publication": "DoDD 5100.46", "section": "DoD Support to Foreign Disaster Relief" }
+    ]
+  }
+]

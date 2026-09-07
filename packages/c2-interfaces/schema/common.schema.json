@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ensim.dev/schema/c2-interfaces/common.schema.json",
+  "title": "ENSIM C2 Interfaces Common Definitions",
+  "$defs": {
+    "entityId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Lowercase kebab-case stable identifier, unique within its entity type. Same convention as org-doctrine-model's common.schema.json — deliberately not $ref'd across packages, to keep c2-interfaces self-contained (see README)."
+    },
+    "doctrineSource": {
+      "type": "object",
+      "description": "Citation to the public doctrine or reference material that grounds this message type or record. Required per AGENTS.md Section 2, which explicitly calls out 'a C2 interface' alongside the org/doctrine model and mission scenarios — not optional style.",
+      "properties": {
+        "publication": { "type": "string" },
+        "section": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "note": { "type": "string" }
+      },
+      "required": ["publication"],
+      "additionalProperties": false
+    },
+    "actor": {
+      "description": "Who produced this message — mirrors org-doctrine-model DoctrineProcess step's actorRoleId/actorC2NodeId/actorOrganizationId pattern (usually exactly one is set).",
+      "type": "object",
+      "properties": {
+        "roleId": { "anyOf": [{ "$ref": "#/$defs/entityId" }, { "type": "null" }] },
+        "c2NodeId": { "anyOf": [{ "$ref": "#/$defs/entityId" }, { "type": "null" }] },
+        "organizationId": { "anyOf": [{ "$ref": "#/$defs/entityId" }, { "type": "null" }] }
+      },
+      "additionalProperties": false
+    }
+  }
+}

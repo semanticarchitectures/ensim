@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ensim.dev/schema/c2-interfaces/mission-report.schema.json",
+  "title": "MissionReport",
+  "description": "The closing 'report' phase of ENSIM's tasking sequence (ARCHITECTURE.md Section 3). Grounded in Mission 1's timeline step 8 ('Mission report closes the loop back through the C2 chain').",
+  "type": "object",
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/entityId" },
+    "messageType": { "const": "MissionReport" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "missionId": { "$ref": "common.schema.json#/$defs/entityId" },
+    "doctrineProcessStep": {
+      "anyOf": [{ "type": "integer" }, { "type": "null" }]
+    },
+    "producedBy": { "$ref": "common.schema.json#/$defs/actor" },
+    "outcome": {
+      "type": "string",
+      "enum": ["Success", "PartialSuccess", "Aborted"]
+    },
+    "summary": { "type": "string" },
+    "doctrineSource": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },
+      "minItems": 1
+    }
+  },
+  "required": ["id", "messageType", "timestamp", "missionId", "outcome", "summary", "doctrineSource"],
+  "additionalProperties": false
+}

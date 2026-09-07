@@ -1,0 +1,17 @@
+[
+  {
+    "id": "mr-mission-001-closeout",
+    "messageType": "MissionReport",
+    "timestamp": "2026-01-16T12:00:00Z",
+    "missionId": "mission-001-hickam-luzon-airdrop",
+    "producedBy": { "roleId": "mission-commander", "organizationId": "535th-airlift-squadron" },
+    "outcome": "Success",
+    "summary": "Mission report closes the loop back through the C2 chain.",
+    "doctrineSource": [
+      {
+        "publication": "Operation Damayan reporting",
+        "note": "Air & Space Forces Magazine and Joint Force Quarterly coverage of the 2013 Typhoon Haiyan response, used as scenario precedent only — this record is a fictionalized scenario, not a report of a real mission."
+      }
+    ]
+  }
+]

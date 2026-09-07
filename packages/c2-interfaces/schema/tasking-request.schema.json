@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ensim.dev/schema/c2-interfaces/tasking-request.schema.json",
+  "title": "TaskingRequest",
+  "description": "The initiating message in ENSIM's representative tasking sequence (ARCHITECTURE.md Section 3: request → validate → ATO line → execution → report) — a host-nation or embassy request for assistance. Grounded in org-doctrine-model's hadr-request-and-tasking-flow doctrine process, step 1 ('Assistance request').",
+  "type": "object",
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/entityId" },
+    "messageType": { "const": "TaskingRequest" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "missionId": { "$ref": "common.schema.json#/$defs/entityId" },
+    "doctrineProcessStep": {
+      "anyOf": [{ "type": "integer" }, { "type": "null" }],
+      "description": "stepNumber in the referenced Mission's DoctrineProcess this message corresponds to."
+    },
+    "producedBy": { "$ref": "common.schema.json#/$defs/actor" },
+    "requestingParty": {
+      "type": "string",
+      "description": "Free text, e.g. 'Philippine government / U.S. Embassy Manila' — not a role/org id, since the requester is external to the org-doctrine-model hierarchy this scenario models."
+    },
+    "requestSummary": { "type": "string" },
+    "doctrineSource": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },
+      "minItems": 1
+    }
+  },
+  "required": ["id", "messageType", "timestamp", "missionId", "requestingParty", "requestSummary", "doctrineSource"],
+  "additionalProperties": false
+}

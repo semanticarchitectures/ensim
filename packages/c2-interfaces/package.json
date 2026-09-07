@@ -1,0 +1,17 @@
+{
+  "name": "@ensim/c2-interfaces",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Representative, unclassified C2 message schemas for ENSIM's tasking sequence (Sections 3, 5, 8 of docs/architecture/ARCHITECTURE.md). Schema-only in v1 — no UI components yet.",
+  "type": "module",
+  "types": "./types/index.ts",
+  "scripts": {
+    "validate": "node scripts/validate.mjs && node scripts/check-refs.mjs",
+    "generate-types": "node scripts/generate-types.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "json-schema-to-typescript": "^16.0.0"
+  }
+}

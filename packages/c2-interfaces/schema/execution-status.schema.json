@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ensim.dev/schema/c2-interfaces/execution-status.schema.json",
+  "title": "ExecutionStatus",
+  "description": "The 'execution' phase of ENSIM's tasking sequence (ARCHITECTURE.md Section 3). Grounded in Mission 1's timeline step 7 ('Sortie generated and mission executed'). Discrete sortie states only — no real-time position/telemetry, matching Mission 1 v1's explicit scope (data/process simulation, not flight dynamics; ARCHITECTURE.md Section 4a/7).",
+  "type": "object",
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/entityId" },
+    "messageType": { "const": "ExecutionStatus" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "missionId": { "$ref": "common.schema.json#/$defs/entityId" },
+    "doctrineProcessStep": {
+      "anyOf": [{ "type": "integer" }, { "type": "null" }]
+    },
+    "producedBy": { "$ref": "common.schema.json#/$defs/actor" },
+    "sortieStatus": {
+      "type": "string",
+      "enum": ["Generated", "Airborne", "OnStation", "DropComplete", "Returned"],
+      "description": "Representative discrete states, not a real sortie-status message standard."
+    },
+    "statusNote": { "type": "string" },
+    "doctrineSource": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },
+      "minItems": 1
+    }
+  },
+  "required": ["id", "messageType", "timestamp", "missionId", "sortieStatus", "doctrineSource"],
+  "additionalProperties": false
+}

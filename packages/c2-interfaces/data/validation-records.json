@@ -1,0 +1,33 @@
+[
+  {
+    "id": "vr-mission-001-requirement-validated",
+    "messageType": "ValidationRecord",
+    "recordType": "RequirementValidated",
+    "timestamp": "2026-01-15T04:00:00Z",
+    "missionId": "mission-001-hickam-luzon-airdrop",
+    "doctrineProcessStep": 2,
+    "summary": "USAID's Bureau for Humanitarian Assistance validated the requirement for a unique DoD capability.",
+    "doctrineSource": [{ "publication": "DoDD 5100.46" }]
+  },
+  {
+    "id": "vr-mission-001-tasking-authority-approved",
+    "messageType": "ValidationRecord",
+    "recordType": "TaskingAuthorityApproved",
+    "timestamp": "2026-01-15T08:00:00Z",
+    "missionId": "mission-001-hickam-luzon-airdrop",
+    "doctrineProcessStep": 3,
+    "summary": "Request entered the Mission Tasking Matrix process; tasking authority approved by the Secretary of Defense.",
+    "doctrineSource": [{ "publication": "DoDD 5100.46" }]
+  },
+  {
+    "id": "vr-mission-001-jtf-stood-up",
+    "messageType": "ValidationRecord",
+    "recordType": "JointTaskForceStoodUp",
+    "timestamp": "2026-01-15T10:00:00Z",
+    "missionId": "mission-001-hickam-luzon-airdrop",
+    "doctrineProcessStep": 4,
+    "producedBy": { "organizationId": "indopacom" },
+    "summary": "INDOPACOM stood up a Joint Task Force to coordinate the response.",
+    "doctrineSource": [{ "publication": "DoDD 5100.46" }]
+  }
+]
