@@ -116,5 +116,39 @@
     "doctrineSource": [
       { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
     ]
+  },
+  {
+    "id": "air-traffic-controller",
+    "name": "Air Traffic Controller",
+    "organizationId": "15th-wing",
+    "c2NodeId": null,
+    "responsibilities": [
+      "Provides air traffic control services and airspace separation, including separation of airdrop/airland operations from other air traffic"
+    ],
+    "authorities": [],
+    "reportsToRoleId": null,
+    "doctrineSource": [
+      {
+        "publication": "AFMAN 13-204 Volume 3, Air Traffic Control",
+        "note": "Confirmed by publication title/summary via web search on 2026-09-07 (including that military authority assumes responsibility for separation of airdrop/airland operations at applicable installations); the exact section number for airdrop-separation provisions was not independently verified — static.e-publishing.af.mil and all other .mil domains returned an Akamai network-level 403 from this session's environment (confirmed via curl, WebFetch, and a real browser session), not a content-specific block. organizationId assigned to 15th Wing (home station Hickam, the mission's departure airfield) as a doctrinally reasonable placement for airfield/ATC functions, not independently verified against a specific 15th Wing unit designation."
+      }
+    ]
+  },
+  {
+    "id": "drop-zone-support-team-leader",
+    "name": "Drop Zone Support Team Leader (DZSTL)",
+    "organizationId": null,
+    "c2NodeId": null,
+    "responsibilities": [
+      "Senior member of the Drop Zone Support Team (DZST); leads ground personnel at the drop zone and coordinates drop zone status/readiness with the tasked aircrew"
+    ],
+    "authorities": [],
+    "reportsToRoleId": null,
+    "doctrineSource": [
+      {
+        "publication": "DAFMAN 13-217, Drop Zone, Landing Zone, and Helicopter Landing Zone Operations",
+        "note": "Confirmed via web search on 2026-09-07: the senior member of the Drop Zone Support Team (DZST) functions as the Drop Zone Support Team Leader (DZSTL) and must be an NCO, officer, or civilian equivalent who has completed DZST member training. A related Drop Zone Safety Officer (DZSO) position also exists in this doctrine but is out of scope for this minimal role set. Exact chapter/section number not independently verified — same network-access constraint as the air-traffic-controller record. organizationId left null: which unit provides the DZST for this specific scenario (e.g. a JTF-organic or host-nation element) is not modeled."
+      }
+    ]
   }
 ]

@@ -14,6 +14,8 @@ const organizations = load(path.join(dataDir, "organizations.json"));
 const roles = load(path.join(dataDir, "roles.json"));
 const c2nodes = load(path.join(dataDir, "c2nodes.json"));
 const doctrineProcesses = load(path.join(dataDir, "doctrine-processes.json"));
+const systems = load(path.join(dataDir, "systems.json"));
+const interactions = load(path.join(dataDir, "interactions.json"));
 const missions = readdirSync(path.join(dataDir, "missions"))
   .filter((f) => f.endsWith(".json"))
   .map((f) => load(path.join(dataDir, "missions", f)));
@@ -22,6 +24,9 @@ const orgIds = new Set(organizations.map((o) => o.id));
 const roleIds = new Set(roles.map((r) => r.id));
 const c2nodeIds = new Set(c2nodes.map((n) => n.id));
 const processIds = new Set(doctrineProcesses.map((p) => p.id));
+const systemIds = new Set(systems.map((s) => s.id));
+
+const participantSets = { role: roleIds, c2node: c2nodeIds, organization: orgIds, system: systemIds };
 
 const errors = [];
 const check = (set, id, where) => {
@@ -52,10 +57,24 @@ for (const m of missions) {
   for (const id of m.rolesInvolved ?? []) check(roleIds, id, `missions/${m.id}.rolesInvolved`);
 }
 
+function checkParticipant(participant, where) {
+  const set = participantSets[participant.kind];
+  if (!set) {
+    errors.push(`${where}: unknown participant kind "${participant.kind}"`);
+    return;
+  }
+  check(set, participant.id, `${where}.id (kind=${participant.kind})`);
+}
+
+for (const i of interactions) {
+  checkParticipant(i.from, `interactions/${i.id}.from`);
+  checkParticipant(i.to, `interactions/${i.id}.to`);
+}
+
 if (errors.length) {
   console.error(`FAILED — ${errors.length} dangling reference(s):`);
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 } else {
-  console.log(`All references resolve (${organizations.length} orgs, ${roles.length} roles, ${c2nodes.length} c2nodes, ${doctrineProcesses.length} processes, ${missions.length} mission(s)).`);
+  console.log(`All references resolve (${organizations.length} orgs, ${roles.length} roles, ${c2nodes.length} c2nodes, ${doctrineProcesses.length} processes, ${systems.length} systems, ${interactions.length} interactions, ${missions.length} mission(s)).`);
 }

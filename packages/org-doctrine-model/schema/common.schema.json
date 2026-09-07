@@ -31,6 +31,19 @@
       },
       "required": ["publication"],
       "additionalProperties": false
+    },
+    "participant": {
+      "type": "object",
+      "description": "A reference to any node in the mission execution interaction network — a Role (personnel), C2Node, Organization, or System.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["role", "c2node", "organization", "system"]
+        },
+        "id": { "$ref": "#/$defs/entityId" }
+      },
+      "required": ["kind", "id"],
+      "additionalProperties": false
     }
   }
 }

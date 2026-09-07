@@ -29,6 +29,8 @@ const checks = [
   { data: "roles.json", schemaId: "https://ensim.dev/schema/role.schema.json" },
   { data: "c2nodes.json", schemaId: "https://ensim.dev/schema/c2node.schema.json" },
   { data: "doctrine-processes.json", schemaId: "https://ensim.dev/schema/doctrine-process.schema.json" },
+  { data: "systems.json", schemaId: "https://ensim.dev/schema/system.schema.json" },
+  { data: "interactions.json", schemaId: "https://ensim.dev/schema/interaction.schema.json" },
 ];
 
 let ok = true;

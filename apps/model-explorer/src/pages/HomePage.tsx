@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { organizations, roles, c2Nodes, doctrineProcesses, missions } from "../data";
+import { organizations, roles, c2Nodes, doctrineProcesses, systems, interactions, missions } from "../data";
 
 const counts = [
   { label: "Organizations", to: "/organizations", count: organizations.length },
   { label: "Roles", to: "/roles", count: roles.length },
   { label: "C2 Nodes", to: "/c2-nodes", count: c2Nodes.length },
   { label: "Doctrine Processes", to: "/doctrine-processes", count: doctrineProcesses.length },
+  { label: "Systems", to: "/systems", count: systems.length },
+  { label: "Interactions", to: "/interactions", count: interactions.length },
   { label: "Missions", to: "/missions", count: missions.length },
 ];
 

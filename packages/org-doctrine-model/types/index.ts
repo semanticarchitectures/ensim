@@ -7,4 +7,6 @@ export type { Role } from "./Role.js";
 export type { C2Node } from "./C2Node.js";
 export type { DoctrineProcess } from "./DoctrineProcess.js";
 export type { Mission } from "./Mission.js";
+export type { System } from "./System.js";
+export type { Interaction } from "./Interaction.js";
 export type { DoctrineSource } from "./Organization.js";

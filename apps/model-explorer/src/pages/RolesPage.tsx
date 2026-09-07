@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { roles, rolesById, roleReportsChain, directReports } from "../data";
+import { roles, rolesById, roleReportsChain, directReports, interactionsForParticipant } from "../data";
 import { RecordTable } from "../components/RecordTable";
 import { DoctrineSourceList } from "../components/DoctrineSourceList";
 import { EntityLink } from "../components/EntityLink";
@@ -32,6 +32,7 @@ export function RoleDetailPage() {
 
   const chain = roleReportsChain(role.id).slice(1);
   const reports = directReports(role.id);
+  const roleInteractions = interactionsForParticipant("role", role.id);
 
   return (
     <>
@@ -90,6 +91,23 @@ export function RoleDetailPage() {
               {reports.map((r) => (
                 <li key={r.id}>
                   <EntityLink kind="role" id={r.id} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </dd>
+        <dt>Interactions</dt>
+        <dd>
+          {roleInteractions.length === 0 ? (
+            <span className="muted">None</span>
+          ) : (
+            <ul>
+              {roleInteractions.map((i) => (
+                <li key={i.id}>
+                  <EntityLink kind={i.from.kind} id={i.from.id} /> —{" "}
+                  <span className="step-status">{i.interactionType}</span> →{" "}
+                  <EntityLink kind={i.to.kind} id={i.to.id} />
+                  <div className="step-meta">{i.description}</div>
                 </li>
               ))}
             </ul>

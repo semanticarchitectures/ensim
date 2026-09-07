@@ -1,0 +1,48 @@
+[
+  {
+    "id": "c-17-airlift-aircraft",
+    "name": "C-17 Globemaster III (representative airlift aircraft)",
+    "type": "Aircraft",
+    "description": "Represents the tasked C-17 sortie's airframe as a node in the mission execution interaction network. Deliberately generic — no specific tail number, avionics, or classified capability detail; only the public, unclassified mission profile (tactical airlift and airdrop) is represented.",
+    "doctrineSource": [
+      {
+        "publication": "C-17 Globemaster III Air Force Fact Sheet",
+        "url": "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/1529726/c-17-globemaster-iii/",
+        "note": "Content (mission: rapid strategic delivery of troops/cargo, capable of tactical airlift and airdrop missions) confirmed via web search on 2026-09-07; the af.mil page itself could not be directly fetched from this session's environment (network-level 403 on all .mil domains, not content-specific — see air-traffic-controller role's doctrineSource note for the same constraint)."
+      }
+    ]
+  },
+  {
+    "id": "tactical-communications-system",
+    "name": "Tactical Communications System (representative)",
+    "type": "Communications",
+    "description": "Represents the voice/data communications means used by aircrew, ATC, and ground drop-zone personnel to coordinate during mission execution. Generic and representative only — no real radio system, frequency, or crypto detail is modeled, consistent with the classification boundary (AGENTS.md Section 3).",
+    "doctrineSource": [
+      {
+        "publication": "AFDP 3-0.1",
+        "note": "Command and Control doctrine establishes that C2 depends on communications connectivity between echelons; this record represents that general concept at the execution level, not a specific real communications system."
+      }
+    ]
+  },
+  {
+    "id": "identity-access-control-system",
+    "name": "Identity and Access Control System (representative)",
+    "type": "SecurityAccessControl",
+    "description": "Represents the identity/credential/access-control function personnel authenticate against to use mission-relevant systems (e.g. communications, mission planning/tasking data). Deliberately generic — modeled on the general DoD ICAM (Identity, Credential, and Access Management) policy concept, not any specific real fielded system.",
+    "doctrineSource": [
+      {
+        "publication": "DoDI 8520.04, Access Management for DoD Information Systems",
+        "note": "Confirmed as a real, public, unclassified DoD instruction governing access management for DoD information systems via web search on 2026-09-07; the primary-source PDF (esd.whs.mil) could not be directly fetched from this session's environment (network-level 403). Cited for the general ICAM policy concept only — this System record does not represent any specific real system's implementation."
+      }
+    ]
+  },
+  {
+    "id": "cds-airdrop-mechanism",
+    "name": "Container Delivery System (CDS) Release Mechanism",
+    "type": "AirdropMechanism",
+    "description": "The rigging/release mechanism the Loadmaster operates to release CDS bundles over the drop zone. Same doctrinal basis already cited for the Loadmaster role's CDS rigging/release responsibility.",
+    "doctrineSource": [
+      { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
+    ]
+  }
+]

@@ -2,7 +2,7 @@
 
 Read-only UI for two things (see `docs/architecture/ARCHITECTURE.md` Section 13 for the full design):
 
-1. **Navigate the data model** — browse Organizations, Roles, C2 Nodes, Doctrine Processes, and Missions from `packages/org-doctrine-model/data`, follow their relationships (parent orgs, reporting chains, process steps and actors), and see every record's `doctrineSource` citations inline, including unverified-fact notes. This half can be built now — the data already exists and validates.
+1. **Navigate the data model** — browse Organizations, Roles, C2 Nodes, Doctrine Processes, Systems, Interactions, and Missions from `packages/org-doctrine-model/data`, follow their relationships (parent orgs, reporting chains, process steps and actors, and — for Systems/Interactions — the mission execution interaction network: which personnel and equipment interact with which, and how), and see every record's `doctrineSource` citations inline, including unverified-fact notes. Role detail pages show a role's Interactions alongside its reporting chain, so personnel read as network nodes, not just hierarchy entries.
 
 2. **View mission simulation results** — v1 renders a Mission's planned `timeline`. v2 (built): reads real `RunResult` output from `sim-services` (glob-loaded from `missions/<id>/*.json` at the repo root), lets a viewer pick which run to view via a "Run results" list on the Mission detail page, and switches the Timeline section to that run's executed trace — real per-step status, simulated timestamps, and artifacts — with the original planned sequence still available in a collapsed `<details>` underneath. Same view code as v1, just fed richer data, per the plan in `ARCHITECTURE.md` Section 13.
 

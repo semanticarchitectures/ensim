@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { organizationsById, rolesById, c2NodesById, doctrineProcessesById, missionsById } from "../data";
+import { organizationsById, rolesById, c2NodesById, doctrineProcessesById, missionsById, systemsById } from "../data";
 
-type Kind = "organization" | "role" | "c2node" | "process" | "mission";
+type Kind = "organization" | "role" | "c2node" | "process" | "mission" | "system";
 
 const routeBase: Record<Kind, string> = {
   organization: "/organizations",
@@ -9,6 +9,7 @@ const routeBase: Record<Kind, string> = {
   c2node: "/c2-nodes",
   process: "/doctrine-processes",
   mission: "/missions",
+  system: "/systems",
 };
 
 function resolveName(kind: Kind, id: string): string | undefined {
@@ -23,6 +24,8 @@ function resolveName(kind: Kind, id: string): string | undefined {
       return doctrineProcessesById.get(id)?.name;
     case "mission":
       return missionsById.get(id)?.name;
+    case "system":
+      return systemsById.get(id)?.name;
   }
 }
 

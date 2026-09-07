@@ -5,6 +5,8 @@ const navItems = [
   { to: "/roles", label: "Roles" },
   { to: "/c2-nodes", label: "C2 Nodes" },
   { to: "/doctrine-processes", label: "Doctrine Processes" },
+  { to: "/systems", label: "Systems" },
+  { to: "/interactions", label: "Interactions" },
   { to: "/missions", label: "Missions" },
 ];
 

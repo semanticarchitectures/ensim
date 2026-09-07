@@ -5,6 +5,8 @@ import { OrganizationsPage, OrganizationDetailPage } from "./pages/Organizations
 import { RolesPage, RoleDetailPage } from "./pages/RolesPage";
 import { C2NodesPage, C2NodeDetailPage } from "./pages/C2NodesPage";
 import { DoctrineProcessesPage, DoctrineProcessDetailPage } from "./pages/DoctrineProcessesPage";
+import { SystemsPage, SystemDetailPage } from "./pages/SystemsPage";
+import { InteractionsPage, InteractionDetailPage } from "./pages/InteractionsPage";
 import { MissionsPage, MissionDetailPage } from "./pages/MissionsPage";
 
 export function App() {
@@ -21,6 +23,10 @@ export function App() {
           <Route path="c2-nodes/:id" element={<C2NodeDetailPage />} />
           <Route path="doctrine-processes" element={<DoctrineProcessesPage />} />
           <Route path="doctrine-processes/:id" element={<DoctrineProcessDetailPage />} />
+          <Route path="systems" element={<SystemsPage />} />
+          <Route path="systems/:id" element={<SystemDetailPage />} />
+          <Route path="interactions" element={<InteractionsPage />} />
+          <Route path="interactions/:id" element={<InteractionDetailPage />} />
           <Route path="missions" element={<MissionsPage />} />
           <Route path="missions/:id" element={<MissionDetailPage />} />
         </Route>

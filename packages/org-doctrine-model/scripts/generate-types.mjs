@@ -19,6 +19,8 @@ const schemas = [
   { file: "c2node.schema.json", name: "C2Node" },
   { file: "doctrine-process.schema.json", name: "DoctrineProcess" },
   { file: "mission.schema.json", name: "Mission" },
+  { file: "system.schema.json", name: "System" },
+  { file: "interaction.schema.json", name: "Interaction" },
 ];
 
 const banner =

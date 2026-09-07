@@ -4,9 +4,9 @@ The foundation package (Section 6 of `docs/architecture/ARCHITECTURE.md`). Every
 
 ## Contents
 
-`schema/` — JSON Schema (2020-12) definitions for the five core entity types: `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus shared definitions (`common.schema.json`) including the `doctrineSource` citation object required on every record.
+`schema/` — JSON Schema (2020-12) definitions for seven entity types: `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission` (the org/doctrine hierarchy), plus `System` and `Interaction` (the mission execution interaction network — personnel and equipment as nodes, who/what interacts with who/what, at a finer grain than `DoctrineProcess`'s organizational tasking flow). Shared definitions live in `common.schema.json`, including the `doctrineSource` citation object required on every record and the `participant` reference (`{kind, id}`, where `kind` is `role`/`c2node`/`organization`/`system`) `Interaction.from`/`.to` use.
 
-`data/` — the USAF seed dataset: `organizations.json`, `roles.json`, `c2nodes.json`, `doctrine-processes.json`, and `data/missions/001-hickam-luzon-airdrop.json` (Mission 1).
+`data/` — the USAF seed dataset: `organizations.json`, `roles.json`, `c2nodes.json`, `doctrine-processes.json`, `systems.json`, `interactions.json`, and `data/missions/001-hickam-luzon-airdrop.json` (Mission 1). `systems.json`/`interactions.json` model Mission 1's execution-level network: the tasked C-17 crew, Air Traffic Control, the Drop Zone Support Team Leader, and the Mission Commander, interacting with each other and with four representative systems (the aircraft, a tactical communications system, an identity/access-control system, and the CDS airdrop release mechanism). Every System is deliberately representative, not a real fielded system's specifications — see AGENTS.md Section 3.
 
 ## Rules for adding or editing data
 

@@ -1,0 +1,94 @@
+[
+  {
+    "id": "aircraft-commander-operates-c17",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "system", "id": "c-17-airlift-aircraft" },
+    "interactionType": "Operates",
+    "description": "Aircraft Commander is pilot in command of the tasked C-17 sortie.",
+    "doctrineSource": [{ "publication": "Aircrew doctrine reference" }]
+  },
+  {
+    "id": "loadmaster-operates-cds-mechanism",
+    "from": { "kind": "role", "id": "loadmaster" },
+    "to": { "kind": "system", "id": "cds-airdrop-mechanism" },
+    "interactionType": "Operates",
+    "description": "Loadmaster rigs and releases Container Delivery System (CDS) bundles via the airdrop release mechanism.",
+    "doctrineSource": [{ "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }]
+  },
+  {
+    "id": "aircraft-commander-comms-via-tactical-system",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "system", "id": "tactical-communications-system" },
+    "interactionType": "CommunicatesVia",
+    "description": "Aircraft Commander communicates with Air Traffic Control and ground drop-zone personnel via the tactical communications system.",
+    "doctrineSource": [{ "publication": "AFDP 3-0.1", "note": "General C2/communications-connectivity concept, not a specific real system." }]
+  },
+  {
+    "id": "atc-comms-via-tactical-system",
+    "from": { "kind": "role", "id": "air-traffic-controller" },
+    "to": { "kind": "system", "id": "tactical-communications-system" },
+    "interactionType": "CommunicatesVia",
+    "description": "Air Traffic Controller communicates with the tasked aircrew via the tactical communications system.",
+    "doctrineSource": [
+      {
+        "publication": "AFMAN 13-204 Volume 3, Air Traffic Control",
+        "note": "Same verification status as the air-traffic-controller Role record's citation — publication/content confirmed via web search, exact section not independently verified (network-blocked from fetching .mil sources this session)."
+      }
+    ]
+  },
+  {
+    "id": "dzstl-comms-via-tactical-system",
+    "from": { "kind": "role", "id": "drop-zone-support-team-leader" },
+    "to": { "kind": "system", "id": "tactical-communications-system" },
+    "interactionType": "CommunicatesVia",
+    "description": "Drop Zone Support Team Leader communicates drop-zone status and readiness to the aircrew via the tactical communications system.",
+    "doctrineSource": [{ "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }]
+  },
+  {
+    "id": "aircraft-commander-coordinates-with-atc",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "role", "id": "air-traffic-controller" },
+    "interactionType": "CoordinatesWith",
+    "description": "Aircraft Commander coordinates airspace clearance and traffic separation with Air Traffic Control.",
+    "doctrineSource": [
+      {
+        "publication": "AFMAN 13-204 Volume 3, Air Traffic Control",
+        "note": "Same verification status as the air-traffic-controller Role record's citation."
+      }
+    ]
+  },
+  {
+    "id": "loadmaster-coordinates-with-dzstl",
+    "from": { "kind": "role", "id": "loadmaster" },
+    "to": { "kind": "role", "id": "drop-zone-support-team-leader" },
+    "interactionType": "CoordinatesWith",
+    "description": "Loadmaster coordinates drop timing and drop-zone readiness with the Drop Zone Support Team Leader before releasing CDS bundles.",
+    "doctrineSource": [{ "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }]
+  },
+  {
+    "id": "aircraft-commander-authenticates-to-access-control",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "system", "id": "identity-access-control-system" },
+    "interactionType": "AuthenticatesTo",
+    "description": "Aircraft Commander authenticates to the identity/access-control system to access mission-relevant systems (e.g. tasking and planning data).",
+    "doctrineSource": [
+      {
+        "publication": "DoDI 8520.04, Access Management for DoD Information Systems",
+        "note": "General ICAM policy concept only, not a specific real system — same verification status as the identity-access-control-system System record's citation."
+      }
+    ]
+  },
+  {
+    "id": "mission-commander-commands-aircraft-commander",
+    "from": { "kind": "role", "id": "mission-commander" },
+    "to": { "kind": "role", "id": "aircraft-commander" },
+    "interactionType": "Commands",
+    "description": "Mission Commander holds overall mission execution and decision authority over the tasked sortie, including the Aircraft Commander.",
+    "doctrineSource": [
+      {
+        "publication": "Aircrew doctrine reference",
+        "note": "Generic mission-commander concept; not tied to a specific numbered instruction in this dataset — matches the existing mission-commander Role record's citation."
+      }
+    ]
+  }
+]
