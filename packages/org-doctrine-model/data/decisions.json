@@ -41,5 +41,26 @@
     "doctrineSource": [
       { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
     ]
+  },
+  {
+    "id": "loadmaster-uav-pallet-configuration-verification",
+    "roleId": "loadmaster",
+    "name": "UAV Pallet Configuration Verification Against TOC-L Flight Plan",
+    "description": "Before the drop run, the Loadmaster verifies that the Rapid Dragon-class pallet configuration and UAV launch sequence match the flight plan and launch instructions provided by the TOC-L Coordinator.",
+    "informedBy": [
+      { "kind": "role", "id": "toc-l-coordinator" },
+      { "kind": "system", "id": "rapid-dragon-palletized-effects-system" }
+    ],
+    "criteria": "Pallet configuration, UAV launch sequence, and release parameters match the TOC-L-provided flight plan exactly.",
+    "possibleOutcomes": [
+      "Configuration verified — proceed with launch sequence",
+      "Discrepancy identified — hold and coordinate with TOC-L before release"
+    ],
+    "doctrineSource": [
+      {
+        "publication": "Air Force Research Laboratory, \"Rapid Dragon\" / \"Palletized Effects\"",
+        "note": "General Rapid Dragon-class pallet concept confirmed (see rapid-dragon-palletized-effects-system System record). The specific loadmaster verification procedure against a TOC-L-produced flight plan is not documented in any source found this session — this Decision is a reasonable structural inference (a loadmaster verifying configuration against instructions before release is standard practice for any pre-release check, per the existing loadmaster-rigging-readiness-verification Decision) applied to this mission's new payload type, not a directly documented procedure."
+      }
+    ]
   }
 ]

@@ -69,5 +69,30 @@
     "doctrineSource": [
       { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" }
     ]
+  },
+  {
+    "id": "rapid-dragon-palletized-effects-system",
+    "name": "Rapid Dragon-class Palletized Effects Deployment System",
+    "type": "AirdropMechanism",
+    "description": "A real, unclassified, publicly documented AFRL/USAF capability (program of record name: 'Dragon Cart'): a disposable, roll-on/roll-off deployment box that lets unmodified cargo aircraft (C-17, C-130, EC-130) airdrop palletized effects using standard aerial-delivery/CDS-style extraction, with no aircraft modification required. Originally demonstrated with palletized cruise missiles (JASSM-ER surrogates, 2021 C-17/EC-130 system-level tests), AFRL has since publicly stated the program is expanding from 'Palletized Munitions' to 'Palletized Effects' — explicitly including ISR platforms and humanitarian aid delivery. This mission's use of it to deploy ISR UAVs in a humanitarian-relief context is directly aligned with that stated public program direction, not a fictional stretch of an unrelated system.",
+    "doctrineSource": [
+      {
+        "publication": "Air Force Research Laboratory, \"Rapid Dragon\" / \"Palletized Effects\"",
+        "url": "https://afresearchlab.com/rapid-dragon-delivers-long-range-strike-from-cargo-aircraft/",
+        "note": "Directly fetched from afresearchlab.com on 2026-09-07 (not a .mil domain, reachable this session). Direct quote: 'Palletized Effects has the potential to assist in multiple scenarios on the spectrum of conflict ranging from humanitarian relief to kinetic effects,' and Rapid Dragon 'is also expanding its Palletized Effects with Foreign Partners & Allies, which includes kinetic and non-kinetic effects; intelligence, surveillance, and reconnaissance (ISR) platforms; contested logistics / cargo resupply.' Corroborated by Lockheed Martin's press release and Air & Space Forces Magazine coverage of the 2021 C-17 system-level demonstration and the 'Dragon Cart' program-of-record name."
+      }
+    ]
+  },
+  {
+    "id": "long-endurance-isr-uav",
+    "name": "Long-Endurance ISR/Comms-Relay UAV (representative)",
+    "type": "Aircraft",
+    "description": "Represents the class of long-endurance unmanned aircraft deployed via the Rapid Dragon-class system, carrying a mixture of communications-relay and sensor payloads to form a distributed network providing intelligence and C2 support to the relief effort. Deliberately generic — no specific real UAV platform, sensor, or communications-payload specification is modeled, consistent with the classification boundary (AGENTS.md Section 3). AFRL's public 'Palletized Effects' materials mention proposals for airdropping large numbers of small UAVs per pallet for roles including reconnaissance and precision navigation/timing, but do not name a specific long-endurance ISR/comms-relay platform — this record's specific characterization (long-endurance, mixed comms+sensor payload, forming a network) is this mission's own representative design choice, not drawn from a single named real system.",
+    "doctrineSource": [
+      {
+        "publication": "Air Force Research Laboratory, \"Rapid Dragon\" / \"Palletized Effects\"",
+        "note": "Same verification status as the rapid-dragon-palletized-effects-system System record's citation — general UAV-deployment-via-palletized-effects concept confirmed; the specific long-endurance/mixed-payload/networked characterization here is representative, not a named real platform."
+      }
+    ]
   }
 ]

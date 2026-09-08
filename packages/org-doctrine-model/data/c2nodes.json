@@ -87,5 +87,20 @@
     "doctrineSource": [
       { "publication": "618th Air Operations Center Fact Sheet", "url": "https://www.amc.af.mil/About-Us/Fact-Sheets/Display/Article/1517680/618th-air-operations-center/" }
     ]
+  },
+  {
+    "id": "toc-l",
+    "name": "Tactical Operations Center (Light) (TOC-L)",
+    "organizationId": "pacaf",
+    "function": "Tasking",
+    "producesArtifacts": ["Air picture / sensor-fusion common operating picture", "UAV flight plan (this mission's extension)"],
+    "description": "A real, current, deployable USAF C2 kit: fuses data from hundreds of sensor/battle-management feeds into a common air picture, connects to aircraft and other C2 agencies, and is staffed by a handful of personnel versus ~100 for a full-size Control and Reporting Center (CRC). Publicly demonstrated across PACAF's Indo-Pacific AOR (Misawa, Yokota, Guam) in 2025 exercises. Its use here as the element that produces UAV flight plans and issues detailed launch instructions to the Loadmaster is this mission's own extension of TOC-L's real, more general C2/sensor-fusion role — no source found this session documents TOC-L specifically performing airdropped-UAV flight planning.",
+    "doctrineSource": [
+      {
+        "publication": "\"Air Force TOC-L enhances joint force C2\"",
+        "url": "https://www.af.mil/News/Article-Display/Article/4170256/air-force-toc-l-enhances-joint-force-c2/",
+        "note": "Confirmed via web search on 2026-09-07 (real, current USAF program; corroborated by a second af.mil article, 'Next-gen TOC-L systems announced to boost agile C2 capabilities,' and independent defense trade press: Air & Space Forces Magazine, DefenseScoop, The Defense Post). Direct fetch of the af.mil article itself returned a network-level 403 this session — same .mil constraint noted on other records. This record's specific claim that TOC-L produces UAV flight plans for a palletized-effects airdrop is NOT from any source — it is this mission's fictional extension of TOC-L's real, documented air-battle-management/sensor-fusion function, stated explicitly rather than presented as doctrine."
+      }
+    ]
   }
 ]

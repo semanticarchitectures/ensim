@@ -12,7 +12,8 @@ export interface Interaction {
   id: string;
   from: Participant;
   to: Participant;
-  interactionType: "Operates" | "CommunicatesVia" | "AuthenticatesTo" | "CoordinatesWith" | "Commands" | "Informs";
+  interactionType:
+    "Operates" | "CommunicatesVia" | "AuthenticatesTo" | "CoordinatesWith" | "Commands" | "Informs" | "Deploys";
   description: string;
   /**
    * @minItems 1

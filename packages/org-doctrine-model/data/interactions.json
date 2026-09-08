@@ -161,5 +161,70 @@
         "note": "NOT an official Air Force publication — same verification status as aircraft-commander-informs-loadmaster-of-release-command."
       }
     ]
+  },
+  {
+    "id": "loadmaster-operates-rapid-dragon-system",
+    "from": { "kind": "role", "id": "loadmaster" },
+    "to": { "kind": "system", "id": "rapid-dragon-palletized-effects-system" },
+    "interactionType": "Operates",
+    "description": "Loadmaster rolls on, configures, and operates the Rapid Dragon-class deployment boxes for palletized ISR UAV airdrop — the roll-on/roll-off design requires no aircraft modification, per AFRL's public materials.",
+    "doctrineSource": [
+      {
+        "publication": "Air Force Research Laboratory, \"Rapid Dragon\" / \"Palletized Effects\"",
+        "note": "Same verification status as the rapid-dragon-palletized-effects-system System record's citation. The specific loadmaster procedure for configuring/operating a Rapid Dragon-class pallet is not documented in any source found this session; the general roll-on/roll-off, no-modification design is confirmed, so a loadmaster-operated interaction is a reasonable structural inference, not a directly documented procedure."
+      }
+    ]
+  },
+  {
+    "id": "toc-l-coordinates-with-loadmaster",
+    "from": { "kind": "role", "id": "toc-l-coordinator" },
+    "to": { "kind": "role", "id": "loadmaster" },
+    "interactionType": "CoordinatesWith",
+    "description": "TOC-L Coordinator coordinates UAV pallet deployment timing and configuration with the Loadmaster ahead of release — the C5ISR Airdrop mission's analogue to the DZSTL/Loadmaster coordination relationship in the CDS-resupply mission.",
+    "doctrineSource": [
+      {
+        "publication": "\"Air Force TOC-L enhances joint force C2\"",
+        "note": "Same verification status as the toc-l C2Node record's citation — the general TOC-L/aircraft C2 connection is real and documented; this specific coordination relationship is this mission's extension of it."
+      }
+    ]
+  },
+  {
+    "id": "toc-l-informs-loadmaster-of-uav-flight-plan",
+    "from": { "kind": "role", "id": "toc-l-coordinator" },
+    "to": { "kind": "role", "id": "loadmaster" },
+    "interactionType": "Informs",
+    "description": "TOC-L Coordinator provides the Loadmaster detailed UAV flight-plan and launch-sequence instructions — which pallet/UAV launches in what order, at what point in the run, and any deployment-specific configuration — before the drop run begins. This is the specific information-flow the Loadmaster needs beyond the CDS-resupply mission's simpler rigging/release picture.",
+    "doctrineSource": [
+      {
+        "publication": "\"Air Force TOC-L enhances joint force C2\"",
+        "note": "Same verification status as the toc-l C2Node record's citation. TOC-L's real documented function is air-picture/sensor-fusion, not UAV flight-plan production specifically — this interaction is this mission's fictional extension, stated explicitly rather than presented as a documented TOC-L procedure."
+      }
+    ]
+  },
+  {
+    "id": "rapid-dragon-deploys-isr-uav",
+    "from": { "kind": "system", "id": "rapid-dragon-palletized-effects-system" },
+    "to": { "kind": "system", "id": "long-endurance-isr-uav" },
+    "interactionType": "Deploys",
+    "description": "Rapid Dragon-class deployment box airdrops and releases the long-endurance ISR/comms-relay UAVs, which then transition to powered flight and establish their sensor/communications network.",
+    "doctrineSource": [
+      {
+        "publication": "Air Force Research Laboratory, \"Rapid Dragon\" / \"Palletized Effects\"",
+        "note": "Same verification status as the two System records this interaction connects."
+      }
+    ]
+  },
+  {
+    "id": "isr-uav-communicates-via-toc-l",
+    "from": { "kind": "system", "id": "long-endurance-isr-uav" },
+    "to": { "kind": "c2node", "id": "toc-l" },
+    "interactionType": "CommunicatesVia",
+    "description": "The deployed UAV network relays sensor and communications-relay data to the TOC-L, which fuses it into the common operating picture — the intelligence and C2 support this mission provides to the broader relief effort.",
+    "doctrineSource": [
+      {
+        "publication": "\"Air Force TOC-L enhances joint force C2\"",
+        "note": "TOC-L's real documented function is fusing sensor/battle-management feeds into a common picture; that it specifically receives feeds from airdropped ISR UAVs is this mission's extension, not independently documented."
+      }
+    ]
   }
 ]

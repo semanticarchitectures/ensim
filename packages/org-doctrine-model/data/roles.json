@@ -178,5 +178,24 @@
         "note": "Confirmed via web search on 2026-09-07: the senior member of the Drop Zone Support Team (DZST) functions as the Drop Zone Support Team Leader (DZSTL) and must be an NCO, officer, or civilian equivalent who has completed DZST member training. A related Drop Zone Safety Officer (DZSO) position also exists in this doctrine but is out of scope for this minimal role set. Exact chapter/section number not independently verified — same network-access constraint as the air-traffic-controller record. organizationId left null: which unit provides the DZST for this specific scenario (e.g. a JTF-organic or host-nation element) is not modeled."
       }
     ]
+  },
+  {
+    "id": "toc-l-coordinator",
+    "name": "TOC-L Coordinator",
+    "organizationId": "pacaf",
+    "c2NodeId": "toc-l",
+    "responsibilities": [
+      "Fuses sensor and battle-management data into a common air picture (TOC-L's real, documented function)",
+      "Produces UAV flight plans for Rapid Dragon-class palletized ISR UAV deployment and provides detailed launch/release instructions to the tasked aircrew's Loadmaster (this mission's extension of that function)"
+    ],
+    "authorities": [],
+    "reportsToRoleId": null,
+    "doctrineSource": [
+      {
+        "publication": "\"Air Force TOC-L enhances joint force C2\"",
+        "url": "https://www.af.mil/News/Article-Display/Article/4170256/air-force-toc-l-enhances-joint-force-c2/",
+        "note": "Same verification status as the toc-l C2Node record's citation. The specific rank/AFSC for whoever staffs a TOC-L console is not modeled — kept generic as 'TOC-L Coordinator' rather than naming an unverified specific position title."
+      }
+    ]
   }
 ]

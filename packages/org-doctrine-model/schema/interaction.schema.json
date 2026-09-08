@@ -10,7 +10,7 @@
     "to": { "$ref": "common.schema.json#/$defs/participant" },
     "interactionType": {
       "type": "string",
-      "enum": ["Operates", "CommunicatesVia", "AuthenticatesTo", "CoordinatesWith", "Commands", "Informs"]
+      "enum": ["Operates", "CommunicatesVia", "AuthenticatesTo", "CoordinatesWith", "Commands", "Informs", "Deploys"]
     },
     "description": { "type": "string" },
     "doctrineSource": {
