@@ -50,6 +50,25 @@
       },
       "additionalProperties": false
     },
+    "patients": {
+      "description": "For aeromedical evacuation missions, in place of cargo — see AE Decision/Interaction records for patient precedence (Urgent/Urgent-Surg/Priority/Routine/Convenience) and type (Litter/Ambulatory).",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "contents": { "type": "string" },
+        "count": {
+          "anyOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }]
+        },
+        "litterCount": {
+          "anyOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }]
+        },
+        "ambulatoryCount": {
+          "anyOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }]
+        },
+        "precedenceMix": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
     "timeline": {
       "description": "Discrete-event steps for the v1 data/process simulation (Section 4a/7 of ARCHITECTURE.md) — not a flown trajectory.",
       "type": "array",

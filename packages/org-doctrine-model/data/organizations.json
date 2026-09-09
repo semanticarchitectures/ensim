@@ -87,5 +87,37 @@
     "doctrineSource": [
       { "publication": "535th Airlift Squadron public unit reference" }
     ]
+  },
+  {
+    "id": "ustranscom",
+    "name": "United States Transportation Command",
+    "shortName": "USTRANSCOM",
+    "type": "CombatantCommand",
+    "echelon": "Combatant Command",
+    "parentId": null,
+    "homeStation": "Scott AFB, IL",
+    "description": "Functional combatant command with global oversight of patient movement, including the Theater Patient Movement Requirements Center (TPMRC) network that validates and regulates aeromedical evacuation requirements.",
+    "doctrineSource": [
+      {
+        "publication": "\"USTRANSCOM oversees strategic theater patient movement\" / \"USTRANSCOM coordinates theater patient movement, critical part of aeromedical evacuation process\"",
+        "note": "Confirmed via web search on 2026-09-09 (two corroborating Army.mil articles plus DVIDS coverage, all describing USTRANSCOM's oversight of the Patient Movement Requirement Center (PMRC)/TPMRC/JPMRC system). A direct fetch of the primary Army.mil article returned an HTTP 429 rate-limit from this session's environment rather than succeeding — grounded via WebSearch synthesis instead, consistent with this dataset's citation-honesty pattern for sources that could not be directly fetched."
+      }
+    ]
+  },
+  {
+    "id": "18th-aeromedical-evacuation-squadron",
+    "name": "18th Aeromedical Evacuation Squadron",
+    "shortName": "18 AES",
+    "type": "Squadron",
+    "echelon": "Squadron",
+    "parentId": "pacaf",
+    "homeStation": "Kadena Air Base, Japan",
+    "description": "The sole aeromedical evacuation unit in U.S. Indo-Pacific Command; provides 24/7 patient movement capability across the theater, picking up patients and transporting them to higher levels of care. AE crews fly aboard whichever airlift airframe is tasked for the mission (C-130, KC-135, or — as in this mission — a tasked C-17), rather than operating dedicated aircraft.",
+    "doctrineSource": [
+      {
+        "publication": "PACAF / Yokota AB / DVIDS public affairs coverage of 18th Aeromedical Evacuation Squadron operations",
+        "note": "Confirmed via web search on 2026-09-09 (pacaf.af.mil, yokota.af.mil, dvidshub.net, and Wikipedia's List of United States Air Force aeromedical evacuation squadrons all corroborate: 18 AES at Kadena AB, sole AE unit in INDOPACOM). The specific intermediate wing this squadron reports to (rather than PACAF directly) was not independently verified this session — parentId is set to pacaf as a doctrinally reasonable simplification, same pattern as this dataset's other organizationId placements flagged as unverified at the intermediate echelon."
+      }
+    ]
   }
 ]

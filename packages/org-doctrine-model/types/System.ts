@@ -11,7 +11,7 @@ export interface System {
    */
   id: string;
   name: string;
-  type: "Aircraft" | "Communications" | "SecurityAccessControl" | "AirdropMechanism";
+  type: "Aircraft" | "Communications" | "SecurityAccessControl" | "AirdropMechanism" | "MedicalEquipment";
   description: string;
   /**
    * @minItems 1

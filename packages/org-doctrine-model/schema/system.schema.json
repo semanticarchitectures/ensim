@@ -9,7 +9,7 @@
     "name": { "type": "string" },
     "type": {
       "type": "string",
-      "enum": ["Aircraft", "Communications", "SecurityAccessControl", "AirdropMechanism"]
+      "enum": ["Aircraft", "Communications", "SecurityAccessControl", "AirdropMechanism", "MedicalEquipment"]
     },
     "description": { "type": "string" },
     "doctrineSource": {

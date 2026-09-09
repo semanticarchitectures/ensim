@@ -197,5 +197,42 @@
         "note": "Same verification status as the toc-l C2Node record's citation. The specific rank/AFSC for whoever staffs a TOC-L console is not modeled — kept generic as 'TOC-L Coordinator' rather than naming an unverified specific position title."
       }
     ]
+  },
+  {
+    "id": "flight-nurse-medical-crew-director",
+    "name": "Flight Nurse (Medical Crew Director)",
+    "organizationId": "18th-aeromedical-evacuation-squadron",
+    "c2NodeId": null,
+    "responsibilities": [
+      "Overall supervision of patient care and management of the Aeromedical Evacuation Crew (AEC) assigned to the mission",
+      "Advises the Aircraft Commander on patients' conditions and on use of medical equipment that may affect aircraft operations",
+      "Verifies the patient manifest and precedence/type mix against the TPMRC-validated Patient Movement Request before departure"
+    ],
+    "authorities": [],
+    "reportsToRoleId": "aircraft-commander",
+    "doctrineSource": [
+      {
+        "publication": "AFI 48-307 (En Route Care and Aeromedical Evacuation Medical Operations) / DAFI 48-107 series",
+        "note": "Medical Crew Director (a qualified flight nurse) responsibilities confirmed via web search on 2026-09-09, corroborated by USAF career-field and AES public materials. Clinical practice during mission execution is under the medical direction of a ground-based Theater Validating Flight Surgeon (TVFS), not modeled as a separate Role in this v1 dataset. reportsToRoleId is set to aircraft-commander as the doctrinally reasonable in-flight command relationship (the MCD advises the AC, the same structural pattern as the loadmaster role) — the primary AFI/DAFI PDFs (static.e-publishing.af.mil) could not be directly fetched, same .mil network-block constraint noted throughout this dataset."
+      }
+    ]
+  },
+  {
+    "id": "aeromedical-evacuation-technician",
+    "name": "Aeromedical Evacuation Technician",
+    "organizationId": "18th-aeromedical-evacuation-squadron",
+    "c2NodeId": null,
+    "responsibilities": [
+      "Provides hands-on inpatient medical-surgical care with Basic Life Support (BLS) and Advanced Cardiac Life Support (ACLS) resuscitative capability during flight",
+      "Monitors assigned patients and reports status/condition changes to the Flight Nurse (Medical Crew Director)"
+    ],
+    "authorities": [],
+    "reportsToRoleId": "flight-nurse-medical-crew-director",
+    "doctrineSource": [
+      {
+        "publication": "AFI 48-307 / DAFI 48-107 series; USAFSAM Flight Nurse and Aeromedical Evacuation Technician Course public materials",
+        "note": "Confirmed via web search on 2026-09-09 (airforcemedicine.af.mil course description, corroborated by USAF career-field public materials). Also called a 'Flight Medic' in some sources. Same .mil primary-source-fetch constraint as the flight-nurse-medical-crew-director role."
+      }
+    ]
   }
 ]

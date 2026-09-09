@@ -102,5 +102,19 @@
         "note": "Confirmed via web search on 2026-09-07 (real, current USAF program; corroborated by a second af.mil article, 'Next-gen TOC-L systems announced to boost agile C2 capabilities,' and independent defense trade press: Air & Space Forces Magazine, DefenseScoop, The Defense Post). Direct fetch of the af.mil article itself returned a network-level 403 this session — same .mil constraint noted on other records. This record's specific claim that TOC-L produces UAV flight plans for a palletized-effects airdrop is NOT from any source — it is this mission's fictional extension of TOC-L's real, documented air-battle-management/sensor-fusion function, stated explicitly rather than presented as doctrine."
       }
     ]
+  },
+  {
+    "id": "tpmrc",
+    "name": "Theater Patient Movement Requirements Center (TPMRC)",
+    "organizationId": "ustranscom",
+    "function": "Tasking",
+    "producesArtifacts": ["Validated Patient Movement Request (PMR)", "Patient movement/evacuation manifest"],
+    "description": "Validates and regulates aeromedical evacuation requirements: receives Patient Movement Requests (PMRs) from the requesting medical treatment facility, validates and prioritizes them by precedence (Urgent/Urgent-Surg/Priority/Routine/Convenience), and coordinates with the theater AOC's Air Mobility Division (which includes an Aeromedical Evacuation Control Team — see aoc-air-mobility-division) to source the tasked AE mission/crew. Part of the PMRC/JPMRC/TPMRC/GPMRC system; three regional TPMRCs exist (Americas, East, West) — this record represents the Pacific-theater instance generically, not tied to one of the three by name.",
+    "doctrineSource": [
+      {
+        "publication": "USTRANSCOM patient movement doctrine (per Army.mil/DVIDS coverage) and NATO AAMedP-1.1/1.5 (STANAG 3204/2087) for the PMR precedence/type taxonomy",
+        "note": "TPMRC's validating/regulating function and the PMR process are confirmed via web search on 2026-09-09 (same sourcing status as the ustranscom Organization record). The precedence categories (Urgent/Urgent-Surg/Priority/Routine/Convenience) and patient type codes (Litter/Ambulatory) are drawn from NATO standardization agreements (coemed.org-hosted STANAG texts) — allied/NATO doctrine rather than a US-specific source, used here because a directly fetchable USAF-specific enumeration of the same categories was not found this session; the concepts are standard across US/NATO aeromedical evacuation doctrine."
+      }
+    ]
   }
 ]

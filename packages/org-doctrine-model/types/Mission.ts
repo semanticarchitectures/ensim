@@ -45,6 +45,17 @@ export interface Mission {
     bundleCount?: number | null;
   };
   /**
+   * For aeromedical evacuation missions, in place of cargo — see AE Decision/Interaction records for patient precedence (Urgent/Urgent-Surg/Priority/Routine/Convenience) and type (Litter/Ambulatory).
+   */
+  patients?: {
+    type?: string;
+    contents?: string;
+    count?: number | null;
+    litterCount?: number | null;
+    ambulatoryCount?: number | null;
+    precedenceMix?: string;
+  };
+  /**
    * Discrete-event steps for the v1 data/process simulation (Section 4a/7 of ARCHITECTURE.md) — not a flown trajectory.
    *
    * @minItems 1

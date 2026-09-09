@@ -94,5 +94,17 @@
         "note": "Same verification status as the rapid-dragon-palletized-effects-system System record's citation — general UAV-deployment-via-palletized-effects concept confirmed; the specific long-endurance/mixed-payload/networked characterization here is representative, not a named real platform."
       }
     ]
+  },
+  {
+    "id": "ae-patient-care-equipment",
+    "name": "Aeromedical Evacuation Patient Care Equipment (representative)",
+    "type": "MedicalEquipment",
+    "description": "Represents the Patient Movement Items (PMI) and patient-care equipment configured into the tasked aircraft's cargo compartment for an AE mission: litter stanchions, oxygen distribution, and patient monitoring equipment. Deliberately generic — no specific real equipment model or medical-device specification is modeled, consistent with the classification boundary (AGENTS.md Section 3). The Flight Nurse (Medical Crew Director) operates/configures this equipment; the Aeromedical Evacuation Technician monitors patients via it.",
+    "doctrineSource": [
+      {
+        "publication": "AFI 48-307 / DAFI 48-107 series; general Patient Movement Items (PMI) concept",
+        "note": "The general concept of a standardized patient-care/litter-configuration kit for AE missions is well established in public USAF AE materials (career-field descriptions, AES public affairs coverage) confirmed via web search on 2026-09-09. No specific PMI equipment model or medical-device specification is drawn from any source — this record is deliberately representative only, same pattern as this dataset's other equipment-class System records."
+      }
+    ]
   }
 ]
