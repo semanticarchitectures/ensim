@@ -291,5 +291,83 @@
         "note": "Same verification status as the tpmrc C2Node record's citation. The general PMR validation/dissemination process is confirmed; the specific hand-off to an in-flight MCD modeled here is this dataset's reasonable structural inference from that process, not a directly quoted procedure."
       }
     ]
+  },
+  {
+    "id": "17-ows-comms-via-jaawin",
+    "from": { "kind": "organization", "id": "17th-operational-weather-squadron" },
+    "to": { "kind": "system", "id": "jaawin-weather-distribution-system" },
+    "interactionType": "CommunicatesVia",
+    "description": "17th Operational Weather Squadron disseminates theater-scale mission planning and execution weather analyses, forecasts, TAFs, and Weather Watches/Warnings/Advisories (WWAs) via the JAAWIN-class distribution system.",
+    "doctrineSource": [
+      {
+        "publication": "Joint Air Force and Army Weather Information Network (JAAWIN) — general program information",
+        "note": "Same verification status as the jaawin-weather-distribution-system System record's citation."
+      }
+    ]
+  },
+  {
+    "id": "aoc-wst-comms-via-jaawin",
+    "from": { "kind": "c2node", "id": "aoc-weather-support-team" },
+    "to": { "kind": "system", "id": "jaawin-weather-distribution-system" },
+    "interactionType": "CommunicatesVia",
+    "description": "AOC Weather Support Team receives 17th OWS's theater weather products via the same distribution system to produce AOC-tailored Mission Weather Products (per AFMAN 15-129's Mission Execution Forecast Process) — the AOC's half of the continuous weather data stream.",
+    "doctrineSource": [
+      {
+        "publication": "AFMAN 15-129; JAAWIN general program information",
+        "note": "Same verification status as the aoc-weather-support-team C2Node record's and jaawin-weather-distribution-system System record's citations."
+      }
+    ]
+  },
+  {
+    "id": "aircraft-commander-comms-via-jaawin",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "system", "id": "jaawin-weather-distribution-system" },
+    "interactionType": "CommunicatesVia",
+    "description": "Aircraft Commander/aircrew receive in-flight weather data (updated TAFs, PIREPs, SIGMETs, winds aloft) via the same class of weather distribution/datalink system — the aircraft's half of the continuous weather data stream that begins at 17th OWS/the AOC during planning and continues through mission execution.",
+    "doctrineSource": [
+      {
+        "publication": "JAAWIN general program information; commercial aviation datalink weather delivery as structural analogue",
+        "note": "Same verification status as the jaawin-weather-distribution-system System record's citation — general in-flight datalink weather delivery is well documented for aviation broadly; its specific application to this tasked aircraft is this dataset's structural extension, not a confirmed military-specific implementation."
+      }
+    ]
+  },
+  {
+    "id": "17-ows-informs-aoc-wst",
+    "from": { "kind": "organization", "id": "17th-operational-weather-squadron" },
+    "to": { "kind": "c2node", "id": "aoc-weather-support-team" },
+    "interactionType": "Informs",
+    "description": "17th OWS provides theater-scale mission planning/execution weather forecasts to the AOC Weather Support Team, which fuses and tailors them into AOC-specific Mission Weather Products per AFMAN 15-129's Mission Execution Forecast Process (MEFP).",
+    "doctrineSource": [
+      {
+        "publication": "AFMAN 15-129, Aerospace Weather Operations – Processes and Procedures",
+        "note": "Confirmed via web search on 2026-09-10 — same verification status as the aoc-weather-support-team C2Node record's citation."
+      }
+    ]
+  },
+  {
+    "id": "aoc-wst-informs-aircraft-commander",
+    "from": { "kind": "c2node", "id": "aoc-weather-support-team" },
+    "to": { "kind": "role", "id": "aircraft-commander" },
+    "interactionType": "Informs",
+    "description": "AOC Weather Support Team/Staff Weather Officer provides mission weather guidance that feeds the tasked Aircraft Commander's pre-flight Flight Weather Briefing (DD Form 175-1) and continues to inform en-route decision-making during execution.",
+    "doctrineSource": [
+      {
+        "publication": "DD Form 175-1, \"Flight Weather Briefing\"; AFDP 3-59, Weather Operations",
+        "note": "DD Form 175-1's role as the standard pre-flight weather briefing (mission/takeoff data, en-route data, terminal forecast, hazards) is confirmed via web search on 2026-09-10 (esd.whs.mil form page, corroborating secondary sources). The specific hand-off from an AOC Weather Support Team/SWO to this dataset's Aircraft Commander role is a reasonable structural inference from AFDP 3-59's confirmed SWO integration into planning/execution, not a directly quoted procedure."
+      }
+    ]
+  },
+  {
+    "id": "aircraft-commander-informs-17-ows-of-pirep",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "organization", "id": "17th-operational-weather-squadron" },
+    "interactionType": "Informs",
+    "description": "Aircrew may generate a Pilot Weather Report (PIREP) of actual conditions encountered in flight, fed back into the weather production/dissemination chain — closing the loop so the weather data stream is not purely one-directional.",
+    "doctrineSource": [
+      {
+        "publication": "Pilot Weather Report (PIREP) — general aviation weather-reporting concept",
+        "note": "PIREPs as pilot-generated actual-conditions reports fed back to the weather system (voice or datalink) are well-documented general aviation practice, confirmed via web search on 2026-09-10. Their specific routing to 17th OWS by name is this dataset's reasonable structural inference (17 OWS is the theater production unit this dataset already models), not a confirmed specific routing procedure."
+      }
+    ]
   }
 ]

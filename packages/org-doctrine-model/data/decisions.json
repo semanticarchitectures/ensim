@@ -102,5 +102,27 @@
         "note": "Same verification status as the tpmrc C2Node record's citation. The general PMR validation process is confirmed; the specific pre-departure MCD verification step modeled here is a reasonable structural inference (a pre-release/pre-departure verification against validated instructions is standard practice, per the existing loadmaster-rigging-readiness-verification and loadmaster-uav-pallet-configuration-verification Decisions), not a directly documented procedure."
       }
     ]
+  },
+  {
+    "id": "aircraft-commander-weather-go-no-go",
+    "roleId": "aircraft-commander",
+    "name": "Weather Go/No-Go and Divert Decision",
+    "description": "Before departure and continuously during the mission, the Aircraft Commander assesses current and forecast weather — starting with the pre-flight Flight Weather Briefing (DD Form 175-1) and updated by the in-flight weather data stream — against aircraft and mission-specific weather minimums, and decides whether to proceed, delay, or divert.",
+    "informedBy": [
+      { "kind": "c2node", "id": "aoc-weather-support-team" },
+      { "kind": "system", "id": "jaawin-weather-distribution-system" }
+    ],
+    "criteria": "Observed and forecast weather (ceiling, visibility, winds, icing, thunderstorm activity) at departure, en route, and destination/drop-zone, measured against aircraft and mission-specific weather minimums.",
+    "possibleOutcomes": [
+      "Proceed as planned",
+      "Delay departure pending improved conditions",
+      "Divert to an alternate or abort the mission leg"
+    ],
+    "doctrineSource": [
+      {
+        "publication": "DD Form 175-1, \"Flight Weather Briefing\"; AFDP 3-59, Weather Operations",
+        "note": "The weather-minimums go/no-go decision is standard aviation practice, confirmed generically via web search on 2026-09-10; DD Form 175-1's structure (mission/takeoff data, en-route data, terminal forecast, hazards including turbulence/icing/thunderstorms) is confirmed as the standard USAF pre-flight weather-briefing input to exactly this kind of decision. The specific outcome set and continuous (not just pre-flight) framing here is this dataset's reasonable structuring of that authority, not a quoted procedure."
+      }
+    ]
   }
 ]

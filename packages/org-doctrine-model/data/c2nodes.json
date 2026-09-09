@@ -116,5 +116,19 @@
         "note": "TPMRC's validating/regulating function and the PMR process are confirmed via web search on 2026-09-09 (same sourcing status as the ustranscom Organization record). The precedence categories (Urgent/Urgent-Surg/Priority/Routine/Convenience) and patient type codes (Litter/Ambulatory) are drawn from NATO standardization agreements (coemed.org-hosted STANAG texts) — allied/NATO doctrine rather than a US-specific source, used here because a directly fetchable USAF-specific enumeration of the same categories was not found this session; the concepts are standard across US/NATO aeromedical evacuation doctrine."
       }
     ]
+  },
+  {
+    "id": "aoc-weather-support-team",
+    "name": "AOC Weather Support Team (WST)",
+    "organizationId": "pacaf-theater-aoc",
+    "function": "Reporting",
+    "producesArtifacts": ["Mission Execution Forecast", "Terminal Aerodrome Forecast (TAF)", "Weather Watches, Warnings, and Advisories (WWA)"],
+    "description": "Fuses theater-scale weather products from the 17th Operational Weather Squadron with local mission requirements to produce Mission Weather Products, per AFMAN 15-129's Mission Execution Forecast Process (MEFP), and reports weather impacts to the AOC's divisions and to AOC Flight Managers. Weather is confirmed as one of the AOC's embedded operating disciplines (alongside ISR, airspace management, logistics, etc.) rather than one of the five core divisions (Strategy/Combat Plans/Combat Operations/ISR/Air Mobility) — this record represents that embedded weather function as its own C2Node rather than attributing it to one specific division, since no source found this session pins it to exactly one.",
+    "doctrineSource": [
+      {
+        "publication": "AFMAN 13-1AOC Vol 3; AFMAN 15-129, Aerospace Weather Operations – Processes and Procedures; AFDP 3-59, Weather Operations (26 Sep 2025)",
+        "note": "Confirmed via web search on 2026-09-10: AFMAN 13-1AOC Vol 3 lists weather among the AOC's operating disciplines and confirms Weather Support Teams (WSTs) provide weather information/products to AOC Flight Managers; AFMAN 15-129 confirms the Mission Execution Forecast Process (MEFP) fuses theater-scale OWS products with local requirements into tailored Mission Weather Products (MWPs); AFDP 3-59 confirms weather personnel integrate into staff functions for short-term (1-3 day) mission planning and execution. None of the primary PDFs (static.e-publishing.af.mil, doctrine.af.mil) could be directly fetched from this session's environment — same network-block constraint noted throughout this dataset — so this record is grounded via WebSearch synthesis of the publications' confirmed content, not an independent full read."
+      }
+    ]
   }
 ]

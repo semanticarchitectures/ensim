@@ -13,7 +13,9 @@
     "15th-wing",
     "535th-airlift-squadron",
     "ustranscom",
-    "18th-aeromedical-evacuation-squadron"
+    "18th-aeromedical-evacuation-squadron",
+    "557th-weather-wing",
+    "17th-operational-weather-squadron"
   ],
   "rolesInvolved": [
     "cfacc",
@@ -24,7 +26,8 @@
     "aircraft-commander",
     "copilot",
     "flight-nurse-medical-crew-director",
-    "aeromedical-evacuation-technician"
+    "aeromedical-evacuation-technician",
+    "staff-weather-officer"
   ],
   "route": {
     "origin": "Austere/forward airfield near the affected area, Luzon, Philippines",
@@ -44,9 +47,9 @@
     { "step": 2, "description": "Injured disaster-relief personnel and local casualties requiring evacuation are identified; a Patient Movement Request (PMR) is submitted to TPMRC, running in parallel to USAID BHA's validation of the broader unique-DoD-capability requirement.", "doctrineProcessStep": 2 },
     { "step": 3, "description": "Request enters the Mission Tasking Matrix process to the Secretary of Defense.", "doctrineProcessStep": 3 },
     { "step": 4, "description": "INDOPACOM stands up a Joint Task Force (shared with Missions 1-2).", "doctrineProcessStep": 4 },
-    { "step": 5, "description": "PACAF theater AOC tasks the sortie via the ATO; DIRMOBFOR coordinates mobility flow. TPMRC validates the PMR and coordinates patient movement requirements with the AOC's Air Mobility Division (whose Aeromedical Evacuation Control Team plans/coordinates AE missions).", "doctrineProcessStep": 5 },
-    { "step": 6, "description": "618 AOC/TACC tasks the specific tail number and crew from the 535th Airlift Squadron, augmented by an 18th AES aeromedical evacuation crew (Flight Nurse Medical Crew Director and AE Technician). TPMRC provides the validated PMR/manifest to the Medical Crew Director.", "doctrineProcessStep": 6 },
-    { "step": 7, "description": "Sortie executed: the Medical Crew Director verifies the patient manifest against the TPMRC-validated PMR, patients are loaded and configured with patient-care equipment, and the AE crew provides in-flight care during transit to the higher-echelon facility — modeled as a state transition in v1, with no in-flight physiological simulation.", "doctrineProcessStep": null },
+    { "step": 5, "description": "PACAF theater AOC tasks the sortie via the ATO; DIRMOBFOR coordinates mobility flow. TPMRC validates the PMR and coordinates patient movement requirements with the AOC's Air Mobility Division (whose Aeromedical Evacuation Control Team plans/coordinates AE missions), informed by the AOC Weather Support Team's mission forecast.", "doctrineProcessStep": 5 },
+    { "step": 6, "description": "618 AOC/TACC tasks the specific tail number and crew from the 535th Airlift Squadron, augmented by an 18th AES aeromedical evacuation crew (Flight Nurse Medical Crew Director and AE Technician). TPMRC provides the validated PMR/manifest to the Medical Crew Director; the Aircraft Commander receives a pre-flight Flight Weather Briefing (DD Form 175-1) from the Staff Weather Officer.", "doctrineProcessStep": 6 },
+    { "step": 7, "description": "Sortie executed: the Medical Crew Director verifies the patient manifest against the TPMRC-validated PMR, patients are loaded and configured with patient-care equipment, and the AE crew provides in-flight care during transit to the higher-echelon facility — modeled as a state transition in v1, with no in-flight physiological simulation. Weather data continues to stream to both the AOC and the aircraft throughout, informing the Aircraft Commander's weather go/no-go decisions.", "doctrineProcessStep": null },
     { "step": 8, "description": "Mission report closes the loop back through the C2 chain, including patient hand-off status at the destination facility.", "doctrineProcessStep": null }
   ],
   "doctrineSource": [

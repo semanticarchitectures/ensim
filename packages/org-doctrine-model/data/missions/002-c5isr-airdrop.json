@@ -11,7 +11,9 @@
     "pacaf-theater-aoc",
     "amc-618-aoc-tacc",
     "15th-wing",
-    "535th-airlift-squadron"
+    "535th-airlift-squadron",
+    "557th-weather-wing",
+    "17th-operational-weather-squadron"
   ],
   "rolesInvolved": [
     "cfacc",
@@ -22,7 +24,8 @@
     "mission-commander",
     "aircraft-commander",
     "copilot",
-    "loadmaster"
+    "loadmaster",
+    "staff-weather-officer"
   ],
   "route": {
     "origin": "Joint Base Pearl Harbor-Hickam, HI",
@@ -39,9 +42,9 @@
     { "step": 2, "description": "USAID BHA validates the requirement for a unique DoD capability, including the need for an airborne ISR/C2 sensor network over the affected area.", "doctrineProcessStep": 2 },
     { "step": 3, "description": "Request enters the Mission Tasking Matrix process to the Secretary of Defense.", "doctrineProcessStep": 3 },
     { "step": 4, "description": "INDOPACOM stands up a Joint Task Force (shared with Mission 1).", "doctrineProcessStep": 4 },
-    { "step": 5, "description": "PACAF theater AOC tasks the sortie via the ATO; DIRMOBFOR coordinates mobility flow. The TOC-L Coordinator begins producing the UAV flight plan for the palletized ISR deployment.", "doctrineProcessStep": 5 },
-    { "step": 6, "description": "618 AOC/TACC tasks the specific tail number and crew from the 535th Airlift Squadron. TOC-L provides the completed UAV flight plan and detailed launch instructions to the tasked Loadmaster.", "doctrineProcessStep": 6 },
-    { "step": 7, "description": "Sortie executed: the Loadmaster verifies pallet configuration against the TOC-L flight plan and operates the Rapid Dragon-class system to deploy the ISR UAVs, which establish their sensor/communications-relay network — modeled as a state transition in v1, with no flight dynamics or UAV telemetry simulation.", "doctrineProcessStep": null },
+    { "step": 5, "description": "PACAF theater AOC tasks the sortie via the ATO; DIRMOBFOR coordinates mobility flow. The TOC-L Coordinator begins producing the UAV flight plan for the palletized ISR deployment, informed by the AOC Weather Support Team's mission forecast — winds at release altitude affect both the airdrop and the UAVs' powered-flight transition.", "doctrineProcessStep": 5 },
+    { "step": 6, "description": "618 AOC/TACC tasks the specific tail number and crew from the 535th Airlift Squadron. TOC-L provides the completed UAV flight plan and detailed launch instructions to the tasked Loadmaster; the Aircraft Commander receives a pre-flight Flight Weather Briefing (DD Form 175-1) from the Staff Weather Officer.", "doctrineProcessStep": 6 },
+    { "step": 7, "description": "Sortie executed: the Loadmaster verifies pallet configuration against the TOC-L flight plan and operates the Rapid Dragon-class system to deploy the ISR UAVs, which establish their sensor/communications-relay network — modeled as a state transition in v1, with no flight dynamics or UAV telemetry simulation. Weather data continues to stream to both the AOC and the aircraft throughout, informing the Aircraft Commander's weather go/no-go decisions.", "doctrineProcessStep": null },
     { "step": 8, "description": "Mission report closes the loop back through the C2 chain, including initial status of the deployed ISR/C2 network.", "doctrineProcessStep": null }
   ],
   "doctrineSource": [

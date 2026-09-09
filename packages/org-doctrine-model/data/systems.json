@@ -106,5 +106,17 @@
         "note": "The general concept of a standardized patient-care/litter-configuration kit for AE missions is well established in public USAF AE materials (career-field descriptions, AES public affairs coverage) confirmed via web search on 2026-09-09. No specific PMI equipment model or medical-device specification is drawn from any source — this record is deliberately representative only, same pattern as this dataset's other equipment-class System records."
       }
     ]
+  },
+  {
+    "id": "jaawin-weather-distribution-system",
+    "name": "JAAWIN-class Weather Data Distribution System (representative)",
+    "type": "WeatherSystem",
+    "description": "Represents the class of web-based weather product dissemination system in the style of JAAWIN (Joint Air Force and Army Weather Information Network) — a real, publicly documented system distributing text observations, analyses, forecasts, and tailored products (METAR, TAF, PIREP, SIGMET, NOTAM, winds aloft) to Operational Weather Squadrons, Combat Weather Teams, AOCs, and field/fixed-base users, sourced from centralized Air Force Weather production. Represents the continuous weather data stream flowing from production (17th OWS) through the AOC's Weather Support Team and, via in-flight datalink, to the tasked aircraft — the same class of system carries weather data from mission planning through the duration of execution. Deliberately generic — no specific real network architecture, bandwidth, or classification-level detail is modeled, consistent with the classification boundary (AGENTS.md Section 3).",
+    "doctrineSource": [
+      {
+        "publication": "Joint Air Force and Army Weather Information Network (JAAWIN) — general program information",
+        "note": "JAAWIN's existence, web-based interface, ~8 million hits/month, and role distributing raw/processed weather data to OWS/Combat Weather Teams/field and fixed-base users is confirmed via multiple corroborating public sources as of 2026-09-10 (AMS conference paper, AcronymFinder, Air Force Weather Agency background materials). Its specific use for real-time in-flight datalink delivery to a tasked aircraft (as opposed to pre-flight/fixed-base access) is this dataset's reasonable extension of the general concept — commercial aviation datalink weather delivery (METAR/TAF/PIREP/SIGMET/NOTAM/winds aloft via SATCOM) is well documented and used here as the structural analogue, not a confirmed military-specific implementation detail."
+      }
+    ]
   }
 ]
