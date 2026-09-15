@@ -70,6 +70,7 @@ function checkParticipant(participant, where) {
 for (const i of interactions) {
   checkParticipant(i.from, `interactions/${i.id}.from`);
   checkParticipant(i.to, `interactions/${i.id}.to`);
+  if (i.viaSystem) checkParticipant(i.viaSystem, `interactions/${i.id}.viaSystem`);
 }
 
 for (const d of decisions) {

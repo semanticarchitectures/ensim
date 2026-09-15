@@ -12,6 +12,10 @@
       "enum": ["Aircraft", "Communications", "SecurityAccessControl", "AirdropMechanism", "MedicalEquipment", "WeatherSystem"]
     },
     "description": { "type": "string" },
+    "commsLink": {
+      "$ref": "common.schema.json#/$defs/commsLink",
+      "description": "For a Communications-, SecurityAccessControl-, or WeatherSystem-type System: whether it carries verbal or digital traffic, its medium, and — if digital — its protocol and message format. Omitted for Systems that are not themselves a communications channel (e.g. an Aircraft, AirdropMechanism, or MedicalEquipment)."
+    },
     "doctrineSource": {
       "type": "array",
       "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },

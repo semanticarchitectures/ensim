@@ -3,6 +3,7 @@ import { systems, systemsById, interactionsForParticipant } from "../data";
 import { RecordTable } from "../components/RecordTable";
 import { DoctrineSourceList } from "../components/DoctrineSourceList";
 import { EntityLink } from "../components/EntityLink";
+import { CommsLinkDetail, CommsModeBadge } from "../components/CommsLinkDetail";
 import { NotFound } from "./NotFound";
 
 export function SystemsPage() {
@@ -21,6 +22,7 @@ export function SystemsPage() {
         columns={[
           { header: "Name", render: (s) => <Link to={`/systems/${s.id}`}>{s.name}</Link> },
           { header: "Type", render: (s) => s.type },
+          { header: "Mode", render: (s) => <CommsModeBadge link={s.commsLink} /> },
         ]}
       />
     </>
@@ -45,6 +47,14 @@ export function SystemDetailPage() {
         <dd>{system.type}</dd>
         <dt>Description</dt>
         <dd>{system.description}</dd>
+        {system.commsLink && (
+          <>
+            <dt>Communications link</dt>
+            <dd>
+              <CommsLinkDetail link={system.commsLink} />
+            </dd>
+          </>
+        )}
         <dt>Interactions</dt>
         <dd>
           {systemInteractions.length === 0 ? (

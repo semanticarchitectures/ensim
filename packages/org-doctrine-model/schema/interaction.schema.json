@@ -13,6 +13,14 @@
       "enum": ["Operates", "CommunicatesVia", "AuthenticatesTo", "CoordinatesWith", "Commands", "Informs", "Deploys"]
     },
     "description": { "type": "string" },
+    "commsLink": {
+      "$ref": "common.schema.json#/$defs/commsLink",
+      "description": "For a CommunicatesVia, Informs, or AuthenticatesTo interaction: whether this specific hop is verbal or digital, its medium, and — if digital — its protocol and message format. Omitted for interaction types that describe an organizational/operational relationship rather than a literal communications hop (Operates, CoordinatesWith, Commands, Deploys)."
+    },
+    "viaSystem": {
+      "$ref": "common.schema.json#/$defs/participant",
+      "description": "When this interaction's information flow is physically relayed through a System not already named as 'from' or 'to' (e.g. a role-to-role Informs relayed over an intercom or radio net), the System (kind: 'system') that carries it."
+    },
     "doctrineSource": {
       "type": "array",
       "items": { "$ref": "common.schema.json#/$defs/doctrineSource" },

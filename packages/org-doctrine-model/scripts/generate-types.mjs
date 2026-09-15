@@ -44,5 +44,6 @@ for (const { file, name } of schemas) {
 }
 
 exportLines.push('export type { DoctrineSource } from "./Organization.js";');
+exportLines.push('export type { CommsLink } from "./System.js";');
 writeFileSync(path.join(outDir, "index.ts"), banner + exportLines.join("\n") + "\n");
 console.log("wrote types/index.ts");

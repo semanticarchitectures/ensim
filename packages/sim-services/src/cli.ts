@@ -16,13 +16,15 @@ const repoRoot = path.resolve(here, "..", "..", ".."); // packages/sim-services/
  * Maps a completed timeline step to the Mission status it implies, so the published Mission
  * record's `status` field tracks run progress through valid Mission.schema.json enum values
  * (Draft -> Tasked -> Executing -> Complete) rather than inventing new fields. Grounded in
- * Mission 1's own timeline text: step 5 is the ATO tasking, step 7 is sortie execution, step 8
- * is the closing mission report. Returns null for steps that don't cross a status boundary.
+ * Mission 1's own timeline text: step 5 is the ATO tasking, step 7 is sortie execution (release),
+ * steps 8-9 are the return/landing and debrief that follow it (still "Executing" — the mission
+ * isn't done until it's reported), and step 10 is the closing mission report. Returns null for
+ * steps that don't cross a status boundary.
  */
 function missionStatusForStep(stepNumber: number): Mission["status"] | null {
   if (stepNumber === 5 || stepNumber === 6) return "Tasked";
-  if (stepNumber === 7) return "Executing";
-  if (stepNumber === 8) return "Complete";
+  if (stepNumber === 7 || stepNumber === 8 || stepNumber === 9) return "Executing";
+  if (stepNumber === 10) return "Complete";
   return null;
 }
 

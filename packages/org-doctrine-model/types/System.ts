@@ -14,10 +14,32 @@ export interface System {
   type:
     "Aircraft" | "Communications" | "SecurityAccessControl" | "AirdropMechanism" | "MedicalEquipment" | "WeatherSystem";
   description: string;
+  commsLink?: CommsLink;
   /**
    * @minItems 1
    */
   doctrineSource: [DoctrineSource, ...DoctrineSource[]];
+}
+/**
+ * For a Communications-, SecurityAccessControl-, or WeatherSystem-type System: whether it carries verbal or digital traffic, its medium, and — if digital — its protocol and message format. Omitted for Systems that are not themselves a communications channel (e.g. an Aircraft, AirdropMechanism, or MedicalEquipment).
+ */
+export interface CommsLink {
+  /**
+   * Verbal = spoken communication (radio voice, intercom, in-person). Digital = structured data communication. Mixed = the link combines both, e.g. a spoken briefing built from a written/digital product.
+   */
+  mode: "Verbal" | "Digital" | "Mixed";
+  /**
+   * The physical or logical bearer carrying this link, e.g. 'UHF/VHF AM voice radio', 'wired aircraft intercom', 'SATCOM datalink', 'tactical mesh radio (MANET)', 'DoD web network (HTTPS)', 'in-person'.
+   */
+  medium: string;
+  /**
+   * Digital transport/message protocol, when mode is Digital or Mixed, e.g. 'Cursor on Target (CoT) over UDP/TCP', 'HTTPS', 'PKI/CAC certificate-based authentication'. State 'representative' rather than inventing a specific real protocol when none is confirmed.
+   */
+  protocol?: string;
+  /**
+   * Message/data format, when mode is Digital or Mixed, e.g. 'CoT XML event schema', 'TAC plain-text alphanumeric codes (METAR/TAF/PIREP/SIGMET/NOTAM)'. State 'representative' rather than inventing a specific real format when none is confirmed.
+   */
+  format?: string;
 }
 /**
  * Citation to the public doctrine or reference material that grounds this record. Required on every ENSIM entity per AGENTS.md — do not add a record without one, and use the 'note' field to flag anything not independently verified.

@@ -44,6 +44,31 @@
       },
       "required": ["kind", "id"],
       "additionalProperties": false
+    },
+    "commsLink": {
+      "type": "object",
+      "description": "Detail on a communications or information-flow link: whether it is spoken or digital, what physical/logical medium carries it, and — for digital links — the protocol and message/data format. Per AGENTS.md Section 3, any protocol/format detail must be either a real, public, unclassified specification (e.g. Cursor on Target, PKI/CAC) or explicitly marked representative — never a real classified system's specification.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["Verbal", "Digital", "Mixed"],
+          "description": "Verbal = spoken communication (radio voice, intercom, in-person). Digital = structured data communication. Mixed = the link combines both, e.g. a spoken briefing built from a written/digital product."
+        },
+        "medium": {
+          "type": "string",
+          "description": "The physical or logical bearer carrying this link, e.g. 'UHF/VHF AM voice radio', 'wired aircraft intercom', 'SATCOM datalink', 'tactical mesh radio (MANET)', 'DoD web network (HTTPS)', 'in-person'."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Digital transport/message protocol, when mode is Digital or Mixed, e.g. 'Cursor on Target (CoT) over UDP/TCP', 'HTTPS', 'PKI/CAC certificate-based authentication'. State 'representative' rather than inventing a specific real protocol when none is confirmed."
+        },
+        "format": {
+          "type": "string",
+          "description": "Message/data format, when mode is Digital or Mixed, e.g. 'CoT XML event schema', 'TAC plain-text alphanumeric codes (METAR/TAF/PIREP/SIGMET/NOTAM)'. State 'representative' rather than inventing a specific real format when none is confirmed."
+        }
+      },
+      "required": ["mode", "medium"],
+      "additionalProperties": false
     }
   }
 }

@@ -3,6 +3,7 @@ import { interactions, interactionsById } from "../data";
 import { RecordTable } from "../components/RecordTable";
 import { DoctrineSourceList } from "../components/DoctrineSourceList";
 import { EntityLink } from "../components/EntityLink";
+import { CommsLinkDetail, CommsModeBadge } from "../components/CommsLinkDetail";
 import { NotFound } from "./NotFound";
 
 export function InteractionsPage() {
@@ -23,6 +24,7 @@ export function InteractionsPage() {
           { header: "From", render: (i) => <EntityLink kind={i.from.kind} id={i.from.id} /> },
           { header: "Type", render: (i) => <Link to={`/interactions/${i.id}`}>{i.interactionType}</Link> },
           { header: "To", render: (i) => <EntityLink kind={i.to.kind} id={i.to.id} /> },
+          { header: "Mode", render: (i) => <CommsModeBadge link={i.commsLink} /> },
         ]}
       />
     </>
@@ -46,6 +48,22 @@ export function InteractionDetailPage() {
       <dl className="field-list">
         <dt>Description</dt>
         <dd>{interaction.description}</dd>
+        {interaction.commsLink && (
+          <>
+            <dt>Communications link</dt>
+            <dd>
+              <CommsLinkDetail link={interaction.commsLink} />
+            </dd>
+          </>
+        )}
+        {interaction.viaSystem && (
+          <>
+            <dt>Relayed via</dt>
+            <dd>
+              <EntityLink kind={interaction.viaSystem.kind} id={interaction.viaSystem.id} />
+            </dd>
+          </>
+        )}
         <dt>Doctrine sources</dt>
         <dd>
           <DoctrineSourceList sources={interaction.doctrineSource} />

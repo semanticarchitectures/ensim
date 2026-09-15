@@ -21,6 +21,7 @@
     "to": { "kind": "system", "id": "tactical-communications-system" },
     "interactionType": "CommunicatesVia",
     "description": "Aircraft Commander communicates with Air Traffic Control and ground drop-zone personnel via the tactical communications system.",
+    "commsLink": { "mode": "Verbal", "medium": "UHF/VHF AM air-to-ground voice radio net" },
     "doctrineSource": [{ "publication": "AFDP 3-0.1", "note": "General C2/communications-connectivity concept, not a specific real system." }]
   },
   {
@@ -29,6 +30,7 @@
     "to": { "kind": "system", "id": "tactical-communications-system" },
     "interactionType": "CommunicatesVia",
     "description": "Air Traffic Controller communicates with the tasked aircrew via the tactical communications system.",
+    "commsLink": { "mode": "Verbal", "medium": "UHF/VHF AM air-to-ground voice radio net" },
     "doctrineSource": [
       {
         "publication": "AFMAN 13-204 Volume 3, Air Traffic Control",
@@ -42,6 +44,7 @@
     "to": { "kind": "system", "id": "dz-safety-of-flight-radio-net" },
     "interactionType": "CommunicatesVia",
     "description": "Drop Zone Support Team Leader communicates with the drop aircraft via UHF/VHF voice radio — limited to safety-of-flight traffic and passing wind/weather, not continuous coordination chatter (see the System record for the doctrinal detail).",
+    "commsLink": { "mode": "Verbal", "medium": "UHF/VHF AM voice radio (representative class, e.g. PRC-113-class equipment), line-of-sight air-to-ground" },
     "doctrineSource": [
       {
         "publication": "FM 57-38, Chapter 6, Drop Zones",
@@ -55,6 +58,12 @@
     "to": { "kind": "system", "id": "digital-situational-awareness-system" },
     "interactionType": "CommunicatesVia",
     "description": "Drop Zone Support Team Leader could plausibly share drop-zone position/marker data via an ATAK-class digital situational awareness capability, complementing the voice radio net. Representative/illustrative only — see the System record's doctrineSource note: no source found this session confirms this is actually used for CDS/airdrop drop-zone coordination.",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "cellular, satellite, or tactical mesh radio (MANET) — e.g. Persistent Systems Wave Relay- or Silvus-class radios",
+      "protocol": "Cursor on Target (CoT) over UDP/TCP",
+      "format": "CoT XML event schema (position/marker/zone data)"
+    },
     "doctrineSource": [
       {
         "publication": "Android Team Awareness Kit (ATAK) — general program information",
@@ -89,10 +98,30 @@
     "to": { "kind": "system", "id": "identity-access-control-system" },
     "interactionType": "AuthenticatesTo",
     "description": "Aircraft Commander authenticates to the identity/access-control system to access mission-relevant systems (e.g. tasking and planning data).",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "DoD enterprise network (representative)",
+      "protocol": "PKI/CAC certificate-based authentication",
+      "format": "authentication transaction (representative)"
+    },
     "doctrineSource": [
       {
         "publication": "DoDI 8520.04, Access Management for DoD Information Systems",
         "note": "General ICAM policy concept only, not a specific real system — same verification status as the identity-access-control-system System record's citation."
+      }
+    ]
+  },
+  {
+    "id": "aircraft-commander-informs-mission-commander-of-debrief",
+    "from": { "kind": "role", "id": "aircraft-commander" },
+    "to": { "kind": "role", "id": "mission-commander" },
+    "interactionType": "Informs",
+    "description": "Following mission execution and recovery, the Aircraft Commander leads the post-mission crew debrief and reports execution results, any discrepancies, and mission outcome to the Mission Commander — the input the Mission Commander's report back through the C2 chain is built from.",
+    "commsLink": { "mode": "Verbal", "medium": "in-person, post-mission debrief at the squadron operations/debrief facility" },
+    "doctrineSource": [
+      {
+        "publication": "Aircrew doctrine reference",
+        "note": "Post-mission aircrew debrief to the Mission Commander is standard, well-established aircrew practice; not tied to a specific numbered instruction in this dataset — same generic-citation pattern already used for the mission-commander/aircraft-commander/copilot Role records and the mission-commander-commands-aircraft-commander Interaction."
       }
     ]
   },
@@ -115,6 +144,12 @@
     "to": { "kind": "system", "id": "identity-access-control-system" },
     "interactionType": "AuthenticatesTo",
     "description": "Loadmaster authenticates to the identity/access-control system to access weight-and-balance and load-planning computation tools used to compute center of gravity for the loaded cargo configuration.",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "DoD enterprise network (representative)",
+      "protocol": "PKI/CAC certificate-based authentication",
+      "format": "authentication transaction (representative)"
+    },
     "doctrineSource": [
       {
         "publication": "DoDI 8520.04, Access Management for DoD Information Systems",
@@ -128,6 +163,8 @@
     "to": { "kind": "role", "id": "aircraft-commander" },
     "interactionType": "Informs",
     "description": "Drop Zone Support Team Leader relays surface wind and limited weather observations to the flight deck (Aircraft Commander) via the dz-safety-of-flight-radio-net — the actual first hop of the information path that ultimately reaches the Loadmaster relayed through the flight deck. This radio contact is limited to safety-of-flight matters (ATC directions, range clearance, unsafe surface conditions, mission changes) and wind/weather, not continuous chatter, and is mandatory (not just customary) for IMC/AWADS instrument drops.",
+    "commsLink": { "mode": "Verbal", "medium": "UHF/VHF AM voice radio (representative class, e.g. PRC-113-class equipment), line-of-sight air-to-ground" },
+    "viaSystem": { "kind": "system", "id": "dz-safety-of-flight-radio-net" },
     "doctrineSource": [
       { "publication": "DAFMAN 13-217", "section": "Drop-Zone and Landing-Zone Operations" },
       {
@@ -142,6 +179,8 @@
     "to": { "kind": "role", "id": "loadmaster" },
     "interactionType": "Informs",
     "description": "Aircraft Commander relays drop-zone status/wind updates during the run-in and gives the verbal release command (\"Mark\") to the Loadmaster via intercom — the trigger for the Loadmaster's release-execution decision.",
+    "commsLink": { "mode": "Verbal", "medium": "wired aircraft intercom (analog, point-to-point voice)" },
+    "viaSystem": { "kind": "system", "id": "aircraft-intercom-system" },
     "doctrineSource": [
       {
         "publication": "C-17 Pilot (c17pilot.com), \"C-17 Airdrop Operations — How Cargo and Troops Exit at 25,000 Feet\"",
@@ -155,6 +194,8 @@
     "to": { "kind": "role", "id": "aircraft-commander" },
     "interactionType": "Informs",
     "description": "Loadmaster confirms release completion (\"Cargo away\") to the flight deck via intercom immediately after executing the release.",
+    "commsLink": { "mode": "Verbal", "medium": "wired aircraft intercom (analog, point-to-point voice)" },
+    "viaSystem": { "kind": "system", "id": "aircraft-intercom-system" },
     "doctrineSource": [
       {
         "publication": "C-17 Pilot (c17pilot.com), \"C-17 Airdrop Operations — How Cargo and Troops Exit at 25,000 Feet\"",
@@ -194,6 +235,13 @@
     "to": { "kind": "role", "id": "loadmaster" },
     "interactionType": "Informs",
     "description": "TOC-L Coordinator provides the Loadmaster detailed UAV flight-plan and launch-sequence instructions — which pallet/UAV launches in what order, at what point in the run, and any deployment-specific configuration — before the drop run begins. This is the specific information-flow the Loadmaster needs beyond the CDS-resupply mission's simpler rigging/release picture.",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "tactical data link (representative)",
+      "protocol": "representative — no specific real tactical data link protocol is confirmed for this hop",
+      "format": "structured UAV flight-plan / launch-sequence data (representative)"
+    },
+    "viaSystem": { "kind": "system", "id": "toc-l-tactical-data-link" },
     "doctrineSource": [
       {
         "publication": "\"Air Force TOC-L enhances joint force C2\"",
@@ -220,6 +268,12 @@
     "to": { "kind": "c2node", "id": "toc-l" },
     "interactionType": "CommunicatesVia",
     "description": "The deployed UAV network relays sensor and communications-relay data to the TOC-L, which fuses it into the common operating picture — the intelligence and C2 support this mission provides to the broader relief effort.",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "tactical data link / mesh network (representative)",
+      "protocol": "representative — no specific real UAV comms-relay protocol is modeled, consistent with the classification boundary (AGENTS.md Section 3)",
+      "format": "sensor/telemetry and comms-relay data (representative)"
+    },
     "doctrineSource": [
       {
         "publication": "\"Air Force TOC-L enhances joint force C2\"",
@@ -246,10 +300,14 @@
     "to": { "kind": "role", "id": "flight-nurse-medical-crew-director" },
     "interactionType": "Informs",
     "description": "Aeromedical Evacuation Technician reports patient status and condition changes to the Flight Nurse (Medical Crew Director) during flight — the information input to the MCD's in-flight patient-status decision.",
+    "commsLink": {
+      "mode": "Verbal",
+      "medium": "in-person (face-to-face, both crew stationed in the same aircraft cargo/cabin compartment)"
+    },
     "doctrineSource": [
       {
         "publication": "AFI 48-307 / DAFI 48-107 series",
-        "note": "Same verification status as the aeromedical-evacuation-technician Role record's citation."
+        "note": "Same verification status as the aeromedical-evacuation-technician Role record's citation. The in-person/face-to-face commsLink is a reasonable structural inference from the AE crew being physically co-located in the aircraft cabin during flight, not a directly documented procedure."
       }
     ]
   },
@@ -259,6 +317,8 @@
     "to": { "kind": "role", "id": "aircraft-commander" },
     "interactionType": "Informs",
     "description": "Flight Nurse (Medical Crew Director) advises the Aircraft Commander of patient conditions or medical-equipment needs that may affect aircraft operations (e.g. a requested altitude restriction) — the AE mission's analogue to the Loadmaster's flight-deck information flow in Missions 1-2.",
+    "commsLink": { "mode": "Verbal", "medium": "wired aircraft intercom (analog, point-to-point voice)" },
+    "viaSystem": { "kind": "system", "id": "aircraft-intercom-system" },
     "doctrineSource": [
       {
         "publication": "AFI 48-307 / DAFI 48-107 series",
@@ -285,6 +345,13 @@
     "to": { "kind": "role", "id": "flight-nurse-medical-crew-director" },
     "interactionType": "Informs",
     "description": "TPMRC provides the Flight Nurse (Medical Crew Director) the validated Patient Movement Request/manifest — patient count, precedence mix, and litter/ambulatory breakdown — before departure. This is the information the MCD verifies the aircraft's actual patient load against (see the mcd-manifest-verification Decision).",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "DoD patient-movement tasking network (representative)",
+      "protocol": "representative — no specific real system's transport protocol is named",
+      "format": "structured Patient Movement Request (PMR) / patient manifest data (representative)"
+    },
+    "viaSystem": { "kind": "system", "id": "patient-movement-tasking-system" },
     "doctrineSource": [
       {
         "publication": "USTRANSCOM patient movement doctrine (via web search synthesis)",
@@ -298,6 +365,12 @@
     "to": { "kind": "system", "id": "jaawin-weather-distribution-system" },
     "interactionType": "CommunicatesVia",
     "description": "17th Operational Weather Squadron disseminates theater-scale mission planning and execution weather analyses, forecasts, TAFs, and Weather Watches/Warnings/Advisories (WWAs) via the JAAWIN-class distribution system.",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "DoD/public web (HTTPS) content-delivery network",
+      "protocol": "web-based (HTTPS) product delivery",
+      "format": "TAC plain-text products — METAR, TAF, PIREP, SIGMET, NOTAM, winds aloft"
+    },
     "doctrineSource": [
       {
         "publication": "Joint Air Force and Army Weather Information Network (JAAWIN) — general program information",
@@ -311,6 +384,12 @@
     "to": { "kind": "system", "id": "jaawin-weather-distribution-system" },
     "interactionType": "CommunicatesVia",
     "description": "AOC Weather Support Team receives 17th OWS's theater weather products via the same distribution system to produce AOC-tailored Mission Weather Products (per AFMAN 15-129's Mission Execution Forecast Process) — the AOC's half of the continuous weather data stream.",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "DoD/public web (HTTPS) content-delivery network",
+      "protocol": "web-based (HTTPS) product delivery",
+      "format": "TAC plain-text products — METAR, TAF, PIREP, SIGMET, NOTAM, winds aloft"
+    },
     "doctrineSource": [
       {
         "publication": "AFMAN 15-129; JAAWIN general program information",
@@ -324,6 +403,12 @@
     "to": { "kind": "system", "id": "jaawin-weather-distribution-system" },
     "interactionType": "CommunicatesVia",
     "description": "Aircraft Commander/aircrew receive in-flight weather data (updated TAFs, PIREPs, SIGMETs, winds aloft) via the same class of weather distribution/datalink system — the aircraft's half of the continuous weather data stream that begins at 17th OWS/the AOC during planning and continues through mission execution.",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "SATCOM-class in-flight aviation datalink (representative)",
+      "protocol": "in-flight datalink transport protocol not modeled as a specific real protocol",
+      "format": "TAC plain-text products — TAF, PIREP, SIGMET, winds aloft"
+    },
     "doctrineSource": [
       {
         "publication": "JAAWIN general program information; commercial aviation datalink weather delivery as structural analogue",
@@ -337,6 +422,13 @@
     "to": { "kind": "c2node", "id": "aoc-weather-support-team" },
     "interactionType": "Informs",
     "description": "17th OWS provides theater-scale mission planning/execution weather forecasts to the AOC Weather Support Team, which fuses and tailors them into AOC-specific Mission Weather Products per AFMAN 15-129's Mission Execution Forecast Process (MEFP).",
+    "commsLink": {
+      "mode": "Digital",
+      "medium": "DoD/public web (HTTPS) content-delivery network",
+      "protocol": "web-based (HTTPS) product delivery",
+      "format": "TAC plain-text products — METAR, TAF, SIGMET, NOTAM, winds aloft"
+    },
+    "viaSystem": { "kind": "system", "id": "jaawin-weather-distribution-system" },
     "doctrineSource": [
       {
         "publication": "AFMAN 15-129, Aerospace Weather Operations – Processes and Procedures",
@@ -350,10 +442,16 @@
     "to": { "kind": "role", "id": "aircraft-commander" },
     "interactionType": "Informs",
     "description": "AOC Weather Support Team/Staff Weather Officer provides mission weather guidance that feeds the tasked Aircraft Commander's pre-flight Flight Weather Briefing (DD Form 175-1) and continues to inform en-route decision-making during execution.",
+    "commsLink": {
+      "mode": "Mixed",
+      "medium": "in-person/telephonic oral weather briefing pre-flight (built from the DD Form 175-1 product); continues digitally in-flight via the JAAWIN-class distribution/datalink system (see aircraft-commander-comms-via-jaawin)",
+      "protocol": "web-based (HTTPS) product delivery for the digital/in-flight component; the pre-flight briefing itself has no digital transport protocol",
+      "format": "DD Form 175-1 (Flight Weather Briefing) plus TAC plain-text weather products"
+    },
     "doctrineSource": [
       {
         "publication": "DD Form 175-1, \"Flight Weather Briefing\"; AFDP 3-59, Weather Operations",
-        "note": "DD Form 175-1's role as the standard pre-flight weather briefing (mission/takeoff data, en-route data, terminal forecast, hazards) is confirmed via web search on 2026-09-10 (esd.whs.mil form page, corroborating secondary sources). The specific hand-off from an AOC Weather Support Team/SWO to this dataset's Aircraft Commander role is a reasonable structural inference from AFDP 3-59's confirmed SWO integration into planning/execution, not a directly quoted procedure."
+        "note": "DD Form 175-1's role as the standard pre-flight weather briefing (mission/takeoff data, en-route data, terminal forecast, hazards) is confirmed via web search on 2026-09-10 (esd.whs.mil form page, corroborating secondary sources). The specific hand-off from an AOC Weather Support Team/SWO to this dataset's Aircraft Commander role is a reasonable structural inference from AFDP 3-59's confirmed SWO integration into planning/execution, not a directly quoted procedure. The Mixed commsLink reflects that a Flight Weather Briefing is conventionally delivered as a spoken brief built around a standard written/digital form, not a claim about this specific hand-off's exact delivery mechanism."
       }
     ]
   },
@@ -363,10 +461,14 @@
     "to": { "kind": "organization", "id": "17th-operational-weather-squadron" },
     "interactionType": "Informs",
     "description": "Aircrew may generate a Pilot Weather Report (PIREP) of actual conditions encountered in flight, fed back into the weather production/dissemination chain — closing the loop so the weather data stream is not purely one-directional.",
+    "commsLink": {
+      "mode": "Verbal",
+      "medium": "voice radio (via ATC or Flight Service-class relay) — the standard, well-documented PIREP transmission method; a digital/datalink PIREP relay is a plausible modern alternative not confirmed for this specific chain"
+    },
     "doctrineSource": [
       {
         "publication": "Pilot Weather Report (PIREP) — general aviation weather-reporting concept",
-        "note": "PIREPs as pilot-generated actual-conditions reports fed back to the weather system (voice or datalink) are well-documented general aviation practice, confirmed via web search on 2026-09-10. Their specific routing to 17th OWS by name is this dataset's reasonable structural inference (17 OWS is the theater production unit this dataset already models), not a confirmed specific routing procedure."
+        "note": "PIREPs as pilot-generated actual-conditions reports fed back to the weather system (voice or datalink) are well-documented general aviation practice, confirmed via web search on 2026-09-10. Their specific routing to 17th OWS by name is this dataset's reasonable structural inference (17 OWS is the theater production unit this dataset already models), not a confirmed specific routing procedure. Voice radio is the traditional, standard PIREP method — flagged as such rather than presenting a specific digital relay as confirmed for this chain."
       }
     ]
   }

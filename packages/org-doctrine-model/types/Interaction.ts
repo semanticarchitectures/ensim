@@ -15,6 +15,8 @@ export interface Interaction {
   interactionType:
     "Operates" | "CommunicatesVia" | "AuthenticatesTo" | "CoordinatesWith" | "Commands" | "Informs" | "Deploys";
   description: string;
+  commsLink?: CommsLink;
+  viaSystem?: Participant1;
   /**
    * @minItems 1
    */
@@ -24,6 +26,37 @@ export interface Interaction {
  * A reference to any node in the mission execution interaction network — a Role (personnel), C2Node, Organization, or System.
  */
 export interface Participant {
+  kind: "role" | "c2node" | "organization" | "system";
+  /**
+   * Lowercase kebab-case stable identifier, unique within its entity type.
+   */
+  id: string;
+}
+/**
+ * For a CommunicatesVia, Informs, or AuthenticatesTo interaction: whether this specific hop is verbal or digital, its medium, and — if digital — its protocol and message format. Omitted for interaction types that describe an organizational/operational relationship rather than a literal communications hop (Operates, CoordinatesWith, Commands, Deploys).
+ */
+export interface CommsLink {
+  /**
+   * Verbal = spoken communication (radio voice, intercom, in-person). Digital = structured data communication. Mixed = the link combines both, e.g. a spoken briefing built from a written/digital product.
+   */
+  mode: "Verbal" | "Digital" | "Mixed";
+  /**
+   * The physical or logical bearer carrying this link, e.g. 'UHF/VHF AM voice radio', 'wired aircraft intercom', 'SATCOM datalink', 'tactical mesh radio (MANET)', 'DoD web network (HTTPS)', 'in-person'.
+   */
+  medium: string;
+  /**
+   * Digital transport/message protocol, when mode is Digital or Mixed, e.g. 'Cursor on Target (CoT) over UDP/TCP', 'HTTPS', 'PKI/CAC certificate-based authentication'. State 'representative' rather than inventing a specific real protocol when none is confirmed.
+   */
+  protocol?: string;
+  /**
+   * Message/data format, when mode is Digital or Mixed, e.g. 'CoT XML event schema', 'TAC plain-text alphanumeric codes (METAR/TAF/PIREP/SIGMET/NOTAM)'. State 'representative' rather than inventing a specific real format when none is confirmed.
+   */
+  format?: string;
+}
+/**
+ * A reference to any node in the mission execution interaction network — a Role (personnel), C2Node, Organization, or System.
+ */
+export interface Participant1 {
   kind: "role" | "c2node" | "organization" | "system";
   /**
    * Lowercase kebab-case stable identifier, unique within its entity type.

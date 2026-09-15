@@ -11,3 +11,4 @@ export type { System } from "./System.js";
 export type { Interaction } from "./Interaction.js";
 export type { Decision } from "./Decision.js";
 export type { DoctrineSource } from "./Organization.js";
+export type { CommsLink } from "./System.js";

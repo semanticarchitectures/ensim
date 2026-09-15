@@ -259,6 +259,45 @@ details summary {
   border-radius: 4px;
 }
 
+.comms-mode {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+.comms-mode-verbal {
+  color: #1a7a3d;
+  border-color: #1a7a3d;
+}
+.comms-mode-digital {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.comms-mode-mixed {
+  color: #8a5a00;
+  border-color: var(--warning-border);
+  background: var(--warning-bg);
+}
+
+.comms-link {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.75rem;
+  font-size: 0.9rem;
+}
+.comms-link dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+.comms-link dd {
+  margin: 0;
+}
+
 .unresolved {
   color: #b00020;
   font-style: italic;
