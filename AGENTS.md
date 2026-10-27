@@ -33,3 +33,13 @@ Content inspired by or adapted from Open-Arsenal (UCI/OMS — see `ARCHITECTURE.
 ## 8. When in doubt
 
 Ask, or leave a clearly marked TODO/note citing what's uncertain (see the pattern used throughout `org-doctrine-model/data`), rather than filling a gap with a plausible-sounding invention. That applies to doctrine facts, to license terms, and to architectural decisions not already settled in `ARCHITECTURE.md`.
+
+## 9. Umbrella context (Acquisition Knowledge System)
+
+- This repo is a component of the Acquisition Knowledge System: https://github.com/semanticarchitectures/acquisition-knowledge-system.
+  Before cross-component work, read its `.kiro/steering/product.md` and `portfolio.md`.
+- Shared contracts and the shared ontology (BFO 2020 and CCO, pinned once in the umbrella's
+  `.kiro/steering/ontology.md`) are defined in the umbrella. Do not redefine them here.
+- ENSIM depends on no other AKS component. Requests from other components arrive as umbrella specs
+  for a human to accept here; never add a dependency on them to make their job easier.
+- Tasks tagged for this repo in umbrella specs land here; cite them by spec and task number.
