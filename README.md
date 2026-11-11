@@ -8,6 +8,18 @@ Simulates a military enterprise — organizations, doctrine, roles, and command 
 **Mission 3:** Luzon Aeromedical Evacuation — a fictionalized companion mission evacuating injured disaster-relief personnel and casualties to a higher level of care, crewed by an 18th Aeromedical Evacuation Squadron Flight Nurse/Medical Crew Director and AE Technician, tasked through a Theater Patient Movement Requirements Center (TPMRC).
 **Weather data flow:** a real Operational Weather Squadron and an AOC Weather Support Team stream forecasts to both the Air Operations Center and the tasked aircraft, from mission planning through the duration of execution — cross-cutting across all three missions above.
 
+## Part of the Acquisition Knowledge System
+
+ENSIM is a component of the [Acquisition Knowledge System (AKS)](https://github.com/semanticarchitectures/acquisition-knowledge-system),
+a demonstration of AI architecting and simulating Air Force enterprise operations, at scale and
+realistically, and then being used in that enterprise, safely and under human authority.
+
+Its role in AKS: the simulated enterprise itself: the organizations, doctrine,
+roles, processes and missions that AKS's first layer (an AI-built enterprise, running at scale)
+is made of. Other components read ENSIM as a pinned snapshot or join its simulation through an
+interface the umbrella decides; ENSIM depends on none of them. Cross-component specs, the shared ontology and decisions live in the
+umbrella repo.
+
 ## Status
 
 `packages/org-doctrine-model` is scaffolded and validated: JSON Schema for `Organization`, `Role`, `C2Node`, `DoctrineProcess`, `Mission`, plus `System`, `Interaction`, and `Decision` (a mission execution interaction network — personnel and equipment as nodes, e.g. Mission 1's aircrew/ATC/drop-zone team interacting with a representative aircraft, comms, security/access-control, and airdrop-release system; Mission 2's TOC-L Coordinator and Rapid Dragon/UAV systems; Mission 3's Flight Nurse/AE Technician and patient-care equipment; and a cross-cutting weather data stream from the 17th Operational Weather Squadron through the AOC to every tasked aircraft), a seed USAF dataset, all three mission scenario records, and generated TypeScript types. `apps/model-explorer`'s data-navigation UI is built against all of that. `packages/federation-kernel` has a working minimal HLA federate (Portico, pinned to `portico-2.1.4`) exposed over a JSON-over-stdio bridge. `packages/sim-services` runs Mission 1's discrete-event timeline end to end, publishing to `federation-kernel` and writing a validated run result to `missions/001-hickam-luzon-airdrop/` — the full stack now connects. `packages/c2-interfaces` has five schema-only C2 message types (request → validate → ATO line → execution → report), grounded in real doctrine-process artifacts. `apps/ops-dashboard` renders them as a static process/status board (ATO state, C2 node hand-offs, mission timeline) — no live federation connection yet, a deliberate v1 scope decision. `apps/mission-planner` is not started.
